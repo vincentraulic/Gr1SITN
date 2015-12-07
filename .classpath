@@ -53,5 +53,6 @@
 	<classpathentry kind="lib" path="C:/Users/Vincent/Desktop/kk/Gr1SITN/lib/apache-log4j-2.4.1-bin/log4j-web-2.4.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Vincent/Desktop/kk/Gr1SITN/lib/apache-log4j-2.4.1-bin/log4j-web-2.4.1-javadoc.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Vincent/Desktop/kk/Gr1SITN/lib/apache-log4j-2.4.1-bin/log4j-web-2.4.1-sources.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
