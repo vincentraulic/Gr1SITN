@@ -1,0 +1,27 @@
+{
+  "name": "Gr1SITN",
+  "description": "Description",
+  "main": "index.html",
+  "moduleType": [],
+  "keywords": [
+    "project",
+    "management",
+    "pmo"
+  ],
+  "authors": [
+    "VincentRaulic RolandSrong QuentinCombier ThomasBethelot"
+  ],
+  "license": "MIT",
+  "homepage": "http://localhost:8080",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "angularjs#~1.4.8",
+    "bootstrap": "~3.3.6"
+  }
+}
