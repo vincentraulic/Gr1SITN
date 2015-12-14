@@ -1,6 +1,4 @@
-*.class
-*.prefs
-*.project
-*.classpath
 /target/
-/node_modules/
+
+*.class
+/build/
