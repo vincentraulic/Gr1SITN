@@ -26,7 +26,7 @@
 <!-- Automatic element centering -->
 <div class="lockscreen-wrapper">
   <div class="lockscreen-logo">
-    <a href="../../index2.html"><b>PMO</b></a>
+    <a href="../../index2.jsp"><b>PMO</b></a>
   </div>
   <!-- User name -->
   <div class="lockscreen-name">John Doe</div>
@@ -57,7 +57,7 @@
     Enter your password to retrieve your session
   </div>
   <div class="text-center">
-    <a href="login.html">Or sign in as a different user</a>
+    <a href="login.jsp">Or sign in as a different user</a>
   </div>
   <div class="lockscreen-footer text-center">
     Copyright &copy; 2014-2015 <b><a href="http://almsaeedstudio.com" class="text-black">Almsaeed Studio</a></b><br>

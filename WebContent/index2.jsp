@@ -31,7 +31,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="index2.jsp" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>PMO</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -324,8 +324,8 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-            <li class="active"><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+            <li><a href="index.jsp"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+            <li class="active"><a href="index2.jsp"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -335,14 +335,14 @@
             <span class="label label-primary pull-right">4</span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-            <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-            <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+            <li><a href="pages/layout/top-nav.jsp"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
+            <li><a href="pages/layout/boxed.jsp"><i class="fa fa-circle-o"></i> Boxed</a></li>
+            <li><a href="pages/layout/fixed.jsp"><i class="fa fa-circle-o"></i> Fixed</a></li>
+            <li><a href="pages/layout/collapsed-sidebar.jsp"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
           </ul>
         </li>
         <li>
-          <a href="pages/widgets.html">
+          <a href="pages/widgets.jsp">
             <i class="fa fa-th"></i> <span>Widgets</span>
             <small class="label pull-right bg-green">new</small>
           </a>
@@ -354,10 +354,10 @@
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-            <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-            <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+            <li><a href="pages/charts/chartjs.jsp"><i class="fa fa-circle-o"></i> ChartJS</a></li>
+            <li><a href="pages/charts/morris.jsp"><i class="fa fa-circle-o"></i> Morris</a></li>
+            <li><a href="pages/charts/flot.jsp"><i class="fa fa-circle-o"></i> Flot</a></li>
+            <li><a href="pages/charts/inline.jsp"><i class="fa fa-circle-o"></i> Inline charts</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -367,12 +367,12 @@
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
-            <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
-            <li><a href="pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
-            <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-            <li><a href="pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-            <li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
+            <li><a href="pages/UI/general.jsp"><i class="fa fa-circle-o"></i> General</a></li>
+            <li><a href="pages/UI/icons.jsp"><i class="fa fa-circle-o"></i> Icons</a></li>
+            <li><a href="pages/UI/buttons.jsp"><i class="fa fa-circle-o"></i> Buttons</a></li>
+            <li><a href="pages/UI/sliders.jsp"><i class="fa fa-circle-o"></i> Sliders</a></li>
+            <li><a href="pages/UI/timeline.jsp"><i class="fa fa-circle-o"></i> Timeline</a></li>
+            <li><a href="pages/UI/modals.jsp"><i class="fa fa-circle-o"></i> Modals</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -381,9 +381,9 @@
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-            <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-            <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
+            <li><a href="pages/forms/general.jsp"><i class="fa fa-circle-o"></i> General Elements</a></li>
+            <li><a href="pages/forms/advanced.jsp"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
+            <li><a href="pages/forms/editors.jsp"><i class="fa fa-circle-o"></i> Editors</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -392,18 +392,18 @@
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-            <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
+            <li><a href="pages/tables/simple.jsp"><i class="fa fa-circle-o"></i> Simple tables</a></li>
+            <li><a href="pages/tables/data.jsp"><i class="fa fa-circle-o"></i> Data tables</a></li>
           </ul>
         </li>
         <li>
-          <a href="pages/calendar.html">
+          <a href="pages/calendar.jsp">
             <i class="fa fa-calendar"></i> <span>Calendar</span>
             <small class="label pull-right bg-red">3</small>
           </a>
         </li>
         <li>
-          <a href="pages/mailbox/mailbox.html">
+          <a href="pages/mailbox/mailbox.jsp">
             <i class="fa fa-envelope"></i> <span>Mailbox</span>
             <small class="label pull-right bg-yellow">12</small>
           </a>
@@ -414,15 +414,15 @@
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/examples/invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
-            <li><a href="pages/examples/profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
-            <li><a href="pages/examples/login.html"><i class="fa fa-circle-o"></i> Login</a></li>
-            <li><a href="pages/examples/register.html"><i class="fa fa-circle-o"></i> Register</a></li>
-            <li><a href="pages/examples/lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
-            <li><a href="pages/examples/404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
-            <li><a href="pages/examples/500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
-            <li><a href="pages/examples/blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
-            <li><a href="pages/examples/pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
+            <li><a href="pages/examples/invoice.jsp"><i class="fa fa-circle-o"></i> Invoice</a></li>
+            <li><a href="pages/examples/profile.jsp"><i class="fa fa-circle-o"></i> Profile</a></li>
+            <li><a href="pages/examples/login.jsp"><i class="fa fa-circle-o"></i> Login</a></li>
+            <li><a href="pages/examples/register.jsp"><i class="fa fa-circle-o"></i> Register</a></li>
+            <li><a href="pages/examples/lockscreen.jsp"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
+            <li><a href="pages/examples/404.jsp"><i class="fa fa-circle-o"></i> 404 Error</a></li>
+            <li><a href="pages/examples/500.jsp"><i class="fa fa-circle-o"></i> 500 Error</a></li>
+            <li><a href="pages/examples/blank.jsp"><i class="fa fa-circle-o"></i> Blank Page</a></li>
+            <li><a href="pages/examples/pace.jsp"><i class="fa fa-circle-o"></i> Pace Page</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -448,7 +448,7 @@
             <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
           </ul>
         </li>
-        <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+        <li><a href="documentation/index.jsp"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
         <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
@@ -1018,7 +1018,7 @@
                   </thead>
                   <tbody>
                   <tr>
-                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
+                    <td><a href="pages/examples/invoice.jsp">OR9842</a></td>
                     <td>Call of Duty IV</td>
                     <td><span class="label label-success">Shipped</span></td>
                     <td>
@@ -1026,7 +1026,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                    <td><a href="pages/examples/invoice.jsp">OR1848</a></td>
                     <td>Samsung Smart TV</td>
                     <td><span class="label label-warning">Pending</span></td>
                     <td>
@@ -1034,7 +1034,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                    <td><a href="pages/examples/invoice.jsp">OR7429</a></td>
                     <td>iPhone 6 Plus</td>
                     <td><span class="label label-danger">Delivered</span></td>
                     <td>
@@ -1042,7 +1042,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                    <td><a href="pages/examples/invoice.jsp">OR7429</a></td>
                     <td>Samsung Smart TV</td>
                     <td><span class="label label-info">Processing</span></td>
                     <td>
@@ -1050,7 +1050,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                    <td><a href="pages/examples/invoice.jsp">OR1848</a></td>
                     <td>Samsung Smart TV</td>
                     <td><span class="label label-warning">Pending</span></td>
                     <td>
@@ -1058,7 +1058,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                    <td><a href="pages/examples/invoice.jsp">OR7429</a></td>
                     <td>iPhone 6 Plus</td>
                     <td><span class="label label-danger">Delivered</span></td>
                     <td>
@@ -1066,7 +1066,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
+                    <td><a href="pages/examples/invoice.jsp">OR9842</a></td>
                     <td>Call of Duty IV</td>
                     <td><span class="label label-success">Shipped</span></td>
                     <td>

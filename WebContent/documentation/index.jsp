@@ -29,7 +29,7 @@
       <header class="main-header">
         <!-- Logo -->
         <!-- Logo -->
-        <a href="../index2.html" class="logo">
+        <a href="../index2.jsp" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>PMO</b></span>
           <!-- logo for regular state and mobile devices -->
@@ -217,7 +217,7 @@ PMO/
   </ul>
   <div class="callout callout-danger lead">
     <h4>Tip!</h4>
-    <p>The <a href="../starter.html">starter page</a> is a good place to start building your app if you'd like to start from scratch.</p>
+    <p>The <a href="../starter.jsp">starter page</a> is a good place to start building your app if you'd like to start from scratch.</p>
   </div>
 
   <h3>Layout Options</h3>
@@ -457,7 +457,7 @@ PMO/
       <span class="eg">Main Header Example</span>
       <header class="main-header" style="position: relative;">
         <!-- Logo -->
-        <a href="index2.html" class="logo" style="position: relative;"><b>PMO</b></a>
+        <a href="index2.jsp" class="logo" style="position: relative;"><b>PMO</b></a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar" role="navigation" style="border: 0;max-height: 50px;">
           <!-- Sidebar toggle button-->
@@ -592,7 +592,7 @@ PMO/
     </div>
   </div>
   <pre class="prettyprint">&LT;header class="main-header">
-  &LT;a href="../../index2.html" class="logo">
+  &LT;a href="../../index2.jsp" class="logo">
     &LT;!-- LOGO -->
     PMO
   &LT;/a>
@@ -738,7 +738,7 @@ PMO/
         <nav class="navbar navbar-static-top">
           <div class="container-fluid">
             <div class="navbar-header">
-              <a href="../../index2.html" class="navbar-brand"><b>PMO</b></a>
+              <a href="../../index2.jsp" class="navbar-brand"><b>PMO</b></a>
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                 <i class="fa fa-bars"></i>
               </button>
@@ -791,7 +791,7 @@ PMO/
   &LT;nav class="navbar navbar-static-top">
     &LT;div class="container-fluid">
     &LT;div class="navbar-header">
-      &LT;a href="../../index2.html" class="navbar-brand">&LT;b>Admin&LT;/b>LTE&LT;/a>
+      &LT;a href="../../index2.jsp" class="navbar-brand">&LT;b>Admin&LT;/b>LTE&LT;/a>
       &LT;button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
         &LT;i class="fa fa-bars">&LT;/i>
       &LT;/button>
@@ -1995,7 +1995,7 @@ PMO/
       <ul class="list-unstyled">
         <li><h4>Form Elements</h4></li>
         <li><a href="https://github.com/seiyria/bootstrap-slider/">Bootstrap Slider</a></li>
-        <li><a href="http://ionden.com/a/plugins/ion.rangeSlider/en.html" target="_blank">Ion Slider</a></li>
+        <li><a href="http://ionden.com/a/plugins/ion.rangeSlider/en.jsp" target="_blank">Ion Slider</a></li>
         <li><a href="http://bootstrap-datepicker.readthedocs.org/" target="_blank">Date Picker</a></li>
         <li><a href="http://www.daterangepicker.com/" target="_blank">Date Range Picker</a></li>
         <li><a href="http://mjolnic.com/bootstrap-colorpicker/" target="_blank">Color Picker</a></li>
@@ -2014,7 +2014,7 @@ PMO/
     <div class="col-sm-3">
       <ul class="list-unstyled">
         <li><h4>Other</h4></li>
-        <li><a href="https://datatables.net/examples/styling/bootstrap.html" target="_blank">DataTables</a></li>
+        <li><a href="https://datatables.net/examples/styling/bootstrap.jsp" target="_blank">DataTables</a></li>
         <li><a href="http://fullcalendar.io/" target="_blank">Full Calendar</a></li>
         <li><a href="http://jqueryui.com/" target="_blank">jQuery UI</a></li>
         <li><a href="http://anthonyterrien.com/knob/" target="_blank">jQuery Knob</a></li>

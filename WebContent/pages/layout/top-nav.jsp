@@ -33,7 +33,7 @@
     <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="../../index2.html" class="navbar-brand"><b>PMO</b></a>
+          <a href="../../index2.jsp" class="navbar-brand"><b>PMO</b></a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>

@@ -27,13 +27,13 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>PMO</b></a>
+    <a href="../../index2.jsp"><b>PMO</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
 
-    <form action="../../index2.html" method="post">
+    <form action="../../index2.jsp" method="post">
       <div class="form-group has-feedback">
         <input type="email" class="form-control" placeholder="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -68,7 +68,7 @@
     <!-- /.social-auth-links -->
 
     <a href="#">I forgot my password</a><br>
-    <a href="register.html" class="text-center">Register a new membership</a>
+    <a href="register.jsp" class="text-center">Register a new membership</a>
 
   </div>
   <!-- /.login-box-body -->
