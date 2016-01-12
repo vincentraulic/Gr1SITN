@@ -8,7 +8,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import com.pmo.dao.ProjectDao;
-import com.pmo.model.Absence;
+import com.pmo.model.Event;
 import com.pmo.model.Employee;
 import com.pmo.model.Project;
 import com.pmo.model.ProjectTask;
@@ -59,10 +59,10 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
-	public List<Absence> getAbsenceEmployees(int idProject) {
+	public List<Event> getAbsenceEmployees(int idProject) {
 		Project project = projectDao.getProject(idProject);
 		
-		List<Absence> absences = new ArrayList<Absence>();
+		List<Event> absences = new ArrayList<Event>();
 		
 		for(ProjectTask pT : project.getProjectTasks()){
 			for(Task t : pT.getTasks()){

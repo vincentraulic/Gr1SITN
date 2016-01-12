@@ -47,7 +47,7 @@ public class Employee{
     private Set<Task> tasks = new HashSet<Task>();
     
     @OneToMany(mappedBy="employee", cascade=CascadeType.ALL)
-    private Set<Absence> absences;
+    private Set<Event> absences;
     
 	public int getId_employee() {
 		return id_employee;
@@ -80,11 +80,11 @@ public class Employee{
 		this.dateEnd = dateEnd;
 	}
     
-	public Set<Absence> getAbsences(){
+	public Set<Event> getAbsences(){
 		return this.absences;
 	}
 	
-	public void setAbsences(Set<Absence> absences) {
+	public void setAbsences(Set<Event> absences) {
 		this.absences = absences;
 	}
 	

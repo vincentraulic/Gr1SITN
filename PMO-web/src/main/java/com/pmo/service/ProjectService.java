@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import com.pmo.model.Absence;
+import com.pmo.model.Event;
 import com.pmo.model.Employee;
 import com.pmo.model.Project;
 
@@ -20,5 +20,5 @@ public interface ProjectService {
 	
 	public List<Employee> getEmployees(String projectName);
 	
-	public List<Absence> getAbsenceEmployees(int idProject);
+	public List<Event> getAbsenceEmployees(int idProject);
 }

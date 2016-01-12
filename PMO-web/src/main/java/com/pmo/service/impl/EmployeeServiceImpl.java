@@ -8,10 +8,10 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import com.pmo.dao.AbsenceDao;
+import com.pmo.dao.EventDao;
 import com.pmo.dao.EmployeeDao;
 import com.pmo.dao.UserDao;
-import com.pmo.model.Absence;
+import com.pmo.model.Event;
 import com.pmo.model.Employee;
 import com.pmo.service.EmployeeService;
 
@@ -24,8 +24,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@EJB(mappedName="java:module/UserDaoImpl")
 	private UserDao userDao;
 	
-	@EJB(mappedName="java:module/AbsenceDaoImpl")
-	private AbsenceDao absenceDao;
+	@EJB(mappedName="java:module/EventDaoImpl")
+	private EventDao eventDao;
 	
 	@Override
 	public int createEmployee(String lastname, String firstname,
@@ -55,7 +55,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public int createAbsence(int idEmployee, String reason, String dateStart,
+	public int createEvent(int idEmployee, String type, String reason, String dateStart,
 			String dateEnd) {
 		SimpleDateFormat format = new SimpleDateFormat("dd/mm/yy");
 		Date start = null;
@@ -68,7 +68,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 			//to do ajout dans fichier log
 		}
 		
-		int id = absenceDao.createAbsence(idEmployee, 
+		int id = eventDao.createEvent(idEmployee,
+											type,
 											reason, 
 											start, 
 											end);
@@ -76,10 +77,16 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 	
 	@Override
-	public List<Absence> getAbsences(int idEmployee) {
+	public List<Event> getEvents(int idEmployee) {
 		//to do gérer si l'id n'existe pas
 		
-		return absenceDao.getAbsences(idEmployee);
+		return eventDao.getEvents(idEmployee);
+	}
+
+	@Override
+	public List<Event> getEvents(int idEmployee, String type) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

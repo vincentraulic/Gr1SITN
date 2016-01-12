@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import com.pmo.model.Absence;
+import com.pmo.model.Event;
 import com.pmo.model.Employee;
 
 @Local
@@ -19,10 +19,11 @@ public interface EmployeeService {
 	
 	public List<Employee> getEmployees();
 	
-	public int createAbsence(int idEmployee, String reason, String dateStart, String dateEnd);
+	public int createEvent(int idEmployee, String type, String reason, String dateStart, String dateEnd);
 	
-	public List<Absence> getAbsences(int idEmployee);
+	public List<Event> getEvents(int idEmployee);
 	
+	public List<Event> getEvents(int idEmployee, String type);
 	
 	
 }

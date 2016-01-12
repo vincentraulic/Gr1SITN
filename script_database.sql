@@ -15,14 +15,15 @@ INSERT INTO EMPLOYEE
 VALUES (1, 'toto', 'roland', 'roland.toto', '123456', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null)
 
 
-CREATE TABLE ABSENCE(
-	id_absence INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE EVENT(
+	id_event INT NOT NULL AUTO_INCREMENT,
 	id_employee INT NOT NULL,
+	type VARCHAR(50) NOT NULL
 	reason VARCHAR(200) NOT NULL,
 	datestart DATE NOT NULL,
 	dateend DATE,
-	CONSTRAINT pk_absence PRIMARY KEY(id_absence),
-	CONSTRAINT fk_absence_employee FOREIGN KEY(id_employee) REFERENCES EMPLOYEE(id_employee)
+	CONSTRAINT pk_event PRIMARY KEY(id_event),
+	CONSTRAINT fk_event_employee FOREIGN KEY(id_employee) REFERENCES EMPLOYEE(id_employee)
 )
 ENGINE=InnoDB;
 

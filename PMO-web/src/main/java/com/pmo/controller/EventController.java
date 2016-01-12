@@ -29,7 +29,7 @@ public class EventController {
 	
 	@RequestMapping(value="/event/new", method = RequestMethod.POST)
 	public @ResponseBody String newEvent(@RequestParam(value="type") final String type,
-			@RequestParam(value="title") final String title,
+			@RequestParam(value="title") final String motif,
 			@RequestParam(value="startdate") final String startDate,
 			@RequestParam(value="enddate") final String endDate,
 			final ModelMap pModel) {
@@ -38,8 +38,8 @@ public class EventController {
 		
 		if(! StringUtils.isEmpty(type) && type.equals(EventType.ABSENCE)){
 			
-			int id = employeeService.createAbsence(employeeService.getDetails(user.getUsername()).getId_employee(), 
-													null, startDate, endDate);
+			int id = employeeService.createEvent(employeeService.getDetails(user.getUsername()).getId_employee(), 
+													type, motif, startDate, endDate);
 			return id + "";
 		}
 		
