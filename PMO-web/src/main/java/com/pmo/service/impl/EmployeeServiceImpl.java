@@ -1,5 +1,7 @@
 package com.pmo.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -53,10 +55,33 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
+	public int createAbsence(int idEmployee, String reason, String dateStart,
+			String dateEnd) {
+		SimpleDateFormat format = new SimpleDateFormat("dd/mm/yy");
+		Date start = null;
+		Date end = null;
+		try {
+			start = format.parse(dateStart);
+			end = format.parse(dateEnd);
+		} catch (ParseException e) {
+			System.out.println("Format date error");
+			//to do ajout dans fichier log
+		}
+		
+		int id = absenceDao.createAbsence(idEmployee, 
+											reason, 
+											start, 
+											end);
+		return id;
+	}
+	
+	@Override
 	public List<Absence> getAbsences(int idEmployee) {
 		//to do gérer si l'id n'existe pas
 		
 		return absenceDao.getAbsences(idEmployee);
 	}
+	
+	
 
 }

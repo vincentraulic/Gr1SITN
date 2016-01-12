@@ -19,6 +19,8 @@ public interface EmployeeService {
 	
 	public List<Employee> getEmployees();
 	
+	public int createAbsence(int idEmployee, String reason, String dateStart, String dateEnd);
+	
 	public List<Absence> getAbsences(int idEmployee);
 	
 	
