@@ -13,7 +13,8 @@ ENGINE=InnoDB;
 
 INSERT INTO EMPLOYEE
 VALUES (1, 'toto', 'roland', 'roland.toto', '123456', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null)
-
+INSERT INTO EMPLOYEE
+VALUES (1, 'raulic', 'vincent', 'vincent.raulic', '123456', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null)
 
 CREATE TABLE EVENT(
 	id_event INT NOT NULL AUTO_INCREMENT,
