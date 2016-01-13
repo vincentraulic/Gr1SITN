@@ -165,7 +165,7 @@
 									type : 'POST',
 									dataType : 'json',
 									success : function(response) {
-										if (response.status == 'success')
+										if (response.status == 200)
 											$('#calendar').fullCalendar(
 													'updateEvent', event);
 									},

@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.pmo.dao.EmployeeDao;
+import com.pmo.service.EmployeeService;
 
 @Controller
 public class EmployeeController {
 
-	@EJB(mappedName="java:module/EmployeeDaoImpl")
-	private EmployeeDao employeeService;
+	@EJB(mappedName="java:module/EmployeeServiceImpl")
+	private EmployeeService employeeService;
 	
     @RequestMapping(value="/user/employee", method = RequestMethod.GET)
     public String afficher() {
