@@ -59,18 +59,18 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
-	public List<Event> getAbsenceEmployees(int idProject) {
+	public List<Event> getEventEmployees(int idProject) {
 		Project project = projectDao.getProject(idProject);
 		
-		List<Event> absences = new ArrayList<Event>();
+		List<Event> events = new ArrayList<Event>();
 		
 		for(ProjectTask pT : project.getProjectTasks()){
 			for(Task t : pT.getTasks()){
-				absences.addAll(t.getEmployee().getAbsences());
+				events.addAll(t.getEmployee().getEvents());
 			}
 		}
 		
-		return absences;
+		return events;
 	}
 
 }

@@ -7,7 +7,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +17,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="PROJECT")
-public class Project {
+public class Project{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -35,7 +34,7 @@ public class Project {
     @Column(name="dateend")
 	private Date dateEnd;
 	
-    @OneToMany(fetch=FetchType.LAZY, mappedBy="project", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="project", cascade=CascadeType.ALL)
 	private Set<ProjectTask> projectTasks = new HashSet<ProjectTask>();
 
 	public int getId_project() {
@@ -100,7 +99,7 @@ public class Project {
 	
 	@Override
 	public int hashCode() {
-		return name.hashCode() + dateStart.hashCode() + dateEnd.hashCode() + cost;
+		return name.hashCode() + dateStart.hashCode() + cost;
 
 	}
 }

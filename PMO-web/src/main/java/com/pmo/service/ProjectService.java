@@ -20,5 +20,5 @@ public interface ProjectService {
 	
 	public List<Employee> getEmployees(String projectName);
 	
-	public List<Event> getAbsenceEmployees(int idProject);
+	public List<Event> getEventEmployees(int idProject);
 }

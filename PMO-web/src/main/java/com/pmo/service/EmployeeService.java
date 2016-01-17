@@ -19,11 +19,13 @@ public interface EmployeeService {
 	
 	public List<Employee> getEmployees();
 	
-	public int createEvent(int idEmployee, String type, String reason, String dateStart, String dateEnd);
+	public int createEvent(int idEmployee, String type, String reason, Date dateStart, Date dateEnd, boolean allDay);
 	
 	public List<Event> getEvents(int idEmployee);
 	
 	public List<Event> getEvents(int idEmployee, String type);
+	
+	public int updateEvent(int idEvent, Date dateStart, Date dateEnd, boolean allDay);
 	
 	
 }

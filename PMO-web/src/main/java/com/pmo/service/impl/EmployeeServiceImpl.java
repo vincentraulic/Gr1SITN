@@ -1,18 +1,16 @@
 package com.pmo.service.impl;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import com.pmo.dao.EventDao;
 import com.pmo.dao.EmployeeDao;
+import com.pmo.dao.EventDao;
 import com.pmo.dao.UserDao;
-import com.pmo.model.Event;
 import com.pmo.model.Employee;
+import com.pmo.model.Event;
 import com.pmo.service.EmployeeService;
 
 @Stateless
@@ -55,24 +53,16 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public int createEvent(int idEmployee, String type, String reason, String dateStart,
-			String dateEnd) {
-		SimpleDateFormat format = new SimpleDateFormat("dd/mm/yy");
-		Date start = null;
-		Date end = null;
-		try {
-			start = format.parse(dateStart);
-			end = format.parse(dateEnd);
-		} catch (ParseException e) {
-			System.out.println("Format date error");
-			//to do ajout dans fichier log
-		}
+	public int createEvent(int idEmployee, String type, String reason, Date dateStart,
+			Date dateEnd, boolean allDay) {
+		//to do check si dateEnd > dateStart
 		
 		int id = eventDao.createEvent(idEmployee,
 											type,
 											reason, 
-											start, 
-											end);
+											dateStart, 
+											dateEnd,
+											allDay);
 		return id;
 	}
 	
@@ -85,8 +75,14 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	@Override
 	public List<Event> getEvents(int idEmployee, String type) {
-		// TODO Auto-generated method stub
-		return null;
+		//to do check si le type de Event existe
+		return eventDao.getEvents(idEmployee, type);
+	}
+
+	@Override
+	public int updateEvent(int idEvent, Date dateStart, Date dateEnd, boolean allDay) {
+		//to do check dateEnd > dateStart
+		return eventDao.updateEvent(idEvent, dateStart, dateEnd, allDay);
 	}
 	
 	

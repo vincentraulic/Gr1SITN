@@ -20,12 +20,42 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="<c:url value="/resources/dist/css/PMO.min.css"/>">
   <link rel="stylesheet" href="<c:url value="/resources/dist/css/skins/skin-blue.min.css"/>">
 
+  <!-- fullCalendar 2.2.5-->
+  <link rel="stylesheet" href="<c:url value="/resources/plugins/fullcalendar/fullcalendar.min.css"/>">
+  <link rel="stylesheet" href="<c:url value="/resources/plugins/fullcalendar/fullcalendar.print.css"/>" media="print">
+
+  <!-- PMO Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="<c:url value="/resources/dist/css/skins/_all-skins.min.css"/>">
+
+  <meta name="_csrf" content="${_csrf.token}"/>
+  <!-- default header name is X-CSRF-TOKEN -->
+  <meta name="_csrf_header" content="${_csrf.parameterName}"/>
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  
+  <!-- REQUIRED JS SCRIPTS -->
+
+	<!-- jQuery 2.1.4 -->
+	<script src="<c:url value="/resources/plugins/jQuery/jQuery-2.1.4.min.js"/>"></script>
+	<!-- Bootstrap 3.3.5 -->
+	<script src="<c:url value="/resources/bootstrap/js/bootstrap.min.js"/>"></script>
+	<!-- PMO App -->
+	<script src="<c:url value="/resources/dist/js/app.min.js"/>"></script>
+	<!-- PMO for demo purposes -->
+	<script src="<c:url value="/resources/dist/js/demo.js"/>"></script>
+	<!-- jQuery UI 1.11.4 -->
+	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+	<!-- Slimscroll -->
+	<script src="<c:url value="/resources/plugins/slimScroll/jquery.slimscroll.min.js"/>"></script>
+	<!-- FastClick -->
+	<script src="<c:url value="/resources/plugins/fastclick/fastclick.js"/>"></script>
+  
 </head>
 <!--
 BODY TAG OPTIONS:

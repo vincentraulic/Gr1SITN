@@ -15,7 +15,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="TASK")
-public class Task {
+public class Task{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -112,9 +112,7 @@ public class Task {
 	
 	@Override
 	public int hashCode() {
-		int result;
-        result = (projectTask != null ? projectTask.hashCode() : 0);
-        result = 16 * result + (employee != null ? employee.hashCode() : 0) + dateStart.hashCode();
+		int result = id_task;
         return result;
 	}
 }

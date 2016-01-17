@@ -7,10 +7,6 @@
 
 	<display-name>Archetype Created Web Application</display-name>
 
-	<welcome-file-list>
-		<welcome-file>/login</welcome-file>
-	</welcome-file-list>
-
 	<jsp-config>
 		<jsp-property-group>
 			<url-pattern>*.jsp</url-pattern>
@@ -32,7 +28,6 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring-security.xml</param-value>
@@ -51,6 +46,10 @@
 	<session-config>
 		<session-timeout>15</session-timeout>
 	</session-config>
+	
+	<welcome-file-list>
+	    <welcome-file></welcome-file>
+	</welcome-file-list>
 
 	<!-- <ejb-local-ref> <ejb-ref-name>ejb/contacts</ejb-ref-name> <ejb-ref-type>Session</ejb-ref-type> 
 		<local>com.pmo.ejb.EmployeeService</local> </ejb-local-ref> -->

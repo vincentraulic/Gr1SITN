@@ -15,12 +15,15 @@ public interface EventDao {
 							 String type,
 							 String reason,
 							 Date dateStart,
-							 Date dateEnd);
+							 Date dateEnd,
+							 boolean allDAY);
 	
 	public Event getEvent(int id);
 	
 	public List<Event> getEvents(int id_employee);
 	
 	public List<Event> getEvents(int id_employee, String type);
+	
+	public int updateEvent(int idEvent, Date dateStart, Date dateEnd, boolean allDay);
 	
 }

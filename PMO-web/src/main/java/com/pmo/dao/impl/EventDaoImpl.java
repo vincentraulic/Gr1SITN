@@ -11,8 +11,8 @@ import javax.persistence.PersistenceContext;
 import org.springframework.util.StringUtils;
 
 import com.pmo.dao.EventDao;
-import com.pmo.model.Event;
 import com.pmo.model.Employee;
+import com.pmo.model.Event;
 
 @Stateless
 public class EventDaoImpl implements EventDao{
@@ -21,7 +21,7 @@ public class EventDaoImpl implements EventDao{
 	private EntityManager em ;
 	
 	public int createEvent(int id_employee, String type, String reason, Date dateStart,
-			Date dateEnd) {
+			Date dateEnd, boolean allDay) {
 		if(StringUtils.isEmpty(reason) || dateStart == null 
 				|| dateEnd == null)
 			throw new IllegalArgumentException("Argument(s) null or empty");
@@ -32,8 +32,9 @@ public class EventDaoImpl implements EventDao{
 		Event event = new Event();
 		event.setType(type);
 		event.setReason(reason);
-		event.setDateStart(dateStart);
-		event.setDateEnd(dateEnd);
+		event.setStart(dateStart);
+		event.setEnd(dateEnd);
+		event.setAllDay(allDay);
 		
 		try{
 			Employee employee = em.getReference(Employee.class, id_employee);
@@ -57,15 +58,37 @@ public class EventDaoImpl implements EventDao{
 		}
 		
 		List<Event> list = (List<Event>) em.createQuery("SELECT a FROM Event a "
-								+ "WHERE a.id_employee = :id_e")
-								.setParameter("id_e", id_employee);
+								+ "WHERE a.employee.id_employee = :id_e")
+								.setParameter("id_e", id_employee)
+								.getResultList();
 		return list;
 	}
 
 	@Override
 	public List<Event> getEvents(int id_employee, String type) {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			em.getReference(Employee.class, id_employee);
+		} catch(EntityNotFoundException e){
+			return null;
+		}
+		
+		List<Event> list = (List<Event>) em.createQuery("SELECT a FROM Event a "
+								+ "WHERE a.employee.id_employee = :id_e"
+								+ "AND a.type = :typ")
+								.setParameter("id_e", id_employee)
+								.setParameter("typ", type)
+								.getResultList();
+		return list;
+	}
+
+	@Override
+	public int updateEvent(int idEvent, Date dateStart, Date dateEnd, boolean allDay) {
+		Event event = em.getReference(Event.class, idEvent);
+		event.setStart(dateStart);
+		event.setEnd(dateEnd);
+		event.setAllDay(allDay);
+		em.merge(event); 
+		return event.getId_event();
 	}
 
 }

@@ -7,7 +7,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +21,6 @@ public class Employee{
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="id_employee")
 	private int id_employee;
     @Column(name="lastname", nullable=false)
 	private String lastname;
@@ -43,11 +41,11 @@ public class Employee{
     private String role;
     
 
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="employee")
+	@OneToMany(mappedBy="employee")
     private Set<Task> tasks = new HashSet<Task>();
     
     @OneToMany(mappedBy="employee", cascade=CascadeType.ALL)
-    private Set<Event> absences;
+    private Set<Event> events = new HashSet<Event>();
     
 	public int getId_employee() {
 		return id_employee;
@@ -80,12 +78,12 @@ public class Employee{
 		this.dateEnd = dateEnd;
 	}
     
-	public Set<Event> getAbsences(){
-		return this.absences;
+	public Set<Event> getEvents(){
+		return this.events;
 	}
 	
-	public void setAbsences(Set<Event> absences) {
-		this.absences = absences;
+	public void setEvents(Set<Event> events) {
+		this.events = events;
 	}
 	
 	public Set<Task> getTasks() {

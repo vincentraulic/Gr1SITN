@@ -3,7 +3,8 @@ package com.pmo.event.type;
 public enum EventType {
 
 	ABSENCE("Absence"),
-	TASK("Tâche");
+	OTHER("Autre"),
+	MEETING("Réunion");
 	
 	private String name = "";
 	

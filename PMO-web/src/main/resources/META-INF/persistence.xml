@@ -10,7 +10,7 @@
         
         <jta-data-source>jdbc/pmo_resource</jta-data-source>
         
-        <class>com.pmo.model.Absence</class>
+        <class>com.pmo.model.Event</class>
         <class>com.pmo.model.Employee</class>
         <class>com.pmo.model.Project</class>
         <class>com.pmo.model.ProjectTask</class>

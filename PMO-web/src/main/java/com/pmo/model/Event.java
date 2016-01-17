@@ -2,7 +2,6 @@ package com.pmo.model;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="EVENT")
@@ -19,23 +21,23 @@ public class Event{
 
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="id_event")
 	private int id_event;
-	@Column(name="reason")
 	private String reason;
-	@Column(name="type")
 	private String type;
-	@Temporal(TemporalType.DATE)
-	@Column(name="datestart")
-	private Date dateStart;
-	@Temporal(TemporalType.DATE)
-	@Column(name="dateend")
-	private Date dateEnd;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date start;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date end;
+	
+	private boolean allDay;
 	
 	@ManyToOne
 	@JoinColumn(name="id_employee")
+	@JsonIgnore
 	private Employee employee;
 	
+	@Transient
+	private String title;
 	
 	public int getId_event() {
 		return id_event;
@@ -61,20 +63,20 @@ public class Event{
 		this.type = type;
 	}
 
-	public Date getDateStart() {
-		return dateStart;
+	public Date getStart() {
+		return start;
 	}
 
-	public void setDateStart(Date dateStart) {
-		this.dateStart = dateStart;
+	public void setStart(Date dateStart) {
+		this.start = dateStart;
 	}
 
-	public Date getDateEnd() {
-		return dateEnd;
+	public Date getEnd() {
+		return end;
 	}
 
-	public void setDateEnd(Date dateEnd) {
-		this.dateEnd = dateEnd;
+	public void setEnd(Date dateEnd) {
+		this.end = dateEnd;
 	}
 
 	public Employee getEmployee() {
@@ -83,6 +85,18 @@ public class Event{
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
+	}
+	
+	public String getTitle() {
+		return type + " : " + reason;
+	}
+	
+	public boolean isAllDay() {
+		return allDay;
+	}
+
+	public void setAllDay(boolean allDay) {
+		this.allDay = allDay;
 	}
 	
 	@Override
@@ -100,9 +114,9 @@ public class Event{
 			return false;
 		if( !a.reason.equals(this.reason))
 			return false;
-		if( !a.dateStart.equals(this.dateStart))
+		if( !a.start.equals(this.start))
 			return false;
-		if( !a.dateEnd.equals(this.dateEnd))
+		if( !a.end.equals(this.end))
 			return false;
 		if( !a.employee.equals(this.employee))
 			return false;
@@ -112,8 +126,9 @@ public class Event{
 	
 	@Override
 	public int hashCode() {
-		int result = reason.hashCode() + dateStart.hashCode() + dateEnd.hashCode();
-        result = result + (employee != null ? employee.hashCode() : 0);
+		int result = id_event;
         return result;
 	}
+
+
 }

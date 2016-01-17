@@ -5,7 +5,6 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="PROJECTTASK")
-public class ProjectTask {
+public class ProjectTask{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -27,7 +26,7 @@ public class ProjectTask {
 	@Column(name="cost")
 	private int cost;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="projectTask")
+	@OneToMany(mappedBy="projectTask")
 	private Set<Task> tasks = new HashSet<Task>();
 	
 	@ManyToOne

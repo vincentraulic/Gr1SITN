@@ -1,7 +1,7 @@
 <!-- fullCalendar 2.2.5 -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-<script src="../plugins/fullcalendar/fullcalendar.min.js"></script>
+<script src="<c:url value="/resources/plugins/fullcalendar/fullcalendar.min.js"/>"></script>
 <!-- Page specific script -->
 <script>
 	$(function() {
@@ -34,45 +34,22 @@
 
 		ini_events($('#external-events div.external-event'));
 
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+
 		/* initialize the calendar
 		 -----------------------------------------------------------------*/
 		//init data
-		//init data
-		/* probleme pour les couleurs */
 		$.ajax({
-			url : '<c:url value="/event/events"/>',
+			url : '<c:url value="/user/event/events"/>',
 			type : 'POST',
-			data : '',
+			data : header + '=' + token,
 			async : false,
 			success : function(response) {
 				json_events = response;
 			}
 		});
 
-		$('#calendar').fullCalendar({
-			   events: JSON.parse(json_events)
-		});
-
-		/*$('#calendar').fullCalendar({
-
-		    events: {
-		        url: '<c:url value="/event/events"/>',
-		        type: 'POST',
-		        data: {
-		        },
-		        error: function() {
-		            alert('there was an error while fetching events!');
-		        },
-		        color: 'yellow',   // a non-ajax option
-		        textColor: 'black' // a non-ajax option
-		        backgroundColor: "#f56954", //red
-		        borderColor: "#f56954"
-		    }
-
-		});*/
-
-		
-		 
 		//Date for the calendar events (dummy data)
 		var date = new Date();
 		var d = date.getDate(), m = date.getMonth(), y = date.getFullYear();
@@ -90,14 +67,16 @@
 								week : 'week',
 								day : 'day'
 							},
+							/* probleme pour les couleurs */
+							events: json_events,
 							editable : true,
 							droppable : true, // this allows things to be dropped onto the calendar !!!
-							drop : function(date, allDay) { // this function is called when something is dropped
+							drop : function( date, jsEvent, ui, resourceId ) { // this function is called when something is dropped
 
 								// retrieve the dropped element's stored Event Object
-								var originalEventObject = $(this).data(
-										'eventObject');
-
+								var originalEventObject = $(this).data('eventObject');
+								originalEventObject.reason = $("#motifEvent").val();
+								
 								// we need to copy it, so that multiple events don't have a reference to the same object
 								var copiedEventObject = $.extend({},
 										originalEventObject);
@@ -105,37 +84,46 @@
 								// assign title and type
 								var type = copiedEventObject.title;
 								copiedEventObject.type = copiedEventObject.title;
-								copiedEventObject.title = copiedEventObject.title
-										+ ("#motifEvent").val();
+								copiedEventObject.title = copiedEventObject.title + " : "
+										+ copiedEventObject.reason;
 								// assign it the date that was reported
 								copiedEventObject.start = date;
-								copiedEventObject.allDay = allDay;
+								if (typeof date._ambigTime !== 'undefined') {
+									copiedEventObject.allDay = date._ambigTime;
+								}
+								else
+									copiedEventObject.allDay = false;
 								copiedEventObject.backgroundColor = $(this)
 										.css("background-color");
 								copiedEventObject.borderColor = $(this).css(
 										"border-color");
 								
 								/*set start and end date*/
-								copiedEventObject.start = date;
+								var start = new Date(date);
+								copiedEventObject.start = start;
 								var end = new Date(date);
-								end.setHours(date.getHours() + 1); //default + 1h
+								end.setHours(end.getHours() + 1); //default + 1h
 								copiedEventObject.end = end;
 
 								$.ajax({
-											url : '<c:url value="/event/new"/>',
-											data : 'type=' + type + '&title='
-													+ title + '&startdate='
-													+ start + '&enddate=' + end,
+											url : '<c:url value="/user/event/new"/>',
+											data : header + '=' + token +
+													'&type=' + type + '&reason='
+													+ copiedEventObject.reason + '&startdate='
+													+ copiedEventObject.start.getTime() + '&enddate=' 
+													+ copiedEventObject.end.getTime() + '&allDay='
+													+ copiedEventObject.allDay,
 											type : 'POST',
 											dataType : 'json',
 											success : function(response) {
-												copiedEventObject.id = response.eventid;
-												$('#calendar').fullCalendar(
-														'renderEvent',
-														copiedEventObject, true);
+												if(response > 0){
+													copiedEventObject.id_event = response;
+													$('#calendar').fullCalendar('renderEvent',
+																		copiedEventObject, true);
+												}
 											},
 											error : function(e) {
-												console.log(e.responseText);
+												console.log("ERROR: ", e);
 											}
 										});
 
@@ -158,14 +146,16 @@
 										+ event.end.format());
 
 								$.ajax({
-									url : '<c:url value="/event/update"/>"',
-									data : 'eventid=' + event.id
+									url : '<c:url value="/user/event/update"/>',
+									data : 	header + '=' + token +
+											'&eventid=' + event.id_event
 											+ '&startdate=' + event.start
-											+ '&enddate=' + event.end,
+											+ '&enddate=' + event.end
+											+ '&allDay=' + event.allDay,
 									type : 'POST',
 									dataType : 'json',
 									success : function(response) {
-										if (response.status == 200)
+										if(response > 0)
 											$('#calendar').fullCalendar(
 													'updateEvent', event);
 									},
@@ -178,18 +168,21 @@
 							},
 							eventDrop: function(event, delta, revertFunc) {
 								   var title = event.title;
-								   var start = event.start.format();
-								   var end = (event.end == null) ? start : event.end.format();
-								   u$.ajax({
-								     url: '<c:url value="/event/update"/>"',
-								     data: 'eventid=' + event.id
-										+ '&startdate=' + event.start
-										+ '&enddate=' + event.end,
+								   var start = event.start;
+								   var end = (event.end == null) ? start : event.end;
+								   $.ajax({
+								     url: '<c:url value="/user/event/update"/>',
+								     data: 	header + '=' + token +
+									     	'&eventid=' + event.id_event
+											+ '&startdate=' + start
+											+ '&enddate=' + end
+											+ '&allDay=' + event.allDay,
 								     type: 'POST',
 								     dataType: 'json',
 								     success: function(response){
-								       if(response.status != 'success')
-								       revertFunc();
+								    	 if(response > 0)
+								    		 $('#calendar').fullCalendar(
+														'updateEvent', event);
 								     },
 								     error: function(e){
 								       revertFunc();
