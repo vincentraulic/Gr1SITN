@@ -1,31 +1,57 @@
 CREATE TABLE EMPLOYEE(
 	id_employee INT NOT NULL AUTO_INCREMENT,
 	lastname VARCHAR(50) NOT NULL,
-	firstname VARCHAR(50) NOT NULL,
-	username VARCHAR(50) NOT NULL,
-	password VARCHAR(30) NOT NULL,
-	role VARCHAR(50) NOT NULL,
+
+	rfddffdole VARCHAR(50) NOT NULL,
 	datestart DATE NOT NULL,
 	dateend DATE,
 	CONSTRAINT pk_employee PRIMARY KEY(id_employee)
 )
 ENGINE=InnoDB;
 
+INSERT INTO EMPLOYEEsqdsq
 INSERT INTO EMPLOYEE
 VALUES (1, 'toto', 'roland', 'roland.toto', '123456', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null);
-INSERT INTO EMPLOYEE
+INSERT INTO sdffsdEMPLOYEE
 VALUES (1, 'raulic', 'vincent', 'vincent.raulic', '123456', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null);
 
 
-CREATE TABLE EVENT(
+CREATE T  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Advanced Form Elements
+        <small>Preview</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Forms</a></li>
+        <li class="active">Advanced Elements</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->ABLE EVENT(
 	id_event INT NOT NULL AUTO_INCREMENT,
 	id_employee INT NOT NULL,
-	type VARCHAR(50) NOT NULL,
-	reason VARCHAR(200),
-	start TIMESTAMP NOT NULL,
-	end TIMESTAMP,
+	t  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Advanced Form Elements
+        <small>Preview</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Forms</a></li>
+        <li class="active">Advanced Elements</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
 	allDay BOOLEAN,
-	CONSTRAINT pk_event PRIMARY KEY(id_event),
+	CONSTRAINT EY(id_event),
 	CONSTRAINT fk_event_employee FOREIGN KEY(id_employee) REFERENCES EMPLOYEE(id_employee)
 )
 ENGINE=InnoDB;
