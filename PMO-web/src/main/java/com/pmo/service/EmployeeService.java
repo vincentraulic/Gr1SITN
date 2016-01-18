@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import com.pmo.model.Event;
 import com.pmo.model.Employee;
+import com.pmo.model.Event;
 
 @Local
 public interface EmployeeService {

@@ -19,10 +19,10 @@ import com.pmo.user.service.UserPmo;
 @Controller
 public class HomeController {
 
-	@EJB(mappedName="java:module/TaskServiceImpl")
+	@EJB(mappedName="java:module/pmo/TaskService")
 	private TaskService taskService;
 	
-	@EJB(mappedName="java:module/UserDaoImpl")
+	@EJB(mappedName="java:module/pmo/UserDao")
 	private UserDao userDao;
 	
 	@RequestMapping(value = "/user/home", method = RequestMethod.GET)

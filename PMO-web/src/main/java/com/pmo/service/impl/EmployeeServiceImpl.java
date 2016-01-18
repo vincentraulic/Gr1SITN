@@ -13,16 +13,16 @@ import com.pmo.model.Employee;
 import com.pmo.model.Event;
 import com.pmo.service.EmployeeService;
 
-@Stateless
+@Stateless(name = "pmo/EmployeeService", mappedName = "pmo/EmployeeService")
 public class EmployeeServiceImpl implements EmployeeService{
 
-	@EJB(mappedName="java:module/EmployeeDaoImpl")
+	@EJB
 	private EmployeeDao employeeDao;
 	
-	@EJB(mappedName="java:module/UserDaoImpl")
+	@EJB
 	private UserDao userDao;
 	
-	@EJB(mappedName="java:module/EventDaoImpl")
+	@EJB
 	private EventDao eventDao;
 	
 	@Override

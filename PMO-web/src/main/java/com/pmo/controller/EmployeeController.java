@@ -16,7 +16,7 @@ import com.pmo.service.EmployeeService;
 @Controller
 public class EmployeeController {
 
-	@EJB(mappedName="java:module/EmployeeServiceImpl")
+	@EJB(mappedName="java:module/pmo/EmployeeService")
 	private EmployeeService employeeService;
 	
     @RequestMapping(value="/user/employee", method = RequestMethod.GET)

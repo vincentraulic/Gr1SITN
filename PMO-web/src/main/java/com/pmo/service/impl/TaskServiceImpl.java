@@ -15,13 +15,13 @@ import com.pmo.model.ProjectTask;
 import com.pmo.model.Task;
 import com.pmo.service.TaskService;
 
-@Stateless
+@Stateless(name = "pmo/TaskService", mappedName = "pmo/TaskService")
 public class TaskServiceImpl implements TaskService{
 
-	@EJB(mappedName="java:module/TaskDaoImpl")
+	@EJB
 	private TaskDao taskDao;
 	
-	@EJB(mappedName="java:module/ProjectDaoImpl")
+	@EJB
 	private ProjectDao projectDao;
 	
 	@Override
