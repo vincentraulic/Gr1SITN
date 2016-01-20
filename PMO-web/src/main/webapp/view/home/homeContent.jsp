@@ -38,7 +38,9 @@
 			<div class="box">
 				<div class="box-header">
 					<h3 class="box-title">Planning des absences</h3>
-
+					<div>
+					<a href="<c:url value="/user/event"/>"><span>Ajouter une absence</span></a>	
+					</div>
 					<div class="box-tools">
 						<div class="input-group input-group-sm" style="width: 150px;">
 							<input type="text" name="table_search"
