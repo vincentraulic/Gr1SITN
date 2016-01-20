@@ -15,7 +15,6 @@ public class UserDaoImpl implements UserDao{
 	@PersistenceContext(unitName = "pmodb")
 	private EntityManager em ;
 
-	@Override
 	public Employee getUser(String username) {
 		List<Employee> list = em.createQuery("SELECT e FROM Employee e "
 				+ "WHERE e.username = :username")
@@ -27,7 +26,6 @@ public class UserDaoImpl implements UserDao{
 		return null;
 	}
 
-	@Override
 	public String getPassword(String username) {
 		List<Employee> list = em.createQuery("SELECT e FROM Employee e "
 				+ "WHERE e.username = :username")
@@ -39,7 +37,7 @@ public class UserDaoImpl implements UserDao{
 		return null;
 	}
 
-	@Override
+	
 	public String updatePassword(String username, String newPassword) {
 		// TODO Auto-generated method stub
 		return null;

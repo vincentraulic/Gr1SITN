@@ -64,7 +64,6 @@ public class EventDaoImpl implements EventDao{
 		return list;
 	}
 
-	@Override
 	public List<Event> getEvents(int id_employee, String type) {
 		try{
 			em.getReference(Employee.class, id_employee);
@@ -81,7 +80,6 @@ public class EventDaoImpl implements EventDao{
 		return list;
 	}
 
-	@Override
 	public int updateEvent(int idEvent, Date dateStart, Date dateEnd, boolean allDay) {
 		Event event = em.getReference(Event.class, idEvent);
 		event.setStart(dateStart);

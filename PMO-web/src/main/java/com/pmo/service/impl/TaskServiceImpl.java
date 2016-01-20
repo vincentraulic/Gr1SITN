@@ -24,24 +24,24 @@ public class TaskServiceImpl implements TaskService{
 	@EJB
 	private ProjectDao projectDao;
 	
-	@Override
+	
 	public int createTask(int id_projectTask, int id_employee, int cost,
 			Date dateStart, Date estimateDateEnd) {
 		return taskDao.createTask(id_projectTask, id_employee, cost, dateStart, estimateDateEnd, 0, 0);
 	}
 
-	@Override
+	
 	public List<Task> getTasks(Employee employee) {
 		return taskDao.getTasks(employee);
 	}
 
-	@Override
+	
 	public void updateTask(Task task) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public List<Task> getTasks(Project project) {
 		Project p = projectDao.getProject(project.getId_project());
 		
