@@ -1,4 +1,4 @@
-package com.pmo.service.impl;
+package com.pmo.service.bean;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,7 +16,7 @@ import com.pmo.model.Task;
 import com.pmo.service.TaskService;
 
 @Stateless(name = "pmo/TaskService", mappedName = "pmo/TaskService")
-public class TaskServiceImpl implements TaskService{
+public class TaskServiceBean implements TaskService{
 
 	@EJB
 	private TaskDao taskDao;
