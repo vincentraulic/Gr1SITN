@@ -1,4 +1,54 @@
-/target/
+PMO-web/.metadata
+PMO-web/bin/
+PMO-web/tmp/
+PMO-web/*.tmp
+PMO-web/*.bak
+PMO-web/*.swp
+PMO-web/*~.nib
+PMO-web/local.properties
+PMO-web/.settings/
+PMO-web/.loadpath
 
-*.class
-/build/
+# Eclipse Core
+PMO-web/.project
+
+# External tool builders
+PMO-web/.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+PMO-web/*.launch
+
+# PyDev specific (Python IDE for Eclipse)
+PMO-web/*.pydevproject
+
+# CDT-specific (C/C++ Development Tooling)
+PMO-web/.cproject
+
+# JDT-specific (Eclipse Java Development Tools)
+PMO-web/.classpath
+
+# Java annotation processor (APT)
+PMO-web/.factorypath
+
+# PDT-specific (PHP Development Tools)
+PMO-web/.buildpath
+
+# sbteclipse plugin
+PMO-web/.target
+
+# TeXlipse plugin
+PMO-web/.texlipse
+
+# STS (Spring Tool Suite)
+PMO-web/.springBeans
+
+ Maven-specific
+PMO-web/target/
+PMO-web/pom.xml.tag
+PMO-web/pom.xml.releaseBackup
+PMO-web/pom.xml.versionsBackup
+PMO-web/pom.xml.next
+PMO-web/release.properties
+PMO-web/dependency-reduced-pom.xml
+PMO-web/buildNumber.properties
+PMO-web/.mvn/timing.properties
