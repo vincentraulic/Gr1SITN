@@ -65,16 +65,16 @@
 							<th>Status</th>
 							<th>Raison</th>
 						</tr>
-						<%-- <c:forEach items="${absence}" var="absence">
+						<c:forEach items="${absences}" var="absence">
 		              	<tr>
-		              		<td> </td>
-		              		<td> </td>
-		              		<td><c:out value="${absence.dateStart}"/></td>
-		              		<td><c:out value="${absence.dateEnd}"/></td>
-		              		<td> </td>
+		              		<td><c:out value="${absence.employee.lastname}"/></td>
+		              		<td><c:out value="${absence.employee.firstname}"/></td>
+		              		<td><c:out value="${absence.start}"/></td>
+		              		<td><c:out value="${absence.end}"/></td>
+		              		<td><c:out value="${absence.type}"/></td>
 		              		<td><c:out value="${absence.reason}"/></td>
 						</tr>
-					  </c:forEach> --%>
+					  </c:forEach>
 					</table>
 				</div>
 				<!-- /.box-body -->
