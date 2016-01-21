@@ -10,12 +10,6 @@
         
         <jta-data-source>jdbc/pmo_resource</jta-data-source>
         
-        <class>com.pmo.model.Event</class>
-        <class>com.pmo.model.Employee</class>
-        <class>com.pmo.model.Project</class>
-        <class>com.pmo.model.ProjectTask</class>
-        <class>com.pmo.model.Task</class>
-        
         <properties>
         	<property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />

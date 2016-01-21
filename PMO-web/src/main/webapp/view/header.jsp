@@ -1,3 +1,5 @@
+<%@ page pageEncoding="UTF-8"%> 
+
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -5,8 +7,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html>
 <head>
-  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>Project Management Online</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -19,11 +21,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Theme style -->
   <link rel="stylesheet" href="<c:url value="/resources/dist/css/PMO.min.css"/>">
   <link rel="stylesheet" href="<c:url value="/resources/dist/css/skins/skin-blue.min.css"/>">
-
+  <!-- Calendar style -->
+  <link rel="stylesheet" href="<c:url value="/resources/plugins/daterangepicker/daterangepicker-bs3.css"/>">
   <!-- fullCalendar 2.2.5-->
   <link rel="stylesheet" href="<c:url value="/resources/plugins/fullcalendar/fullcalendar.min.css"/>">
   <link rel="stylesheet" href="<c:url value="/resources/plugins/fullcalendar/fullcalendar.print.css"/>" media="print">
-
+  <!-- Bootstrap time Picker -->
+  <link rel="stylesheet" href="<c:url value="/resources/plugins/timepicker/bootstrap-timepicker.min.css"/>">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="<c:url value="/resources/plugins/iCheck/all.css"/>">
+  <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="<c:url value="/resources/plugins/colorpicker/bootstrap-colorpicker.min.css"/>">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="<c:url value="/resources/plugins/select2/select2.min.css"/>">
+  
   <!-- PMO Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<c:url value="/resources/dist/css/skins/_all-skins.min.css"/>">
@@ -55,7 +66,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<script src="<c:url value="/resources/plugins/slimScroll/jquery.slimscroll.min.js"/>"></script>
 	<!-- FastClick -->
 	<script src="<c:url value="/resources/plugins/fastclick/fastclick.js"/>"></script>
-  
+	<!-- InputMask -->
+	<script src="<c:url value="/resources/plugins/input-mask/jquery.inputmask.js"/>"></script>
+	<script src="<c:url value="/resources/plugins/input-mask/jquery.inputmask.date.extensions.js"/>"></script>
+	<script src="<c:url value="/resources/plugins/input-mask/jquery.inputmask.extensions.js"/>"></script>
+	<!-- date-range-picker -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+	<script src="<c:url value="/resources/plugins/daterangepicker/daterangepicker.js"/>"></script>
+    <!-- iCheck 1.0.1 -->
+	<script src="<c:url value="/resources/plugins/iCheck/icheck.min.js"/>"></script>
+	<!-- bootstrap time picker -->
+    <script src="<c:url value="/resources/plugins/timepicker/bootstrap-timepicker.min.js"/>"></script>
+    <!-- Select2 -->
+    <script src="<c:url value="/resources/plugins/select2/select2.full.min.js"/>"></script>
+    <!-- bootstrap color picker -->
+    <script src="<c:url value="/resources/plugins/colorpicker/bootstrap-colorpicker.min.js"/>"></script>
 </head>
 <!--
 BODY TAG OPTIONS:

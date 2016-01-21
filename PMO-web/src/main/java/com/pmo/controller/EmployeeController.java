@@ -25,7 +25,13 @@ public class EmployeeController {
         return "employee";
     }
 	
-    @RequestMapping(value="/user/newemployee", method = RequestMethod.POST)
+    @RequestMapping(value="/user/newemployee", method = RequestMethod.GET)
+    public String afficherNewUser() {
+        
+        return "pages/newuser";
+    }    
+    
+    @RequestMapping(value="/user/newuser", method = RequestMethod.POST)
     public String supprimer(@RequestParam(value="lastname") final String lastname,
     						@RequestParam(value="firstname") final String firstname,
     						final ModelMap pModel) {
@@ -35,7 +41,7 @@ public class EmployeeController {
 
 		//employeeService.createEmployee(lastname, firstname, date);
     	
-        return "home";
+        return "pages/newuser";
     }
 	
 	
