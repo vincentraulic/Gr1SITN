@@ -43,12 +43,4 @@ PMO-web/.texlipse
 PMO-web/.springBeans
 
  Maven-specific
-PMO-web/target/
-PMO-web/pom.xml.tag
-PMO-web/pom.xml.releaseBackup
-PMO-web/pom.xml.versionsBackup
-PMO-web/pom.xml.next
-PMO-web/release.properties
-PMO-web/dependency-reduced-pom.xml
-PMO-web/buildNumber.properties
-PMO-web/.mvn/timing.properties
+PMO-web/target/*
