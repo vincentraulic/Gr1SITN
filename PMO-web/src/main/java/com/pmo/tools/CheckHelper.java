@@ -2,19 +2,23 @@ package com.pmo.tools;
 
 import com.mysql.jdbc.StringUtils;
 import com.pmo.event.type.EventType;
+import com.pmo.exception.EventTypeNotFoundException;
 
 public abstract class CheckHelper {
 	
-	public static boolean checkEventType(String event) {
+	public static void checkEventType(String event) throws EventTypeNotFoundException {
 		if(StringUtils.isNullOrEmpty(event)) {
-			return false;
+			throw new EventTypeNotFoundException("Empty event.");
 		}
+		boolean found = false;
 
 		for(EventType eventType : EventType.values()) {
 			if(eventType.toString().toLowerCase().equals(event.toLowerCase())) {
-				return true;
+				found = true;
+				break;
 			}
 		}
-		return false;
+		
+		if(!found) throw new EventTypeNotFoundException("Event " + event + " can not be found.");
 	}
 }

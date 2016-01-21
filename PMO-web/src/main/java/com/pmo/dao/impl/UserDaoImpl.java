@@ -37,7 +37,6 @@ public class UserDaoImpl implements UserDao{
 		return null;
 	}
 
-	
 	public String updatePassword(String username, String newPassword) {
 		// TODO Auto-generated method stub
 		return null;

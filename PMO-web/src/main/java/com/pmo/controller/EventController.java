@@ -62,7 +62,7 @@ public class EventController {
 		int id = -1;
 		
 		//to do check le type de Event
-		
+		System.out.println(employeeService.getDetails(user.getUsername()).getId_employee());
 		id = employeeService.createEvent(employeeService.getDetails(user.getUsername()).getId_employee(), 
 										 type, 
 										 reason, 
@@ -72,6 +72,15 @@ public class EventController {
 		return id;
 
 		//to do faire exception si erreur
+	}
+	
+	@RequestMapping(value="/user/event", method = RequestMethod.GET)
+	public String displayFormAbsence() {
+
+		UserPmo user = (UserPmo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Employee employee = userDao.getUser(user.getUsername());
+
+		return "absence/formAbsence";
 	}
 	
 	@ResponseBody

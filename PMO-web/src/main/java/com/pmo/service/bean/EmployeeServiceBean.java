@@ -1,4 +1,4 @@
-package com.pmo.service.impl;
+package com.pmo.service.bean;
 
 import java.util.Date;
 import java.util.List;
@@ -14,7 +14,7 @@ import com.pmo.model.Event;
 import com.pmo.service.EmployeeService;
 
 @Stateless(name = "pmo/EmployeeService", mappedName = "pmo/EmployeeService")
-public class EmployeeServiceImpl implements EmployeeService{
+public class EmployeeServiceBean implements EmployeeService{
 
 	@EJB
 	private EmployeeDao employeeDao;
@@ -25,6 +25,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@EJB
 	private EventDao eventDao;
 	
+
 	public int createEmployee(String lastname, String firstname,
 			String password, Date dateStart) {
 		//to do verifier les champs
