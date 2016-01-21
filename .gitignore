@@ -1,4 +1,5 @@
 PMO-web/.metadata
+PMO-web/.classpath
 PMO-web/bin/
 PMO-web/tmp/
 PMO-web/*.tmp
@@ -7,6 +8,7 @@ PMO-web/*.swp
 PMO-web/*~.nib
 PMO-web/local.properties
 PMO-web/.settings/
+PMO-web/.settings/org.eclipse.jdt.core.prefs
 PMO-web/.loadpath
 
 # Eclipse Core
@@ -42,5 +44,6 @@ PMO-web/.texlipse
 # STS (Spring Tool Suite)
 PMO-web/.springBeans
 
- Maven-specific
 PMO-web/target/*
+PMO-web/target/m2e-wtp/web-resources/META-INF/MANIFEST.MF
+PMO-web/target/m2e-wtp/web-resources/META-INF/maven/com.pmo/PMO-web/pom.properties
