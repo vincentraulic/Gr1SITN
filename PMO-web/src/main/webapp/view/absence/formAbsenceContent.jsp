@@ -28,14 +28,16 @@ Ajout de l'absence - Informations
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body table-responsive no-padding">
-					<form action="/user/event/new" method="POST">
+					<form action="<c:url value="/user/event/new"/>" method="POST">
+					<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
 <input type="hidden" name="type" value="absence" />
 Reason : <input type="text" name="reason" /> <br />
 Start Date : <input type="text" name="startdate" /> <br />
 End Date : <input type="text" name="enddate" /> <br />
 All Day : <input type="text" name="allDay" /> <br />
-<button type="submit" name="sendForm">
-Ajouter l'absence
+<button type="submit">
+Ajouter une absence
 </button>
 </form>
 				</div>
