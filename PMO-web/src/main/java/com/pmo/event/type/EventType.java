@@ -3,10 +3,15 @@ package com.pmo.event.type;
 public enum EventType {
 
 	ABSENCE("Absence"),
-	OTHER("Autre"),
-	MEETING("Réunion");
+	LEAVE("Leave"),
+	SICK_LEAVE("Sick leave"),
+	FORMATION("Formation"),
+	PROJECT_ENTRY("Project entry"),
+	PROJECT_EXIT("Project exit"),
+	MEETING("Reunion"),
+	OTHER("Autre");
 	
-	private String name = "";
+	private String name;
 	
 	EventType(String name){
 		this.name = name;

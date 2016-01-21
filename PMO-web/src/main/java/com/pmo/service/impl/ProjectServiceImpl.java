@@ -21,28 +21,28 @@ public class ProjectServiceImpl implements ProjectService{
 	@EJB
 	private ProjectDao projectDao;
 	
-	@Override
+	
 	public int createProject(String name, int cost, Date dateStart, Date dateEnd) {
 		//to do vérifier les champs
 		
 		return projectDao.createProject(name, cost, dateStart, dateEnd);
 	}
 
-	@Override
+	
 	public Project getProject(String name) {
 		//to do gérer si le nom n'existe pas
 		
 		return projectDao.getProject(name);
 	}
 
-	@Override
+	
 	public Project getProject(int id) {
 		//to do gérer si l'id n'existe pas
 		
 		return projectDao.getProject(id);
 	}
 
-	@Override
+	
 	public List<Employee> getEmployees(String projectName) {
 		Project project = projectDao.getProject(projectName);
 		
@@ -58,7 +58,7 @@ public class ProjectServiceImpl implements ProjectService{
 		
 	}
 
-	@Override
+	
 	public List<Event> getEventEmployees(int idProject) {
 		Project project = projectDao.getProject(idProject);
 		

@@ -17,6 +17,8 @@ INSERT INTO EMPLOYEE
 VALUES (2, 'raulic', 'vincent', 'vincent.raulic', '123456', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null);
 INSERT INTO EMPLOYEE
 VALUES (3, 'combier', 'quentin', 'quentin.combier', '123456', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null);
+INSERT INTO EMPLOYEE
+VALUES (4, 'bethelot', 'thomas', 'thomas.bethelot', '123456', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null);
 
 
 CREATE TABLE EVENT(
