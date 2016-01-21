@@ -14,7 +14,7 @@ import com.pmo.dao.EventDao;
 import com.pmo.model.Employee;
 import com.pmo.model.Event;
 
-@Stateless
+@Stateless(name = "pmo/EventDao", mappedName = "pmo/EventDao")
 public class EventDaoImpl implements EventDao{
 
     @PersistenceContext(unitName = "pmodb")
@@ -61,6 +61,7 @@ public class EventDaoImpl implements EventDao{
 								+ "WHERE a.employee.id_employee = :id_e")
 								.setParameter("id_e", id_employee)
 								.getResultList();
+		
 		return list;
 	}
 
@@ -72,13 +73,14 @@ public class EventDaoImpl implements EventDao{
 		}
 		
 		List<Event> list = (List<Event>) em.createQuery("SELECT a FROM Event a "
-								+ "WHERE a.employee.id_employee = :id_e"
+								+ "WHERE a.employee.id_employee = :id_e "
 								+ "AND a.type = :typ")
 								.setParameter("id_e", id_employee)
 								.setParameter("typ", type)
 								.getResultList();
 		return list;
 	}
+
 
 	public int updateEvent(int idEvent, Date dateStart, Date dateEnd, boolean allDay) {
 		Event event = em.getReference(Event.class, idEvent);

@@ -25,6 +25,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@EJB
 	private EventDao eventDao;
 	
+	@Override
 	public int createEmployee(String lastname, String firstname,
 			String password, Date dateStart) {
 		//to do verifier les champs
@@ -32,7 +33,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return employeeDao.createEmployee(lastname, firstname, password, dateStart);
 	}
 
+<<<<<<< .mine
 	
+=======
+
+>>>>>>> .theirs
 	public Employee getDetails(String username) {
 		//to do gérer si l'username n'existe pas
 		
