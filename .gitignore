@@ -9,6 +9,7 @@ PMO-web/target/
 local.properties
 PMO-web/.settings/
 .loadpath
+PMO-web/target/m2e-wtp/web-resources/META-INF/maven/com.pmo/PMO-web/*.properties
 
 # Eclipse Core
 .project
