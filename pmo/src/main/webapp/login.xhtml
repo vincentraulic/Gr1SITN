@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<meta content="charset=utf-8" />
+
+	<title>Connexion à PMO</title>
+
+	<!-- Stylesheets -->
+	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700'
+		rel='stylesheet' />
+	<link rel='stylesheet' href="css/style.css" />
+
+	<!-- Optimize for mobile devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</h:head>
+<h:body>
+
+	<!-- TOP BAR -->
+	<div id="top-bar">
+
+		<div class="page-full-width"></div>
+		<!-- end full-width -->
+
+	</div>
+	<!-- end top-bar -->
+
+
+
+	<!-- HEADER -->
+	<div id="header">
+
+		<div class="page-full-width cf">
+
+			<div id="login-intro" class="fl">
+
+				<h1>Connexion à PMO</h1>
+				<h5>Veuillez saisir vos identifiants</h5>
+
+			</div>
+			<!-- login-intro -->
+
+			<!-- The logo will automatically be resized to 39px height. -->
+			<a href="#" id="company-branding" class="fr"></a>
+
+		</div>
+		<!-- end full-width -->
+
+	</div>
+	<!-- end header -->
+
+
+
+	<!-- MAIN CONTENT -->
+	<div id="content">
+
+		<h:form id="login-form">
+
+			<fieldset>
+
+				<p>
+					<h:outputLabel for="login-username">Username</h:outputLabel>
+					<h:inputText id="login-username" name="username"
+						styleClass="round full-width-input" required="true"
+						requiredMessage="Username manquant" autofocus="true" />
+				</p>
+
+				<p>
+					<h:outputLabel for="login-password">Mot de passe</h:outputLabel>
+					<h:inputSecret id="login-password" name="password"
+						styleClass="round full-width-input" required="true"
+						requiredMessage="Mot de passe manquant" />
+				</p>
+
+				<ui:fragment rendered="${!empty param['error']}">
+					<div>Erreur de l'username/mot de passe</div>
+				</ui:fragment>
+
+				<p>
+					J'ai <a href="#">oublié mon mot de passe</a>.
+				</p>
+
+				<h:commandButton id="loginbtn" value="Connexion"
+					styleClass="button round blue image-right ic-right-arrow"
+					action="#{loginController.doLogin()}" />
+
+			</fieldset>
+
+		</h:form>
+
+	</div>
+	<!-- end content -->
+
+
+
+	<!-- FOOTER -->
+	<div id="footer">
+
+		<p>
+			<a href="#">PMO</a>
+		</p>
+
+	</div>
+	<!-- end footer -->
+
+</h:body>
+</html>
