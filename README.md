@@ -7,15 +7,6 @@ Installation
 -----------
 
 ```
-Download the jboss-logging 3.3.0 Final
-https://repository.jboss.org/nexus/content/groups/public/org/jboss/logging/jboss-logging/3.3.0.Final/jboss-logging-3.3.0.Final.jar
-
-Install it into Glassfish's lib directory
-glassfish-X.X\glassfishX\glassfish\lib
-glassfish-X.X\glassfishX\glassfish\domains\domain1\lib
-```
-
-```
 If you use Eclipse :
 
 1) Implement the maven's dependencies :

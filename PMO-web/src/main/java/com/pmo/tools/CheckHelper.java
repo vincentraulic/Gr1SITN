@@ -1,13 +1,14 @@
 package com.pmo.tools;
 
-import com.mysql.jdbc.StringUtils;
+import org.springframework.util.StringUtils;
+
 import com.pmo.event.type.EventType;
 import com.pmo.exception.EventTypeNotFoundException;
 
 public abstract class CheckHelper {
 	
 	public static void checkEventType(String event) throws EventTypeNotFoundException {
-		if(StringUtils.isNullOrEmpty(event)) {
+		if(StringUtils.isEmpty(event)) {
 			throw new EventTypeNotFoundException("Empty event.");
 		}
 		boolean found = false;

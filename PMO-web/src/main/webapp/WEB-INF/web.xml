@@ -20,7 +20,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>mvc-dispatcher</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>/app/*</url-pattern>
 	</servlet-mapping>
 
 	<listener>
@@ -39,7 +39,7 @@
 
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/app/*</url-pattern>
 	</filter-mapping>
 
 	<session-config>
@@ -47,7 +47,7 @@
 	</session-config>
 	
 	<welcome-file-list>
-	    <welcome-file></welcome-file>
+		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 
 	<!-- <ejb-local-ref> <ejb-ref-name>ejb/contacts</ejb-ref-name> <ejb-ref-type>Session</ejb-ref-type> 

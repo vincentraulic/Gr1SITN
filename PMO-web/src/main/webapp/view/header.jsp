@@ -84,7 +84,7 @@ desired effect
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="<c:url value="/home"/>" class="logo">
+    <a href="<c:url value="/app/user/home"/>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>PMO</b></span>
       <!-- logo for regular state and mobile devices -->
