@@ -31,7 +31,7 @@ Ajout de l'absence - Informations
 					<form action="<c:url value="/user/event/new"/>" method="POST">
 					<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}" />
-<input type="hidden" name="type" value="absence" />
+<input type="hidden" name="type" value="Absence" />
 Reason : <input type="text" name="reason" /> <br />
 Start Date : <input type="text" name="startdate" /> <br />
 End Date : <input type="text" name="enddate" /> <br />
