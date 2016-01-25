@@ -40,7 +40,7 @@
 		<div class="login-box-body">
 			<p class="login-box-msg">Sign in to start your session</p>
 
-			<form action="<c:url value="/j_spring_security_check"/>"
+			<form action="<c:url value="/app/j_spring_security_check"/>"
 				method="post">
 				<div class="form-group has-feedback">
 					<input type="text" class="form-control" placeholder="Username"

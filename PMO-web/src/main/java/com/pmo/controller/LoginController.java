@@ -20,7 +20,7 @@ public class LoginController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
-			return new ModelAndView("forward:/user/home");
+			return new ModelAndView("forward:/app/user/home");
 		}
 		
 		else {

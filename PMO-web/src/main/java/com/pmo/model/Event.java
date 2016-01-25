@@ -2,6 +2,7 @@ package com.pmo.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +28,7 @@ public class Event{
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date start;
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column (name="dateEnd")
 	private Date end;
 	
 	private boolean allDay;

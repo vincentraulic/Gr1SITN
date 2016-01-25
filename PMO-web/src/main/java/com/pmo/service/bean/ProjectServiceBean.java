@@ -1,4 +1,4 @@
-package com.pmo.service.impl;
+package com.pmo.service.bean;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import com.pmo.model.Task;
 import com.pmo.service.ProjectService;
 
 @Stateless(name = "pmo/ProjectService", mappedName = "pmo/ProjectService")
-public class ProjectServiceImpl implements ProjectService{
+public class ProjectServiceBean implements ProjectService{
 
 	@EJB
 	private ProjectDao projectDao;
