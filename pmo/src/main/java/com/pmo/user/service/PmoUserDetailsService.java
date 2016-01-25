@@ -25,7 +25,7 @@ public class PmoUserDetailsService implements UserDetailsService{
 	public PmoUserDetailsService() {
 		try {
 			InitialContext ctx = new InitialContext();
-			userDao = (UserDao) ctx.lookup("java:module/UserDao");
+			userDao = (UserDao) ctx.lookup("java:module/pmo/UserDao");
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

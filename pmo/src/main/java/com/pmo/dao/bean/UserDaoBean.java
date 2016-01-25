@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import com.pmo.dao.UserDao;
 import com.pmo.model.Employee;
 
-@Stateless
+@Stateless(name = "pmo/UserDao", mappedName = "pmo/UserDao")
 public class UserDaoBean implements UserDao{
 
 	@PersistenceContext(unitName = "pmodb")

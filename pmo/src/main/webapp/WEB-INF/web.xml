@@ -27,15 +27,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>/faces/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.jsf</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>*.faces</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
@@ -60,18 +52,7 @@
 	</session-config>
 
 	<welcome-file-list>
-		<welcome-file></welcome-file>
+		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
-
-	<mime-mapping>
-		<extension>js</extension>
-		<mime-type>application/javascript</mime-type>
-	</mime-mapping>
-
-	<mime-mapping>
-		<extension>css</extension>
-		<mime-type>text/css</mime-type>
-	</mime-mapping>
-
 
 </web-app>

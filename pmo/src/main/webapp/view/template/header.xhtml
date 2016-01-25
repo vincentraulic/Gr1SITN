@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -8,7 +8,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <h:link id="headerToHome" outcome="/home">
+    <h:link id="headerToHome" outcome="home">
 		  <!-- mini logo for sidebar mini 50x50 pixels -->
 	      <span class="logo-mini"><b>PMO</b></span>
 	      <!-- logo for regular state and mobile devices -->
@@ -30,28 +30,31 @@
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-flag-o"></i>
-              <span class="label label-danger"><c:out value="${fn:length(tasks)}"/></span>
+              <span class="label label-danger">#{userController.tasks.size()}</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">Vous avez <c:out value="${fn:length(tasks)}"/> taches</li>
-              <c:forEach items="${tasks}" var="task">
+              <li class="header">Vous avez #{userController.tasks.size()} taches</li>
+			  <ui:repeat value="#{userController.tasks}" var="task">
+				<li><h:outputText value="#{item.name}"/></li>
+
 				  <li>
 					<!-- Inner menu: contains the tasks -->
 					<ul class="menu">
 					  <li><!-- Task item -->
-						<a href="<c:url value="/task?id='${task.id_task}'"/>">
-						  <!-- Task title -->
-						  <h3>
-							<c:out value="${task.projectTask.name}"/>
-						  </h3>
-						</a>
+					  	<h:link id="headerToHome" outcome="user/home">
+				  			<f:param name="taskId" value="${task.id}" />
+				  			<!-- Task title -->
+							 <h3>
+							 	<h:outputText value="#{task.projectTask.name}"/>
+							 </h3>
+					  	</h:link>
 					  </li>
 					  <!-- end task item -->
 					</ul>
 				  </li>
-			  </c:forEach>
+			  </ui:repeat>
               <li class="footer">
-                <a href="<c:url value="/tasks"/>">View all tasks</a>
+                <h:link outcome="user/tasks" value="View all tasks"/>
               </li>
             </ul>
           </li>
@@ -60,37 +63,31 @@
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="<c:url value="/resources/dist/img/avatar5.png"/>" class="user-image" alt="User Image">
+               <h:graphicImage name="dist/img/avatar5.png" styleClass="user-image"/>
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs"><c:out value="${user.firstname}"/> <c:out value="${user.lastname}"/></span>
+              <span class="hidden-xs"><h:outputText value="#{userController.employee.firstname}"/> <h:outputText value="#{userController.employee.lastname}"/></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="<c:url value="/resources/dist/img/avatar5.png"/>" class="img-circle" alt="User Image">
-
+             	<h:graphicImage name="dist/img/avatar5.png" styleClass="img-circle"/>
               </li>
               <!-- Menu Body -->
               <li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
-                    <a href="<c:url value="/team"/>">Equipe</a>
+                  	<h:link outcome="user/team" value="Equipe"/>
+                  </div>
                 </div>
                 <!-- /.row -->
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="<c:url value="/employee/details"/>" class="btn btn-default btn-flat">Profil</a>
+                	<h:link outcome="user/employee/details" value="Profil" styleClass="btn btn-default btn-flat"/>
                 </div>
                 <div class="pull-right">
-                  <a href="<c:url value="/logout"/>" onclick="document.getElementById("logoutForm").submit()" class="btn btn-default btn-flat">D&#233;connexion</a>
-				  
-				  	<form action="<c:url value="/logout"/>" method="post" id="logoutForm" class="hide">
-						<input type="hidden" name="${_csrf.parameterName}"
-							value="${_csrf.token}" />
-					</form>
-				  
+                	<h:link outcome="logout" value="Déconnexion" styleClass="btn btn-default btn-flat"/>				  
                 </div>
               </li>
             </ul>
@@ -103,3 +100,4 @@
       </div>
     </nav>
   </header>
+</ui:composition>

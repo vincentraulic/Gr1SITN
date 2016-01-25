@@ -12,19 +12,14 @@
 	</beans:bean>
 
 	<http auto-config="true">
-		<intercept-url pattern="/faces/login.xhtml" access="permitAll" />
-		<intercept-url pattern="/resources/**" access="permitAll" />
-		<intercept-url pattern="resources/**" access="permitAll" />
-		<intercept-url pattern="/css/**" access="permitAll" />
-		<intercept-url pattern="css/**" access="permitAll" />
-		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/faces/**" access="hasRole('ROLE_USER')" />
 		<form-login 
-		    login-page="/faces/login.xhtml" 
+		    login-page="/login" 
 		    login-processing-url="/j_spring_security_check"
-		    authentication-failure-url="/faces/login.xhtml?error=1"
+		    authentication-failure-url="/login?error=1"
 		    default-target-url="/index.jsp"
-			username-parameter="username"
-			password-parameter="password" />
+			username-parameter="login-form:login-username"
+			password-parameter="login-form:login-password" />
 
 		<logout logout-success-url="/login?logout"  />
 		<!-- enable csrf protection -->
