@@ -20,6 +20,9 @@
 	<li>
 		<a href="http://localhost:8080/PMO-web/initCostProject?id=1">Homework JDBC (JPA) 3 : initialise le coût d'un projet à 0 de l'id de projet passé en paramètre</a>
 	</li>
+	<li>
+		<a href="http://localhost:8080/PMO-web/grantAdminEmployee?id=3">Homework JDBC (JPA) 4 : donne le rôle "ROLE_ADMIN" à l'employée dont l'id est passé en paramètre</a>
+	</li>
 </ul>
 </body>
 </html>
