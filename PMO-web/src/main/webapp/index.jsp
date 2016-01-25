@@ -17,6 +17,9 @@
 	<li>
 		<a href="http://localhost:8080/PMO-web/fillEndDateEmployees?id=2">Homework JDBC (JPA) 2 : initialise les dates de fin de contrat des employés sans date de fin sauf pour l'id passé en paramètre</a>
 	</li>
+	<li>
+		<a href="http://localhost:8080/PMO-web/initCostProject?id=1">Homework JDBC (JPA) 3 : initialise le coût d'un projet à 0 de l'id de projet passé en paramètre</a>
+	</li>
 </ul>
 </body>
 </html>

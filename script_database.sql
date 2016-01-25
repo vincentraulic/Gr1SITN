@@ -20,6 +20,8 @@ VALUES (3, 'combier', 'quentin', 'quentin.combier', '123456', 'ROLE_USER', STR_T
 INSERT INTO EMPLOYEE
 VALUES (4, 'bethelot', 'thomas', 'thomas.bethelot', '123456', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), STR_TO_DATE('18/09/2018', '%d/%m/%Y'));
 
+INSERT INTO PROJECT
+VALUES (1, 'projectname1', '50', '2010-05-10', '2018-07-12');
 
 CREATE TABLE EVENT(
 	id_event INT NOT NULL AUTO_INCREMENT,
