@@ -167,7 +167,7 @@
 										<!-- row record -->
 										<div class="progress progress-xs">
 											<div class="progress-bar progress-bar-danger"
-												style="width: 55%"></div>
+												style="width: #{taskController.calculateProgression(task)}%"></div>
 										</div>
 									</h:column>
 
@@ -175,7 +175,7 @@
 										<!-- column header -->
 										<f:facet name="header"></f:facet>
 										<!-- row record -->
-										<span class="badge bg-red">55%</span>
+										<span class="badge bg-red">#{taskController.calculateProgression(task)}</span>
 									</h:column>
 								</h:dataTable>
 							</div>

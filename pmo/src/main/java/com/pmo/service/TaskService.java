@@ -19,5 +19,5 @@ public interface TaskService {
 	
 	public List<Task> getTasks(Project project);
 	
-	
+	public int calculateProgression(Task task);
 }

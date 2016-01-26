@@ -23,23 +23,23 @@ public class TaskServiceBean implements TaskService{
 	@EJB
 	private ProjectDao projectDao;
 	
-	
+	@Override
 	public int createTask(Task task) {
 		return taskDao.createTask(task);
 	}
 
-	
+	@Override
 	public List<Task> getTasks(Employee employee) {
 		return taskDao.getTasks(employee);
 	}
 
-	
+	@Override
 	public void updateTask(Task task) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	
+	@Override
 	public List<Task> getTasks(Project project) {
 		
 		List<Task> tasks = new ArrayList<Task>();
@@ -49,6 +49,11 @@ public class TaskServiceBean implements TaskService{
 		}
 		
 		return tasks;
+	}
+
+	@Override
+	public int calculateProgression(Task task) {
+		return (task.getMandayUsed()/100) * task.getCost();
 	}
 
 }
