@@ -32,7 +32,10 @@ public class Task extends AbstractPersistent{
     @Temporal(TemporalType.DATE)
     @Column(name="dateend")
 	private Date dateEnd;
-	
+    
+    @Column (name="mandayUsed", nullable=false)
+    private int mandayUsed;
+
 	public ProjectTask getProjectTask() {
 		return projectTask;
 	}
@@ -72,6 +75,14 @@ public class Task extends AbstractPersistent{
 	public void setDateEnd(Date dateEnd) {
 		this.dateEnd = dateEnd;
 	}
+	
+	public int getMandayUsed() {
+		return mandayUsed;
+	}
+
+	public void setMandayUsed(int mandayUsed) {
+		this.mandayUsed = mandayUsed;
+	}	
 
 	@Override
 	public boolean equals(Object obj) {

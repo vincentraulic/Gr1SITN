@@ -1,0 +1,3 @@
+ALTER TABLE task
+ADD mandayUsed INT NOT NULL
+DEFAULT 0;

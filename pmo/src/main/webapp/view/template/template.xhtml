@@ -9,23 +9,24 @@
   <meta content="charset=utf-8" />
   <title><ui:insert name="title">Please define a title !</ui:insert></title>
 
+
   <!-- Bootstrap 3.3.5 -->
-  <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap.min.css"/>">
+  <h:outputStylesheet name="bootstrap/css/bootstrap.min.css" />
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' />
   <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel='stylesheet' />
   <!-- Theme style -->
-  <link rel="stylesheet" href="<c:url value="/resources/dist/css/PMO.min.css"/>">
-  <link rel="stylesheet" href="<c:url value="/resources/dist/css/skins/skin-blue.min.css"/>">
+  <h:outputStylesheet name="dist/css/PMO.min.css" />
+  <h:outputStylesheet name="dist/css/skins/skin-blue.min.css" />
 
   <!-- fullCalendar 2.2.5-->
-  <link rel="stylesheet" href="<c:url value="/resources/plugins/fullcalendar/fullcalendar.min.css"/>">
-  <link rel="stylesheet" href="<c:url value="/resources/plugins/fullcalendar/fullcalendar.print.css"/>" media="print">
+  <h:outputStylesheet name="plugins/fullcalendar/fullcalendar.min.css" />
+  <h:outputStylesheet name="plugins/fullcalendar/fullcalendar.print.css" media = "print" />
 
   <!-- PMO Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="<c:url value="/resources/dist/css/skins/_all-skins.min.css"/>">
+  <h:outputStylesheet name="dist/css/skins/_all-skins.min.css" />
 
   <meta name="_csrf" content="${_csrf.token}"/>
   <!-- default header name is X-CSRF-TOKEN -->
@@ -41,21 +42,22 @@
   <!-- REQUIRED JS SCRIPTS -->
 
 	<!-- jQuery 2.1.4 -->
-	<script src="<c:url value="/resources/plugins/jQuery/jQuery-2.1.4.min.js"/>"></script>
+	<h:outputScript name="plugins/jQuery/jQuery-2.1.4.min.js" />
 	<!-- Bootstrap 3.3.5 -->
-	<script src="<c:url value="/resources/bootstrap/js/bootstrap.min.js"/>"></script>
+	<h:outputScript name="bootstrap/js/bootstrap.min.js" />
 	<!-- PMO App -->
-	<script src="<c:url value="/resources/dist/js/app.min.js"/>"></script>
+	<h:outputScript name="dist/js/app.min.js" />
 	<!-- PMO for demo purposes -->
-	<script src="<c:url value="/resources/dist/js/demo.js"/>"></script>
+	<h:outputScript name="dist/js/demo.js" />
 	<!-- jQuery UI 1.11.4 -->
 	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 	<!-- Slimscroll -->
-	<script src="<c:url value="/resources/plugins/slimScroll/jquery.slimscroll.min.js"/>"></script>
+	<h:outputScript name="plugins/slimScroll/jquery.slimscroll.min.js" />
 	<!-- FastClick -->
-	<script src="<c:url value="/resources/plugins/fastclick/fastclick.js"/>"></script>
-  
+	<h:outputScript name="plugins/fastclick/fastclick.js" />
+
 </h:head>
+
 <h:body styleClass="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
 

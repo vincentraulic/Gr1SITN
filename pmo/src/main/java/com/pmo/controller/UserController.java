@@ -12,6 +12,7 @@ import javax.inject.Named;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.pmo.dao.UserDao;
+import com.pmo.event.type.EventType;
 import com.pmo.model.Employee;
 import com.pmo.model.Event;
 import com.pmo.model.Task;
@@ -52,6 +53,10 @@ public class UserController implements Serializable{
 	
 	public List<Event> getEvents(){
 		return new ArrayList<Event>(employee.getEvents());
+	}
+	
+	public List<Event> getAbsences(){
+		return new ArrayList<Event>(employeeService.getEvents(employee, EventType.ABSENCE));
 	}
 	
 }
