@@ -24,13 +24,12 @@ VALUES (4, 'bethelot', 'thomas', 'thomas.bethelot', '123456', 'ROLE_USER', STR_T
 CREATE TABLE EVENT(
 	id INT NOT NULL AUTO_INCREMENT,
 	id_employee INT NOT NULL,
-	type VARCHAR(50) NOT NULL,
 	reason VARCHAR(200),
 	start TIMESTAMP NOT NULL,
 	end TIMESTAMP,
 	allDay BOOLEAN,
 	CONSTRAINT pk_event PRIMARY KEY(id),
-	CONSTRAINT fk_event_employee FOREIGN KEY(id_employee) REFERENCES EMPLOYEE(id_employee)
+	CONSTRAINT fk_event_employee FOREIGN KEY(id_employee) REFERENCES EMPLOYEE(id)
 )
 ENGINE=InnoDB;
 
@@ -50,7 +49,7 @@ CREATE TABLE PROJECTTASK(
 	name VARCHAR(50) NOT NULL,
 	cost INT NOT NULL,
 	CONSTRAINT pk_projecttask PRIMARY KEY(id),
-	CONSTRAINT fk_projecttask_project FOREIGN KEY(id_project) REFERENCES PROJECT(id_project)
+	CONSTRAINT fk_projecttask_project FOREIGN KEY(id_project) REFERENCES PROJECT(id)
 )
 ENGINE=InnoDB;
 
@@ -62,7 +61,7 @@ CREATE TABLE TASK(
 	datestart DATE NOT NULL,
 	dateend DATE,
 	CONSTRAINT pk_task PRIMARY KEY(id),
-	CONSTRAINT fk_task_projecttask FOREIGN KEY(id_projecttask) REFERENCES PROJECTtask(id_projecttask),
-	CONSTRAINT fk_task_employee FOREIGN KEY(id_employee) REFERENCES EMPLOYEE(id_employee)
+	CONSTRAINT fk_task_projecttask FOREIGN KEY(id_projecttask) REFERENCES PROJECTtask(id),
+	CONSTRAINT fk_task_employee FOREIGN KEY(id_employee) REFERENCES EMPLOYEE(id)
 )
 ENGINE=InnoDB;

@@ -12,7 +12,7 @@
       <!-- search form (Optional) -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <input type="text" name="q" class="form-control" placeholder="Search..."/>
               <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
@@ -25,10 +25,8 @@
       <ul class="sidebar-menu">
         <li class="header">Navigation</li>
         <!-- Optionally, you can add icons to the links -->
-        <h:link outcome="user/home" value="Home" styleClass="fa fa-link"/>
-        <li class="active"><h:link outcome="user/home"><i class="fa fa-link"></i> <span>Home</span></h:link></li>
-        <h:link outcome="user/employees">
-        <li><h:link outcome="user/schedule"><i class="fa fa-calendar"></i> <span>Calendrier</span></h:link></li>
+        <li class="active"><h:link outcome="/view/home/homeContent.jsf"><i class="fa fa-link"></i> <span>Home</span></h:link></li>
+        <li><h:link outcome="/view/schedule.jsf"><i class="fa fa-calendar"></i> <span>Calendrier</span></h:link></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Projets</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">

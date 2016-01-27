@@ -62,7 +62,7 @@ public class TaskDaoBean implements TaskDao {
 	@SuppressWarnings("unchecked")
 	public List<Task> getTasks(Employee employee) {
 		List<Task> list = em.createQuery("SELECT s FROM Task s "
-				+ "WHERE s.employee.id_employee = :emp")
+				+ "WHERE s.employee.id = :emp")
 				.setParameter("emp", employee.getId())
 				.getResultList();
 		return list;

@@ -12,12 +12,12 @@
 	</beans:bean>
 
 	<http auto-config="true">
-		<intercept-url pattern="/faces/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/user/**" access="hasRole('ROLE_USER')" />
 		<form-login 
 		    login-page="/login" 
 		    login-processing-url="/j_spring_security_check"
 		    authentication-failure-url="/login?error=1"
-		    default-target-url="/index.jsp"
+		    default-target-url="/user/home"
 			username-parameter="login-form:login-username"
 			password-parameter="login-form:login-password" />
 

@@ -46,7 +46,7 @@ public class ProjectTaskDaoBean implements ProjectTaskDao{
 	@SuppressWarnings("unchecked")
 	public List<ProjectTask> getProjectTasks(int id_project) {
 		List<ProjectTask> list = em.createQuery("SELECT p FROM ProjectTask p "
-									+ "WHERE p.id_project = :project")
+									+ "WHERE p.project.id = :project")
 									.setParameter("project", id_project)
 									.getResultList();
 		return list;

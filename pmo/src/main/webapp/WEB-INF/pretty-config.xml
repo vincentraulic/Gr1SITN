@@ -7,5 +7,15 @@
 		<pattern value="/login" />
 		<view-id value="/login.jsf" />
 	</url-mapping>
+	
+	<url-mapping id="home">
+		<pattern value="/user/home" />
+		<view-id value="/view/home/homeContent.jsf" />
+	</url-mapping>
+	
+	<url-mapping id="schedule">
+		<pattern value="/user/schedule" />
+		<view-id value="/view/schedule.jsf" />
+	</url-mapping>
 
 </pretty-config>

@@ -50,7 +50,7 @@ public class EventDaoBean implements EventDao{
 		}
 		
 		List<Event> list = em.createQuery("SELECT a FROM Event a "
-								+ "WHERE a.employee.id_employee = :id_e")
+								+ "WHERE a.employee.id = :id_e")
 								.setParameter("id_e", id_employee)
 								.getResultList();
 		
@@ -66,10 +66,10 @@ public class EventDaoBean implements EventDao{
 		}
 		
 		List<Event> list = em.createQuery("SELECT a FROM Event a "
-								+ "WHERE a.employee.id_employee = :id_e "
+								+ "WHERE a.employee.id = :id_e "
 								+ "AND a.type = :typ")
 								.setParameter("id_e", id_employee)
-								.setParameter("typ", type.getName())
+								.setParameter("typ", type)
 								.getResultList();
 		return list;
 	}
