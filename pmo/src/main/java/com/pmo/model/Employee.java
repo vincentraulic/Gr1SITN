@@ -31,15 +31,24 @@ public class Employee extends AbstractPersistent{
 	@Temporal(TemporalType.DATE)
 	@Column(name="dateend")
 	private Date dateEnd;
-
+	@Temporal(TemporalType.DATE)
+	@Column(name="birthdate")
+	private Date birthdate;
+	
 	@Column(name="username")
 	private String username;
 	@Column(name="password", nullable=false)
 	private String password;
 	@Column(name="role", nullable=false)
 	private String role;
-
-
+	
+	@Column(name="email")
+	private String email;
+	@Column(name="phone")
+	private String phone;
+	@Column(name="poste")
+	private String poste;
+	
 	@OneToMany(mappedBy="employee")
 	private Set<Task> tasks = new HashSet<Task>();
 

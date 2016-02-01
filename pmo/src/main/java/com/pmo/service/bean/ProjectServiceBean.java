@@ -71,4 +71,9 @@ public class ProjectServiceBean implements ProjectService{
 		return events;
 	}
 
+	@Override
+	public List<Project> getProjects() {
+		return projectDao.getProjects();
+	}
+
 }

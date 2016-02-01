@@ -20,4 +20,6 @@ public interface ProjectService {
 	public List<Employee> getEmployees(Project project);
 	
 	public List<Event> getEventEmployees(int idProject);
+
+	public List<Project> getProjects();
 }

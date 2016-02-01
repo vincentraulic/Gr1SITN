@@ -43,27 +43,29 @@
 							<div class="box-body">
 
 								<div class="form-group">
-									<h:outputLabel for="nom">Nom</h:outputLabel>
-									<h:inputText id="nom" styleClass="form-control"
-										value="#{EmployeeController.employee.lastname}" required="true" />
+									<h:outputLabel for="lastname">Nom</h:outputLabel>
+									<h:inputText id="lastname" styleClass="form-control"
+										value="#{employeeController.employee.lastname}"
+										required="true" />
 								</div>
 
 								<div class="form-group">
-									<h:outputLabel for="prenom">Prénom</h:outputLabel>
-									<h:inputText id="prenom" styleClass="form-control"
-										value="#{EmployeeController.employee.firstname}" required="true" />
+									<h:outputLabel for="firstname">Prénom</h:outputLabel>
+									<h:inputText id="firstname" styleClass="form-control"
+										value="#{employeeController.employee.firstname}"
+										required="true" />
 								</div>
 
 								<div class="form-group">
-									<h:outputLabel for="datenaissance">Date de naissance</h:outputLabel>
+									<h:outputLabel for="birthdate">Date de naissance</h:outputLabel>
 
 									<div class="input-group">
 										<div class="input-group-addon">
 											<i class="fa fa-calendar"></i>
 										</div>
-										<p:inputMask id="datenaissance" styleClass="form-control"
-											value="#{EmployeeController.datenaissance}" mask="99/99/9999"
-											required="true" />
+										<p:inputMask id="birthdate" styleClass="form-control"
+											value="#{employeeController.employee.birthdate}"
+											mask="99/99/9999" required="true" />
 									</div>
 									<!-- /.input group -->
 								</div>
@@ -77,7 +79,7 @@
 										</div>
 										<p:inputText id="email" styleClass="form-control"
 											validatorMessage="Format de l'email invalide"
-											value="#{EmployeeController.email}" required="true">
+											value="#{employeeController.employee.email}" required="true">
 											<f:validateRegex
 												pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
 											<f:validateLength minimum="2" />
@@ -87,15 +89,15 @@
 								</div>
 
 								<div class="form-group">
-									<h:outputLabel for="telephone">Téléphone</h:outputLabel>
+									<h:outputLabel for="phone">Téléphone</h:outputLabel>
 
 									<div class="input-group">
 										<div class="input-group-addon">
 											<i class="fa fa-phone"></i>
 										</div>
-										<p:inputMask id="telephone" styleClass="form-control"
-											value="#{EmployeeController.telephone}" mask="99-99-99-99-99"
-											required="true" />
+										<p:inputMask id="phone" styleClass="form-control"
+											value="#{employeeController.employee.phone}"
+											mask="99-99-99-99-99" required="true" />
 									</div>
 									<!-- /.input group -->
 								</div>
@@ -112,16 +114,16 @@
 							<div class="box-body">
 
 								<div class="form-group">
-									<h:outputLabel for="datearrivee">Date d'arrivée</h:outputLabel>
+									<h:outputLabel for="datestart">Date d'arrivée</h:outputLabel>
 
 									<div class="input-group">
 
 										<div class="input-group-addon">
 											<i class="fa fa-calendar"></i>
 										</div>
-										<p:inputMask id="datearrivee" styleClass="form-control"
-											value="#{EmployeeController.employee.datestart}" mask="99/99/9999"
-											required="true" />
+										<p:inputMask id="datestart" styleClass="form-control"
+											value="#{employeeController.employee.datestart}"
+											mask="99/99/9999" required="true" />
 									</div>
 									<!-- /.input group -->
 								</div>
@@ -129,25 +131,23 @@
 								<div class="form-group">
 									<h:outputLabel for="poste">Poste</h:outputLabel>
 									<h:inputText id="poste" styleClass="form-control"
-										value="#{EmployeeController.poste}" required="true" />
+										value="#{employeeController.employee.poste}" required="true" />
 								</div>
 
 								<div class="form-group">
 									<h:outputLabel for="projets">Projets</h:outputLabel>
 									<h:selectManyListbox id="projets"
-										value="#{EmployeeController.projets}" id="projets"
-										name="projets" styleClass="form-control">
-										<f:selectItem itemValue="1" itemLabel="Item 1" />
-										<f:selectItem itemValue="2" itemLabel="Item 2" />
+										value="#{employeeController.projets}" name="projets"
+										styleClass="form-control">
+										<f:selectItems value="#{ProjectController.getProjects}" />
 									</h:selectManyListbox>
 								</div>
-
 							</div>
 
 							<div class="box-footer">
 								<button type="submit" class="btn btn-default">Annuler</button>
 								<h:commandButton value="Valider"
-									action="#{EmployeeController.create}">
+									action="#{employeeController.create}">
 								</h:commandButton>
 							</div>
 
