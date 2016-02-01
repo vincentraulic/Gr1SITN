@@ -12,3 +12,11 @@ ADD type ENUM('ABSENCE',
 	'MEETING',
 	'OTHER')
 ;
+
+CREATE TABLE EMPLOYEES_PROJECTS(
+	id_employee INT NOT NULL,
+	id_project INT NOT NULL,
+	CONSTRAINT fk_task_employee FOREIGN KEY(id_employee) REFERENCES EMPLOYEE(id),
+	CONSTRAINT fk_task_employee FOREIGN KEY(id_project) REFERENCES PROJECT(id)
+)
+ENGINE=InnoDB;

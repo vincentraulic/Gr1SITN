@@ -17,5 +17,10 @@
 		<pattern value="/user/schedule" />
 		<view-id value="/view/schedule.jsf" />
 	</url-mapping>
+	
+	<url-mapping id="newuser">
+		<pattern value="/user/newuser" />
+		<view-id value="/view/newUserContent.jsf" />
+	</url-mapping>	
 
 </pretty-config>

@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -32,8 +33,19 @@ public class Project extends AbstractPersistent{
     @OneToMany(mappedBy="project", cascade=CascadeType.ALL)
 	private Set<ProjectTask> projectTasks = new HashSet<ProjectTask>();
 
+	@ManyToMany(mappedBy="projects")
+	private Set<Employee> employees = new HashSet<Employee>();  
+    
 	public String getName() {
 		return name;
+	}
+
+	public Set<Employee> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(Set<Employee> employees) {
+		this.employees = employees;
 	}
 
 	public Date getDateStart() {
