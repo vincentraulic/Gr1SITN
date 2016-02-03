@@ -7,39 +7,33 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
-	<beans:bean id="pmoUserDetails" 
-                class="com.pmo.user.service.PmoUserDetailsService">
+	<beans:bean id="pmoUserDetails" class="com.pmo.user.service.PmoUserDetailsService">
 	</beans:bean>
 
+	<beans:bean id="encoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<beans:constructor-arg name="strength" value="11" />
+	</beans:bean>
+	
 	<http auto-config="true">
 		<intercept-url pattern="/user/**" access="hasRole('ROLE_USER')" />
-		<form-login 
-		    login-page="/login" 
-		    login-processing-url="/j_spring_security_check"
-		    authentication-failure-url="/login?error=1"
-		    default-target-url="/user/home"
-			username-parameter="login-form:login-username"
-			password-parameter="login-form:login-password" />
+		<form-login login-page="/login" login-processing-url="/j_spring_security_check"
+			authentication-failure-url="/login?error=1" default-target-url="/user/home"
+			username-parameter="login-form:login-username" password-parameter="login-form:login-password" />
 
-		<logout logout-success-url="/login?logout"  />
+		<logout logout-success-url="/login?logout" />
 		<!-- enable csrf protection -->
-		<csrf disabled="true"/>
-		
+		<csrf disabled="true" />
+
 	</http>
 
 	<authentication-manager>
-	 <!-- 
-	  <authentication-provider>
-	    <user-service>
-		<user name="roland.srong" password="123456" authorities="ROLE_USER" />
-	    </user-service>
-	  </authentication-provider>
-	 -->
-	 
-	 	<authentication-provider user-service-ref="pmoUserDetails" >  
+
+		<authentication-provider user-service-ref="pmoUserDetails">
+			<password-encoder ref="encoder" />
 		</authentication-provider>
 
-	
+
 	</authentication-manager>
- 
+
 </beans:beans>

@@ -22,4 +22,11 @@
     xsi:schemaLocation="
         http://xmlns.jcp.org/xml/ns/javaee
         http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+        
+     <application>
+	  <message-bundle>
+	  	com.pmo.utils.MyMessage
+	  </message-bundle>
+     </application>        
+     
 </faces-config>

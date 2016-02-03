@@ -18,7 +18,7 @@
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper">
 				<!-- Content Header (Page header) -->
-				<section class="content-header">
+				<section class="content-header" style="margin-left:-230px">
 				<h1>Créer un compte utilisateur</h1>
 				<ol class="breadcrumb">
 					<li><a href="./user/home"><i class="fa fa-dashboard"></i>
@@ -28,12 +28,18 @@
 				</section>
 
 				<!-- Main content -->
-				<section class="content"> <!-- Small boxes (Stat box) -->
+				<section class="content" style="margin-left:-230px"> <!-- Small boxes (Stat box) -->
+
+				<div class="row">
+					<div class="box" style="border-top: 0px; margin-bottom: 0px;">
+						<h:messages style="color:red;" />
+					</div>
+				</div>
+
 				<!-- Main row --> <h:form>
 					<div class="row">
 						<!-- Left col -->
 						<section class="col-lg-7 connectedSortable">
-
 						<div class="box">
 
 							<div class="box-header">
@@ -44,16 +50,22 @@
 
 								<div class="form-group">
 									<h:outputLabel for="lastname">Nom</h:outputLabel>
-									<h:inputText id="lastname" styleClass="form-control"
+									<h:inputText id="lastname"
+										styleClass="form-control #{component.valid ? '' : 'has-error'}"
 										value="#{employeeController.employee.lastname}"
-										required="true" />
+										required="true" label="Nom">
+										<f:validateLength minimum="2" maximum="50" />
+									</h:inputText>
 								</div>
 
 								<div class="form-group">
 									<h:outputLabel for="firstname">Prénom</h:outputLabel>
-									<h:inputText id="firstname" styleClass="form-control"
+									<h:inputText id="firstname"
+										styleClass="form-control #{component.valid ? '' : 'has-error'}"
 										value="#{employeeController.employee.firstname}"
-										required="true" />
+										required="true" label="Prénom">
+										<f:validateLength minimum="2" maximum="50" />
+									</h:inputText>
 								</div>
 
 								<div class="form-group">
@@ -63,9 +75,10 @@
 										<div class="input-group-addon">
 											<i class="fa fa-calendar"></i>
 										</div>
-										<p:inputMask id="birthdate" styleClass="form-control"
+										<p:inputMask id="birthdate"
+											styleClass="form-control #{component.valid ? '' : 'has-error'}"
 											value="#{employeeController.employee.birthdate}"
-											mask="99/99/9999" required="true">
+											mask="99/99/9999" required="true" label="Date de naissance">
 											<f:convertDateTime pattern="dd/MM/yyyy" />
 										</p:inputMask>
 									</div>
@@ -79,9 +92,10 @@
 										<div class="input-group-addon">
 											<i class="fa fa-envelope"></i>
 										</div>
-										<p:inputText id="email" styleClass="form-control"
-											validatorMessage="Format de l'email invalide"
-											value="#{employeeController.employee.email}" required="true">
+										<p:inputText id="email"
+											styleClass="form-control #{component.valid ? '' : 'has-error'}"
+											value="#{employeeController.employee.email}" required="true"
+											label="E-mail">
 											<f:validateRegex
 												pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
 											<f:validateLength minimum="2" />
@@ -97,9 +111,10 @@
 										<div class="input-group-addon">
 											<i class="fa fa-phone"></i>
 										</div>
-										<p:inputMask id="phone" styleClass="form-control"
+										<p:inputMask id="phone"
+											styleClass="form-control #{component.valid ? '' : 'has-error'}"
 											value="#{employeeController.employee.phone}"
-											mask="99-99-99-99-99" required="true" />
+											mask="99-99-99-99-99" required="true" label="Téléphone" />
 									</div>
 									<!-- /.input group -->
 								</div>
@@ -123,27 +138,33 @@
 										<div class="input-group-addon">
 											<i class="fa fa-calendar"></i>
 										</div>
-										<p:inputMask id="datestart" styleClass="form-control"
+										<p:inputMask id="datestart"
+											styleClass="form-control #{component.valid ? '' : 'has-error'}"
 											value="#{employeeController.employee.dateStart}"
-											mask="99/99/9999" required="true">
+											mask="99/99/9999" required="true" label="Date d'arrivée">
 											<f:convertDateTime pattern="dd/MM/yyyy" />
-										</p:inputMask>											
-				
+										</p:inputMask>
+
 									</div>
 									<!-- /.input group -->
 								</div>
 
 								<div class="form-group">
 									<h:outputLabel for="poste">Poste</h:outputLabel>
-									<h:inputText id="poste" styleClass="form-control"
-										value="#{employeeController.employee.poste}" required="true" />
+									<h:inputText id="poste"
+										styleClass="form-control #{component.valid ? '' : 'has-error'}"
+										value="#{employeeController.employee.poste}" required="true"
+										label="Poste">
+										<f:validateLength minimum="2" maximum="10" />
+									</h:inputText>
 								</div>
 
 								<div class="form-group">
 									<h:outputLabel for="projets">Projets</h:outputLabel>
 									<h:selectManyListbox id="projets"
 										value="#{employeeController.employee.projects}" name="projets"
-										styleClass="form-control">
+										styleClass="form-control #{component.valid ? '' : 'has-error'}"
+										label="Projets">
 										<f:selectItems value="#{projectController.projects}" />
 									</h:selectManyListbox>
 								</div>

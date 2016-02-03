@@ -1,6 +1,8 @@
 package com.pmo.controller;
 
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -13,6 +15,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.pmo.model.Employee;
 import com.pmo.service.EmployeeService;
@@ -47,13 +51,23 @@ public class EmployeeController implements Serializable{
 	}
 
 	public void create(){
-		//TODO ajouter generation password mail
-		employee.setPassword("123456");
+		//Setting a generate password
+		SecureRandom random = new SecureRandom();
+		String password = new BigInteger(20, random).toString(15);
+		//TODO envoyer le password par email
+		System.out.println(password);
+		password = "123456";
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String hashedPassword = passwordEncoder.encode(password);
+		System.out.println(hashedPassword);
+		/*employee.setPassword(hashedPassword);
+		
 		//TODO Enlever les tirets dans une fonction
 		employee.setPhone(employee.getPhone().replace("-", ""));
+		
 		employeeService.createEmployee(employee);
 		employee = new Employee();
-		conversation.end();
+		conversation.end();*/
 	}
 
 	public void validateEmployeeCreation(ComponentSystemEvent event){
