@@ -32,6 +32,14 @@ public class EmployeeController implements Serializable{
 
 	private Employee employee;
 
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 	@PostConstruct
 	private void init(){
 		employee = new Employee();
@@ -39,6 +47,10 @@ public class EmployeeController implements Serializable{
 	}
 
 	public void create(){
+		//TODO ajouter generation password mail
+		employee.setPassword("123456");
+		//TODO Enlever les tirets dans une fonction
+		employee.setPhone(employee.getPhone().replace("-", ""));
 		employeeService.createEmployee(employee);
 		employee = new Employee();
 		conversation.end();

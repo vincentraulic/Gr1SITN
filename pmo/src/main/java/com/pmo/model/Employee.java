@@ -128,6 +128,32 @@ public class Employee extends AbstractPersistent{
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
+	public Date getBirthdate() {
+		return birthdate;
+	}
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getPoste() {
+		return poste;
+	}
+	public void setPoste(String poste) {
+		this.poste = poste;
+	}
+	
 
 	@Override
 	public boolean equals(Object obj) {

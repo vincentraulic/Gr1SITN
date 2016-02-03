@@ -19,7 +19,7 @@ public class EmployeeDaoBean implements EmployeeDao{
 	public int createEmployee(Employee employee) {
 		
 		if(StringUtils.isEmpty(employee.getLastname()) || StringUtils.isEmpty(employee.getFirstname()) 
-				|| StringUtils.isEmpty(employee.getPassword()) || employee.getDateStart() == null)
+				|| employee.getDateStart() == null)
 			throw new IllegalArgumentException("Argument(s) null or empty");
 		
 		employee.setUsername(employee.getFirstname().toLowerCase() + "." + employee.getLastname().toLowerCase());

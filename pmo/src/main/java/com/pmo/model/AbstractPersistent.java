@@ -13,7 +13,7 @@ public class AbstractPersistent implements Serializable{
 	private static final long serialVersionUID = -1474217871155993922L;
 	
 	@Id 
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id ;
 	
 	public int getId() {
