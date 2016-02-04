@@ -55,11 +55,11 @@ public class Employee extends AbstractPersistent{
 	@OneToMany(mappedBy="employee", cascade=CascadeType.ALL)
 	private Set<Event> events = new HashSet<Event>();
 	
-	@ManyToMany
+	@ManyToMany(targetEntity=Project.class)
 	@JoinTable(
 		      name="EMPLOYEES_PROJECTS",
 		      joinColumns={@JoinColumn(name="id_employee", referencedColumnName="id")},
-		      inverseJoinColumns={@JoinColumn(name="id_project", referencedColumnName="id")})
+		      inverseJoinColumns={@JoinColumn(name="id_project", referencedColumnName="id")})	
 	private Set<Project> projects = new HashSet<Project>();
 
 	public Set<Project> getProjects() {

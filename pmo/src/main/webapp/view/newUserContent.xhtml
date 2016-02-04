@@ -36,7 +36,7 @@
 						<c:if test="#{employeeController.message ne null}">
 							<br />
 							L'utilisateur a bien été créé. <br />
-								<h:outputText value="#{employeeController.message}" />
+							<h:outputText value="#{employeeController.message}" />
 							<br />
 						</c:if>
 
@@ -169,10 +169,12 @@
 								<div class="form-group">
 									<h:outputLabel for="projets">Projets</h:outputLabel>
 									<h:selectManyListbox id="projets"
-										value="#{employeeController.employee.projects}" name="projets"
+										value="#{employeeController.projectsId}" name="projets"
 										styleClass="form-control #{component.valid ? '' : 'has-error'}"
 										label="Projets">
-										<f:selectItems value="#{projectController.projects}" />
+										<f:selectItems value="#{projectController.projects}"
+											var="project" itemLabel="#{project.name}"
+											itemValue="#{project.id}" />
 									</h:selectManyListbox>
 								</div>
 							</div>

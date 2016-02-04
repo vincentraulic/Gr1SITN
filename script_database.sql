@@ -16,13 +16,13 @@ CREATE TABLE EMPLOYEE(
 ENGINE=InnoDB;
 
 INSERT INTO EMPLOYEE
-VALUES (1, 'toto', 'roland', 'roland.toto', '123456', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null);
+VALUES (1, 'toto', 'roland', 'roland.toto', '$2a$10$DT18wtMdGuNhR4smwOrlA.i4RwwELPOg1..qNrK8f.IO2mD9SWGQC', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null);
 INSERT INTO EMPLOYEE
-VALUES (2, 'raulic', 'vincent', 'vincent.raulic', '123456', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null);
+VALUES (2, 'raulic', 'vincent', 'vincent.raulic', '$2a$10$DT18wtMdGuNhR4smwOrlA.i4RwwELPOg1..qNrK8f.IO2mD9SWGQC', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null);
 INSERT INTO EMPLOYEE
-VALUES (3, 'combier', 'quentin', 'quentin.combier', '123456', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null);
+VALUES (3, 'combier', 'quentin', 'quentin.combier', '$2a$10$DT18wtMdGuNhR4smwOrlA.i4RwwELPOg1..qNrK8f.IO2mD9SWGQC', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null);
 INSERT INTO EMPLOYEE
-VALUES (4, 'bethelot', 'thomas', 'thomas.bethelot', '123456', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null);
+VALUES (4, 'bethelot', 'thomas', 'thomas.bethelot', '$2a$10$DT18wtMdGuNhR4smwOrlA.i4RwwELPOg1..qNrK8f.IO2mD9SWGQC', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null);
 
 
 CREATE TABLE EVENT(
@@ -47,7 +47,7 @@ ENGINE=InnoDB;
 
 CREATE TABLE PROJECT(
 	id INT NOT NULL AUTO_INCREMENT,
-	name VARCHAR(50) NOT NULL,
+	name VARCHAR(50) NOT NULL UNIQUE,
 	cost INT NOT NULL,
 	datestart DATE NOT NULL,
 	dateend DATE,
@@ -58,6 +58,7 @@ ENGINE=InnoDB;
 CREATE TABLE EMPLOYEES_PROJECTS(
 	id_employee INT NOT NULL,
 	id_project INT NOT NULL,
+	PRIMARY KEY (id_employee, id_project) ,
 	CONSTRAINT fk_employee_project FOREIGN KEY(id_employee) REFERENCES EMPLOYEE(id),
 	CONSTRAINT fk_project_employee FOREIGN KEY(id_project) REFERENCES PROJECT(id)
 )

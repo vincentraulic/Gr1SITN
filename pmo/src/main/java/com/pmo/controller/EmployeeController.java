@@ -3,6 +3,9 @@ package com.pmo.controller;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -19,7 +22,9 @@ import javax.inject.Named;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.pmo.model.Employee;
+import com.pmo.model.Project;
 import com.pmo.service.EmployeeService;
+import com.pmo.service.ProjectService;
 import com.pmo.utils.StringUtils;
 
 @ConversationScoped
@@ -30,6 +35,9 @@ public class EmployeeController implements Serializable{
 
 	@EJB
 	private transient EmployeeService employeeService;
+	
+	@EJB
+	private transient ProjectService projectService;	
 
 	@Inject
 	private Conversation conversation ;
@@ -37,6 +45,16 @@ public class EmployeeController implements Serializable{
 	private Employee employee;
 	
 	private String message;
+	
+	private Set<String> projectsId = new HashSet<String>();
+
+	public Set<String> getProjectsId() {
+		return projectsId;
+	}
+
+	public void setProjectsId(Set<String> projectsId) {
+		this.projectsId = projectsId;
+	}
 
 	public String getMessage() {
 		return message;
@@ -67,9 +85,16 @@ public class EmployeeController implements Serializable{
 		//TODO envoyer le password par email
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String hashedPassword = passwordEncoder.encode(password);
+		//TODO Rendre cette partie plus propre
 
-		employee.setPassword(hashedPassword);
+		Set<Project> projects = new HashSet<Project>();
+		Iterator<String> it = this.getProjectsId().iterator();
+		while (it.hasNext()) {
+			projects.add(projectService.getProject(Integer.parseInt(it.next().toString())));
+		}
 		
+		employee.setProjects(projects);
+		employee.setPassword(hashedPassword);
 		//TODO Enlever les tirets dans une fonction
 		employee.setPhone(employee.getPhone().replace("-", ""));
 		
