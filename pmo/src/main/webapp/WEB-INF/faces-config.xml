@@ -27,6 +27,6 @@
 	  <message-bundle>
 	  	com.pmo.utils.MyMessage
 	  </message-bundle>
-     </application>        
+     </application>       
      
 </faces-config>

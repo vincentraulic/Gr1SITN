@@ -43,7 +43,9 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 		<dispatcher>FORWARD</dispatcher>
-		<dispatcher>REQUEST</dispatcher><!-- mandatory to allow the managed bean 
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<!-- mandatory to allow the managed bean 
 			to forward the request to the filter -->
 	</filter-mapping>
 

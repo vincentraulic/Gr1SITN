@@ -35,6 +35,16 @@ public class EmployeeController implements Serializable{
 	private Conversation conversation ;
 
 	private Employee employee;
+	
+	private String message;
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
 	public Employee getEmployee() {
 		return employee;
@@ -53,21 +63,21 @@ public class EmployeeController implements Serializable{
 	public void create(){
 		//Setting a generate password
 		SecureRandom random = new SecureRandom();
-		String password = new BigInteger(20, random).toString(15);
+		String password = new BigInteger(120, random).toString(30);
 		//TODO envoyer le password par email
-		System.out.println(password);
-		password = "123456";
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String hashedPassword = passwordEncoder.encode(password);
-		System.out.println(hashedPassword);
-		/*employee.setPassword(hashedPassword);
+
+		employee.setPassword(hashedPassword);
 		
 		//TODO Enlever les tirets dans une fonction
 		employee.setPhone(employee.getPhone().replace("-", ""));
 		
 		employeeService.createEmployee(employee);
+		message = "Username = "+ employee.getUsername() + ". Password : "+ password;
+		
 		employee = new Employee();
-		conversation.end();*/
+		conversation.end();
 	}
 
 	public void validateEmployeeCreation(ComponentSystemEvent event){
