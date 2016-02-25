@@ -27,22 +27,18 @@
 					<li class="active">Créer un compte utilisateur</li>
 				</ol>
 				</section>
+				
+				<h:messages style="color:red;" />
 
 				<!-- Main content -->
 				<section class="content" style="margin-left:-230px"> <!-- Small boxes (Stat box) -->
 
 				<div class="row">
 					<div class="box" style="border-top: 0px; margin-bottom: 0px;">
-						<c:if test="#{employeeController.message ne null}">
-							<br />
-							L'utilisateur a bien été créé. <br />
-							<h:outputText value="#{employeeController.message}" />
-							<br />
-						</c:if>
-
 						<h:messages style="color:red;" />
 					</div>
 				</div>
+
 				<!-- Main row --> <h:form>
 					<div class="row">
 						<!-- Left col -->
@@ -88,25 +84,6 @@
 											mask="99/99/9999" required="true" label="Date de naissance">
 											<f:convertDateTime pattern="dd/MM/yyyy" />
 										</p:inputMask>
-									</div>
-									<!-- /.input group -->
-								</div>
-
-								<div class="form-group">
-									<h:outputLabel for="email">E-mail</h:outputLabel>
-
-									<div class="input-group">
-										<div class="input-group-addon">
-											<i class="fa fa-envelope"></i>
-										</div>
-										<p:inputText id="email"
-											styleClass="form-control #{component.valid ? '' : 'has-error'}"
-											value="#{employeeController.employee.email}" required="true"
-											label="E-mail">
-											<f:validateRegex
-												pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
-											<f:validateLength minimum="2" />
-										</p:inputText>
 									</div>
 									<!-- /.input group -->
 								</div>
@@ -169,12 +146,13 @@
 								<div class="form-group">
 									<h:outputLabel for="projets">Projets</h:outputLabel>
 									<h:selectManyListbox id="projets"
-										value="#{employeeController.projectsId}" name="projets"
+										value="#{employeeController.employee.projects}" name="projets"
 										styleClass="form-control #{component.valid ? '' : 'has-error'}"
 										label="Projets">
-										<f:selectItems value="#{projectController.projects}"
+										<f:selectItems value="#{employeeController.projects}"
 											var="project" itemLabel="#{project.name}"
-											itemValue="#{project.id}" />
+											itemValue="#{project.name}" />
+										<f:converter converterId="com.pmo.ProjectConverter" />
 									</h:selectManyListbox>
 								</div>
 							</div>

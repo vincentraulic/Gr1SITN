@@ -43,7 +43,7 @@ public class ScheduleView implements Serializable {
 	
 	private ScheduleModel eventModel;
  
-    private ScheduleEvent event = new DefaultScheduleEvent();
+    private ScheduleEvent scheduleEvent = new DefaultScheduleEvent();
     
     private Event ev = new Event();
  
@@ -57,8 +57,12 @@ public class ScheduleView implements Serializable {
         eventModel = new DefaultScheduleModel();
         
         for(Event e : events){
-        	eventModel.addEvent(new DefaultScheduleEvent(e.getTitle(), e.getStart(), e.getEnd()));
+        	ScheduleEvent schEv = new DefaultScheduleEvent(e.getTitle(), e.getStart(), e.getEnd());
+        	eventModel.addEvent(schEv);
+        	schEv.setId(String.valueOf(e.getId()));
         }
+        
+        ev.setEmployee(employee);
     }
      
      
@@ -77,57 +81,80 @@ public class ScheduleView implements Serializable {
     }
      
     public ScheduleEvent getEvent() {
-        return event;
+        return scheduleEvent;
     }
  
     public void setEvent(ScheduleEvent event) {
-        this.event = event;
+        this.scheduleEvent = event;
     }
      
     public void addEvent(ActionEvent actionEvent) {
 		
-        if(event.getId() == null){
-            eventModel.addEvent(event);
-            ev.setReason(event.getTitle());
-            ev.setStart(event.getStartDate());
-            ev.setEnd(event.getEndDate());
-            ev.setAllDay(event.isAllDay());
+        if(scheduleEvent.getId() == null){
+            eventModel.addEvent(scheduleEvent);
+            ev.setReason(scheduleEvent.getTitle());
+            ev.setStart(scheduleEvent.getStartDate());
+            ev.setEnd(scheduleEvent.getEndDate());
+            ev.setAllDay(scheduleEvent.isAllDay());
+            
             //create event
-            int id = employeeService.createEvent(ev);
-            event.setId(String.valueOf(id));
+            employeeService.createEvent(ev);
+            scheduleEvent.setId(String.valueOf(ev.getId()));
         }
         else{
-        	eventModel.updateEvent(event);
-        	ev.setId(Integer.parseInt(event.getId()));
-            ev.setReason(event.getTitle());
-            ev.setStart(event.getStartDate());
-            ev.setEnd(event.getEndDate());
-            ev.setAllDay(event.isAllDay());
+        	eventModel.updateEvent(scheduleEvent);
+        	ev.setId(Integer.parseInt(scheduleEvent.getId()));
+            ev.setReason(scheduleEvent.getTitle());
+            ev.setStart(scheduleEvent.getStartDate());
+            ev.setEnd(scheduleEvent.getEndDate());
+            ev.setAllDay(scheduleEvent.isAllDay());
+            
+            employeeService.updateEvent(ev);
         }
          
-        event = new DefaultScheduleEvent();
+        scheduleEvent = new DefaultScheduleEvent();
         ev = new Event();
         ev.setEmployee(employee);
     }
      
     public void onEventSelect(SelectEvent selectEvent) {
-        event = (ScheduleEvent) selectEvent.getObject();
+    	scheduleEvent = (ScheduleEvent) selectEvent.getObject();
     }
      
     public void onDateSelect(SelectEvent selectEvent) {
-        event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
+    	scheduleEvent = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
     }
      
     public void onEventMove(ScheduleEntryMoveEvent event) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event moved", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
-         
         addMessage(message);
+        
+        ev.setId(Integer.parseInt(event.getScheduleEvent().getId()));
+        ev.setStart(event.getScheduleEvent().getStartDate());
+        ev.setEnd(event.getScheduleEvent().getEndDate());
+        ev.setAllDay(event.getScheduleEvent().isAllDay());
+        
+        employeeService.updateEvent(ev);
+        
+        scheduleEvent = new DefaultScheduleEvent();
+        ev = new Event();
+        ev.setEmployee(employee);
     }
      
     public void onEventResize(ScheduleEntryResizeEvent event) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event resized", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
-         
         addMessage(message);
+
+        ev.setId(Integer.parseInt(event.getScheduleEvent().getId()));
+        ev.setStart(event.getScheduleEvent().getStartDate());
+        ev.setEnd(event.getScheduleEvent().getEndDate());
+        ev.setAllDay(event.getScheduleEvent().isAllDay());
+
+        employeeService.updateEvent(ev);
+        
+        scheduleEvent = new DefaultScheduleEvent();
+        ev = new Event();
+        ev.setEmployee(employee);
     }
      
     private void addMessage(FacesMessage message) {

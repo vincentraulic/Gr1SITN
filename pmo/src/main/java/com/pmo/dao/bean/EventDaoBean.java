@@ -46,7 +46,7 @@ public class EventDaoBean implements EventDao{
 		try{
 			em.getReference(Employee.class, id_employee);
 		} catch(EntityNotFoundException e){
-			return null;
+			throw new EntityNotFoundException("Events not found with " + id_employee + " id_employee");
 		}
 		
 		List<Event> list = em.createQuery("SELECT a FROM Event a "
@@ -62,7 +62,8 @@ public class EventDaoBean implements EventDao{
 		try{
 			em.getReference(Employee.class, id_employee);
 		} catch(EntityNotFoundException e){
-			return null;
+			throw new EntityNotFoundException("Events not found with " + id_employee + " id_employee"
+												+ " for type " + type.getName());
 		}
 		
 		List<Event> list = em.createQuery("SELECT a FROM Event a "
@@ -76,8 +77,17 @@ public class EventDaoBean implements EventDao{
 
 
 	public int updateEvent(Event event) {
-		em.merge(event);
-		return event.getId();
+		Event e = em.find(Event.class, event.getId());
+		
+		e.setReason(event.getReason() != null ? event.getReason() : e.getReason());
+		e.setType(event.getType() != null ? event.getType() : e.getType());
+		e.setAllDay(event.getAllDay());
+		e.setStart(event.getStart() != null ? event.getStart() : e.getStart());
+		e.setEnd(event.getEnd() != null ? event.getEnd() : e.getEnd());
+		
+		em.merge(e);
+		em.flush();
+		return e.getId();
 	}
 
 

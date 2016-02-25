@@ -3,7 +3,7 @@ CREATE TABLE EMPLOYEE(
 	lastname VARCHAR(50) NOT NULL,
 	firstname VARCHAR(50) NOT NULL,
 	username VARCHAR(50) NOT NULL UNIQUE,
-	password VARCHAR(30) NOT NULL,
+	password VARCHAR(500) NOT NULL,
 	role VARCHAR(50) NOT NULL,
 	datestart DATE NOT NULL,
 	dateend DATE,
@@ -16,21 +16,20 @@ CREATE TABLE EMPLOYEE(
 ENGINE=InnoDB;
 
 INSERT INTO EMPLOYEE
-VALUES (1, 'toto', 'roland', 'roland.toto', '$2a$10$DT18wtMdGuNhR4smwOrlA.i4RwwELPOg1..qNrK8f.IO2mD9SWGQC', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null);
+VALUES (1, 'toto', 'roland', 'roland.toto', '123456', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null, 'roland.toto@gmail.com', STR_TO_DATE('01/01/1970', '%d/%m/%Y'), '0160657075', 'CTO');
 INSERT INTO EMPLOYEE
-VALUES (2, 'raulic', 'vincent', 'vincent.raulic', '$2a$10$DT18wtMdGuNhR4smwOrlA.i4RwwELPOg1..qNrK8f.IO2mD9SWGQC', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null);
+VALUES (2, 'raulic', 'vincent', 'vincent.raulic', '$2a$10$DT18wtMdGuNhR4smwOrlA.i4RwwELPOg1..qNrK8f.IO2mD9SWGQC', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null, 'vincent.raulic@pmo.com', STR_TO_DATE('01/01/1970', '%d/%m/%Y'), '0160657075', 'CTO');
 INSERT INTO EMPLOYEE
-VALUES (3, 'combier', 'quentin', 'quentin.combier', '$2a$10$DT18wtMdGuNhR4smwOrlA.i4RwwELPOg1..qNrK8f.IO2mD9SWGQC', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null);
+VALUES (3, 'combier', 'quentin', 'quentin.combier', '$2a$10$DT18wtMdGuNhR4smwOrlA.i4RwwELPOg1..qNrK8f.IO2mD9SWGQC', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null, 'quentin.combier@gmail.com', STR_TO_DATE('01/01/1970', '%d/%m/%Y'), '0160657075', 'CTO');
 INSERT INTO EMPLOYEE
-VALUES (4, 'bethelot', 'thomas', 'thomas.bethelot', '$2a$10$DT18wtMdGuNhR4smwOrlA.i4RwwELPOg1..qNrK8f.IO2mD9SWGQC', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null);
-
+VALUES (4, 'bethelot', 'thomas', 'thomas.bethelot', '$2a$10$DT18wtMdGuNhR4smwOrlA.i4RwwELPOg1..qNrK8f.IO2mD9SWGQC', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null, 'thomas.bethelot@gmail.com', STR_TO_DATE('01/01/1970', '%d/%m/%Y'), '0160657075', 'CTO');
 
 CREATE TABLE EVENT(
 	id INT NOT NULL AUTO_INCREMENT,
 	id_employee INT NOT NULL,
 	reason VARCHAR(200),
-	start TIMESTAMP NOT NULL,
-	end TIMESTAMP,
+	datestart TIMESTAMP NOT NULL,
+	dateend TIMESTAMP,
 	allDay BOOLEAN,
 	type ENUM('ABSENCE',
 	'LEAVE',

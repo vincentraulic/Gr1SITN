@@ -182,5 +182,10 @@ public class Employee extends AbstractPersistent{
 	public int hashCode() {
 		return lastname.hashCode() + firstname.hashCode() + dateStart.hashCode();
 	}
+	
+	@Override
+	public String toString() {
+		return firstname + " " + lastname;
+	}
 
 }

@@ -38,6 +38,9 @@ public class PmoUserDetailsService implements UserDetailsService{
 			throws UsernameNotFoundException {
 		Employee user = userDao.getUser(username);
 
+		if(user == null)
+			throw new UsernameNotFoundException("User not found");
+		
 		List<GrantedAuthority> authorities = buildUserAuthority(user.getRole());
 
 		return buildUserForAuthentication(user, authorities);

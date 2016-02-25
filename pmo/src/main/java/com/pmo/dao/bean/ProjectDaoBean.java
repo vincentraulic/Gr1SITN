@@ -40,7 +40,8 @@ public class ProjectDaoBean implements ProjectDao{
 		
 		if(! list.isEmpty())
 			return list.get(0);
-		return null;
+		else
+			throw new IllegalArgumentException("Project name not found");
 	}
 
 	public void deleteProject(int id) {
@@ -70,7 +71,7 @@ public class ProjectDaoBean implements ProjectDao{
 			Project p = em.getReference(Project.class, project.getId());
 			em.remove(p);
 		} catch(EntityNotFoundException e){
-			throw new IllegalArgumentException("Can't delete, Project not found in database");
+			throw new IllegalStateException("Can't delete, Project not found in database");
 		}
 	}
 

@@ -23,6 +23,7 @@ public class ProjectServiceBean implements ProjectService{
 	@Override
 	public int createProject(Project project) {
 		//to do vÃ©rifier les champs
+		//TODO vérifier le projet n'existe pas
 		
 		return projectDao.createProject(project);
 	}

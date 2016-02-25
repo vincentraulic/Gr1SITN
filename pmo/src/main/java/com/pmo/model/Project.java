@@ -103,4 +103,9 @@ public class Project extends AbstractPersistent{
 		return name.hashCode() + dateStart.hashCode() + cost;
 
 	}
+	
+	@Override
+	public String toString() {
+		return this.getName();
+	}
 }

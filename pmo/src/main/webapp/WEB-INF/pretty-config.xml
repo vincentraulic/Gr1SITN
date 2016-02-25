@@ -22,5 +22,10 @@
 		<pattern value="/user/newuser" />
 		<view-id value="/view/newUserContent.jsf" />
 	</url-mapping>	
+	
+	<url-mapping id="newproject">
+		<pattern value="/user/newproject" />
+		<view-id value="/view/newProject.jsf" />
+	</url-mapping>	
 
 </pretty-config>

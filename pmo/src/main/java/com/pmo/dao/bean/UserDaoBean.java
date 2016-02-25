@@ -21,10 +21,10 @@ public class UserDaoBean implements UserDao{
 				+ "WHERE e.username = :username")
 				.setParameter("username", username)
 				.getResultList();
-		if(! list.isEmpty()){
+		if(! list.isEmpty())
 			return list.get(0);
-		}
-		return null;
+		else
+			throw new IllegalArgumentException("Username not found");
 	}
 
 	@SuppressWarnings("unchecked")
@@ -33,10 +33,10 @@ public class UserDaoBean implements UserDao{
 				+ "WHERE e.username = :username")
 				.setParameter("username", username)
 				.getResultList();
-		if(! list.isEmpty()){
+		if(! list.isEmpty())
 			return list.get(0).getPassword();
-		}
-		return null;
+		else
+			throw new IllegalArgumentException("Username not found");
 	}
 
 	public String updatePassword(String username, String newPassword) {

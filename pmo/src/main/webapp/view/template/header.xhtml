@@ -87,7 +87,11 @@
                 	<h:link outcome="user/employee/details" value="Profil" styleClass="btn btn-default btn-flat"/>
                 </div>
                 <div class="pull-right">
-                	<h:link outcome="logout" value="Déconnexion" styleClass="btn btn-default btn-flat"/>				  
+                	<h:form>
+	                	<h:commandButton id="logoutbtn" value="Déconnexion" 
+	                	styleClass="btn btn-default btn-flat"
+	                	action="#{loginController.doLogout()}" />
+                	</h:form>
                 </div>
               </li>
             </ul>

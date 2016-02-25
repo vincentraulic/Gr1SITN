@@ -2,6 +2,7 @@ package com.pmo.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -25,8 +26,10 @@ public class Event extends AbstractPersistent{
 	@Enumerated(EnumType.STRING)
 	private EventType type;
 	
+	@Column(name="datestart")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date start;
+	@Column(name="dateend")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date end;
 	
@@ -83,7 +86,7 @@ public class Event extends AbstractPersistent{
 		return type + " : " + reason;
 	}
 	
-	public boolean isAllDay() {
+	public boolean getAllDay() {
 		return allDay;
 	}
 

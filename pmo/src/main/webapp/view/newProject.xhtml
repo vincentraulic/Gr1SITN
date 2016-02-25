@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:body>
+	<ui:composition template="/view/template/templatewithoutjquery.xhtml">
+		<ui:define name="title">Créer un projet</ui:define>
+
+		<ui:define name="body">
+
+			<!-- Content Wrapper. Contains page content -->
+			<div class="content-wrapper">
+				<!-- Content Header (Page header) -->
+				<section class="content-header" style="margin-left:-230px">
+				<h1>Créer un projet</h1>
+				<ol class="breadcrumb">
+					<li><a href="./user/home"><i class="fa fa-dashboard"></i>
+							Home</a></li>
+					<li class="active">Créer un projet</li>
+				</ol>
+				</section>
+				
+				<h:messages  globalOnly="true"  />
+
+				<!-- Main content -->
+				<section class="content" style="margin-left:-230px"> <!-- Small boxes (Stat box) -->
+
+				<!-- Main row --> <h:form>
+					<div class="row">
+						<!-- Left col -->
+						<section class="col-lg-7 connectedSortable">
+						<div class="box">
+
+							<div class="box-header">
+								<h3 class="box-title">Signalétique du projet</h3>
+							</div>
+
+							<div class="box-body">
+
+								<div class="form-group">
+									<h:outputLabel for="name">Nom</h:outputLabel>
+									<h:inputText id="name"
+										styleClass="form-control #{component.valid ? '' : 'has-error'}"
+										value="#{projectController.project.name}"
+										required="true" label="Nom">
+										<f:validateLength minimum="2" maximum="50" />
+									</h:inputText>
+								</div>
+
+								<div class="form-group">
+									<h:outputLabel for="dateStart">Date de début</h:outputLabel>
+
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-calendar"></i>
+										</div>
+										<p:inputMask id="dateStart"
+											styleClass="form-control #{component.valid ? '' : 'has-error'}"
+											value="#{projectController.project.dateStart}"
+											mask="99/99/9999" required="true" label="Date de début">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</p:inputMask>
+									</div>
+									<!-- /.input group -->
+								</div>
+								
+								<div class="form-group">
+									<h:outputLabel for="dateEnd">Date de fin estimée</h:outputLabel>
+
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-calendar"></i>
+										</div>
+										<p:inputMask id="dateEnd"
+											styleClass="form-control #{component.valid ? '' : 'has-error'}"
+											value="#{projectController.project.dateEnd}"
+											mask="99/99/9999" required="true" label="Date de fin estimée">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</p:inputMask>
+									</div>
+									<!-- /.input group -->
+								</div>
+
+								<div class="form-group">
+									<h:outputLabel for="cost">Coût</h:outputLabel>
+
+									<div class="input-group">
+										<span class="input-group-addon">€</span>
+										<h:inputText id="cost"
+											styleClass="form-control #{component.valid ? '' : 'has-error'}"
+											value="#{projectController.project.cost}"
+											required="true" label="Coût">
+											<f:validateLength minimum="2" maximum="50" />
+										</h:inputText>
+									</div>
+									<!-- /.input group -->
+								</div>
+
+							</div>
+						</div>
+						</section>
+						<!-- right col -->
+						<section class="col-lg-5 connectedSortable">
+						<div class="box">
+							<div class="box-header">
+								<h3 class="box-title">Affectation des ressources</h3>
+							</div>
+							<div class="box-body">
+								<h:form>
+    							<p:growl id="msg" showDetail="true" escape="false" />
+							    <p:pickList id="EmployeePickList" value="#{projectController.employees}" var="employee" effect="bounce"
+							                itemValue="#{employee.id}" itemLabel="#{employee.firstname} #{employee.lastname}" showSourceControls="true" showTargetControls="true" showCheckbox="true" responsive="true"
+							                showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" converter="com.pmo.EmployeeConverter">
+							 
+							        <f:facet name="sourceCaption">Ressources disponibles</f:facet>
+							        <f:facet name="targetCaption">Ressoureces affectées au projet</f:facet>
+							 
+							        <p:ajax event="transfer" listener="#{projectController.onTransfer}" update="msg" />
+							        <p:ajax event="select" listener="#{projectController.onSelect}" update="msg" />
+							        <p:ajax event="unselect" listener="#{projectController.onUnselect}" update="msg" />
+							        <p:ajax event="reorder" listener="#{projectController.onReorder}" update="msg" />
+							 
+							        <p:column style="width:10%">
+							            <h:outputText styleClass="ui-theme ui-theme-#{employee.firstname}" />
+							        </p:column>
+							 
+							        <p:column style="width:90%;">
+							            <h:outputText value="#{employee.firstname} #{employee.lastname}" />
+							        </p:column>
+							    </p:pickList>
+						 
+						 	</h:form>
+
+							</div>
+
+							<div class="box-footer">
+								<button type="submit" class="btn btn-default">Annuler</button>
+								<h:commandButton value="Valider" styleClass="btn btn-default"
+									action="#{projectController.create}">
+								</h:commandButton>
+							</div>
+
+						</div>
+						</section>
+					</div>
+
+				</h:form> <!-- /.row --> </section>
+
+			</div>
+			<!-- /.content-wrapper -->
+
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+</html>

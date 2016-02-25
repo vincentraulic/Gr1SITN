@@ -1,11 +1,8 @@
 package com.pmo.controller;
 
 import java.io.Serializable;
-import java.math.BigInteger;
-import java.security.SecureRandom;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -19,8 +16,7 @@ import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
+import com.pmo.dao.UserDao;
 import com.pmo.model.Employee;
 import com.pmo.model.Project;
 import com.pmo.service.EmployeeService;
@@ -38,31 +34,14 @@ public class EmployeeController implements Serializable{
 	
 	@EJB
 	private transient ProjectService projectService;	
+	
+	@EJB
+	private transient UserDao userDao;
 
 	@Inject
 	private Conversation conversation ;
 
 	private Employee employee;
-	
-	private String message;
-	
-	private Set<String> projectsId = new HashSet<String>();
-
-	public Set<String> getProjectsId() {
-		return projectsId;
-	}
-
-	public void setProjectsId(Set<String> projectsId) {
-		this.projectsId = projectsId;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
 
 	public Employee getEmployee() {
 		return employee;
@@ -71,6 +50,10 @@ public class EmployeeController implements Serializable{
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
+	
+	public List<Project> getProjects(){
+		return new ArrayList<Project>(projectService.getProjects());
+	}
 
 	@PostConstruct
 	private void init(){
@@ -78,31 +61,23 @@ public class EmployeeController implements Serializable{
 		conversation.begin();
 	}
 
-	public void create(){
-		//Setting a generate password
-		SecureRandom random = new SecureRandom();
-		String password = new BigInteger(120, random).toString(30);
-		//TODO envoyer le password par email
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String hashedPassword = passwordEncoder.encode(password);
-		//TODO Rendre cette partie plus propre
+	public String create(){
 
-		Set<Project> projects = new HashSet<Project>();
-		Iterator<String> it = this.getProjectsId().iterator();
-		while (it.hasNext()) {
-			projects.add(projectService.getProject(Integer.parseInt(it.next().toString())));
-		}
-		
-		employee.setProjects(projects);
-		employee.setPassword(hashedPassword);
 		//TODO Enlever les tirets dans une fonction
 		employee.setPhone(employee.getPhone().replace("-", ""));
 		
 		employeeService.createEmployee(employee);
-		message = "Username = "+ employee.getUsername() + ". Password : "+ password;
+
+		//useless
+		//employee = new Employee();
 		
-		employee = new Employee();
 		conversation.end();
+		
+		//TODO mettre dans fichier propriete
+		String message = "L'utilisateur " + employee.getFirstname() + " " + employee.getLastname()
+							+ " a bien été créé";
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));
+		return "home/homeContent";
 	}
 
 	public void validateEmployeeCreation(ComponentSystemEvent event){

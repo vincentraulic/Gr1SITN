@@ -56,7 +56,12 @@ public class UserController implements Serializable{
 	}
 	
 	public List<Event> getAbsences(){
-		return new ArrayList<Event>(employeeService.getEvents(employee, EventType.ABSENCE));
+		List<Event> absences = new ArrayList<Event>();
+		for(Event event : employee.getEvents()){
+			if(event.getType().equals(EventType.ABSENCE))
+				absences.add(event);
+		}
+		return absences;
 	}
 	
 }

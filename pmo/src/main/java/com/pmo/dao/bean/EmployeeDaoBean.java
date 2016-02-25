@@ -38,7 +38,11 @@ public class EmployeeDaoBean implements EmployeeDao{
 
 	@SuppressWarnings("unchecked")
 	public List<Employee> getEmployees() {
-		return em.createQuery("SELECT e FROM Employee e").getResultList();
+		List<Employee> list = em.createQuery("SELECT e FROM Employee e").getResultList();
+		if(! list.isEmpty())
+			return list;
+		else
+			throw new IllegalStateException("No employees found");
 	}
 
 	public Employee getEmployee(int id) {
@@ -56,7 +60,8 @@ public class EmployeeDaoBean implements EmployeeDao{
 		
 		if(! list.isEmpty())
 			return list.get(0);
-		return null;
+		else
+			throw new IllegalArgumentException("Project name not found");
 	}
 
 	

@@ -9,6 +9,7 @@
     <persistence-unit name="pmodb" transaction-type="JTA">
         <!-- <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> -->
         <!-- <provider>org.hibernate.ejb.HibernatePersistence</provider> -->
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         
         <jta-data-source>jdbc/pmo_resource</jta-data-source>
         
@@ -20,8 +21,16 @@
 		-->
 		
 		<properties>
-            <property name="eclipselink.logging.level.sql" value="FINE"/>
+				      <!-- possible values are : none | create-tables | drop-and-create-tables -->
+	   	   <property name="eclipselink.ddl-generation" value="none" />
+           <!-- FINE : SQL requests are logged -->
+		   <property name="eclipselink.logging.level" value="INFO"/>
+		   <property name="eclipselink.logging.timestamp" 
+		             value="true"/>
+
+            <property name="eclipselink.logging.level.sql" value="INFO"/>
             <property name="eclipselink.logging.parameters" value="true"/>
+            <property name="eclipselink.cache.shared.default" value="false"/>
         </properties>
         
    </persistence-unit>
