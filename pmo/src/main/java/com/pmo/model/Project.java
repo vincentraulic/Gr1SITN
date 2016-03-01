@@ -32,6 +32,9 @@ public class Project extends AbstractPersistent{
 	
     @OneToMany(mappedBy="project", cascade=CascadeType.ALL)
 	private Set<ProjectTask> projectTasks = new HashSet<ProjectTask>();
+    
+    @OneToMany(mappedBy="phase", cascade=CascadeType.ALL)
+	private Set<Phase> phases = new HashSet<Phase>();
 
 	@ManyToMany(mappedBy="projects")
 	private Set<Employee> employees = new HashSet<Employee>();  
@@ -75,6 +78,14 @@ public class Project extends AbstractPersistent{
 	}
 	public void setProjectTasks(Set<ProjectTask> projectTasks) {
 		this.projectTasks = projectTasks;
+	}
+	
+	public Set<Phase> getPhases() {
+		return phases;
+	}
+
+	public void setPhases(Set<Phase> phases) {
+		this.phases = phases;
 	}
 	
 	@Override

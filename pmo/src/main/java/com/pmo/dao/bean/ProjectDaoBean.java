@@ -8,6 +8,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 
 import com.pmo.dao.ProjectDao;
+import com.pmo.model.Employee;
 import com.pmo.model.Project;
 import com.pmo.utils.StringUtils;
 
@@ -21,6 +22,10 @@ public class ProjectDaoBean implements ProjectDao{
 		if(StringUtils.isEmpty(project.getName()) || project.getCost() < 0 
 				|| project.getDateStart() == null)
 			throw new IllegalArgumentException("Argument(s) null or empty");
+		
+		if(project.getDateEnd() != null && project.getDateEnd().compareTo(project.getDateStart()) >0){
+			throw new IllegalArgumentException("The date of the end of the project if before the date of the start");
+		}
 		
 		em.persist(project);
 		
@@ -82,5 +87,13 @@ public class ProjectDaoBean implements ProjectDao{
 		return list;
 	}
 
-
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Project> getProjects(Employee employee) {
+		List<Project> list = em.createQuery("SELECT s FROM Project s "
+				+ "WHERE s.employee.id = :emp")
+				.setParameter("emp", employee.getId())
+				.getResultList();
+		return list;
+	}
 }

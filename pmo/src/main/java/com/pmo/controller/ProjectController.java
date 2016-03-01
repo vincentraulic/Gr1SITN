@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -22,6 +23,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.pmo.dao.UserDao;
 import com.pmo.model.Employee;
+import com.pmo.model.Phase;
 import com.pmo.model.Project;
 import com.pmo.service.EmployeeService;
 import com.pmo.service.ProjectService;
@@ -52,10 +54,6 @@ public class ProjectController implements Serializable{
 	
 	private Project project;
 
-	public Project getProject() {
-		return project;
-	}
-
 	public void setProject(Project project) {
 		this.project = project;
 	}
@@ -67,6 +65,20 @@ public class ProjectController implements Serializable{
 	public void setEmployees(DualListModel<Employee> employees) {
 		this.employees = employees;
 	}
+	
+	public void deletePhase(Phase p){
+		Set<Phase> lp = project.getPhases();
+		lp.remove(p);
+		project.setPhases(lp);
+	}
+	
+	public String addPhase() {
+		Phase p = new Phase();
+		
+		//TODO
+		project.getPhases().add(p);
+		return null;
+	}	
 	
 	@PostConstruct
 	private void init(){

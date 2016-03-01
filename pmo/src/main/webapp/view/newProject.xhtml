@@ -10,7 +10,10 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
+<h:outputScript name="plugins/managerow/managerow.js" />
+
 <h:body>
+
 	<ui:composition template="/view/template/templatewithoutjquery.xhtml">
 		<ui:define name="title">Créer un projet</ui:define>
 
@@ -27,8 +30,8 @@
 					<li class="active">Créer un projet</li>
 				</ol>
 				</section>
-				
-				<h:messages  globalOnly="true"  />
+
+				<h:messages globalOnly="true" />
 
 				<!-- Main content -->
 				<section class="content" style="margin-left:-230px"> <!-- Small boxes (Stat box) -->
@@ -49,8 +52,8 @@
 									<h:outputLabel for="name">Nom</h:outputLabel>
 									<h:inputText id="name"
 										styleClass="form-control #{component.valid ? '' : 'has-error'}"
-										value="#{projectController.project.name}"
-										required="true" label="Nom">
+										value="#{projectController.project.name}" required="true"
+										label="Nom">
 										<f:validateLength minimum="2" maximum="50" />
 									</h:inputText>
 								</div>
@@ -71,7 +74,7 @@
 									</div>
 									<!-- /.input group -->
 								</div>
-								
+
 								<div class="form-group">
 									<h:outputLabel for="dateEnd">Date de fin estimée</h:outputLabel>
 
@@ -96,9 +99,9 @@
 										<span class="input-group-addon">€</span>
 										<h:inputText id="cost"
 											styleClass="form-control #{component.valid ? '' : 'has-error'}"
-											value="#{projectController.project.cost}"
-											required="true" label="Coût">
-											<f:validateLength minimum="2" maximum="50" />
+											value="#{projectController.project.cost}" required="true"
+											label="Coût">
+											<f:validateRegex pattern="[0-9]+" />
 										</h:inputText>
 									</div>
 									<!-- /.input group -->
@@ -109,36 +112,95 @@
 						</section>
 						<!-- right col -->
 						<section class="col-lg-5 connectedSortable">
+
+						<div class="box">
+							<div class="box-header">
+								<h3 class="box-title">Gestion des phases</h3>
+							</div>
+							<div class="box-body">
+
+
+								<table class="table table-bordered" id="phasesTable">
+									<tbody>
+										<tr>
+											<th></th>
+											<th>Nom</th>
+											<th>Coût</th>
+											<th>Date de début</th>
+											<th>Date de fin</th>
+										</tr>
+										<tr id='p0'>
+											<td><input type="checkbox" name="chk"/></td>
+											<td><h:inputText
+													styleClass="form-control #{component.valid ? '' : 'has-error'}"
+													value="#{projectController.project.phases.name}"
+													required="true" name="name0" placeholder='Nom'>
+													<f:validateLength minimum="2" maximum="50" />
+												</h:inputText></td>
+											<td><h:inputText
+													styleClass="form-control #{component.valid ? '' : 'has-error'}"
+													value="#{projectController.project.phases.cost}"
+													required="true" name="cost0" placeholder="Coût">
+													<f:validateRegex pattern="[0-9]+" />
+												</h:inputText></td>
+											<td><p:inputMask
+													styleClass="form-control #{component.valid ? '' : 'has-error'}"
+													value="#{projectController.project.phases.dateStart}"
+													mask="99/99/9999" required="true" name="dstart0"
+													placeholder="dd/MM/aaaa">
+													<f:convertDateTime pattern="dd/MM/yyyy" />
+												</p:inputMask></td>
+											<td><p:inputMask
+													styleClass="form-control #{component.valid ? '' : 'has-error'}"
+													value="#{projectController.project.phases.dateEnd}"
+													mask="99/99/9999" required="true" name="dend0"
+													placeholder="dd/MM/aaaa">
+													<f:convertDateTime pattern="dd/MM/yyyy" />
+												</p:inputMask></td>
+										</tr>
+									</tbody>
+								</table>
+								<a id="add_row" class="btn btn-default pull-left" onclick="addRow('phasesTable')">Ajouter</a><a id='delete_row' class="pull-right btn btn-default" onclick="deleteRow('phasesTable')">Supprimer</a>
+							</div>
+						</div>
+
 						<div class="box">
 							<div class="box-header">
 								<h3 class="box-title">Affectation des ressources</h3>
 							</div>
 							<div class="box-body">
-								<h:form>
-    							<p:growl id="msg" showDetail="true" escape="false" />
-							    <p:pickList id="EmployeePickList" value="#{projectController.employees}" var="employee" effect="bounce"
-							                itemValue="#{employee.id}" itemLabel="#{employee.firstname} #{employee.lastname}" showSourceControls="true" showTargetControls="true" showCheckbox="true" responsive="true"
-							                showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" converter="com.pmo.EmployeeConverter">
-							 
-							        <f:facet name="sourceCaption">Ressources disponibles</f:facet>
-							        <f:facet name="targetCaption">Ressoureces affectées au projet</f:facet>
-							 
-							        <p:ajax event="transfer" listener="#{projectController.onTransfer}" update="msg" />
-							        <p:ajax event="select" listener="#{projectController.onSelect}" update="msg" />
-							        <p:ajax event="unselect" listener="#{projectController.onUnselect}" update="msg" />
-							        <p:ajax event="reorder" listener="#{projectController.onReorder}" update="msg" />
-							 
-							        <p:column style="width:10%">
-							            <h:outputText styleClass="ui-theme ui-theme-#{employee.firstname}" />
-							        </p:column>
-							 
-							        <p:column style="width:90%;">
-							            <h:outputText value="#{employee.firstname} #{employee.lastname}" />
-							        </p:column>
-							    </p:pickList>
-						 
-						 	</h:form>
+								<p:growl id="msg" showDetail="true" escape="false" />
+								<p:pickList id="EmployeePickList"
+									value="#{projectController.employees}" var="employee"
+									effect="bounce" itemValue="#{employee.id}"
+									itemLabel="#{employee.firstname} #{employee.lastname}"
+									showSourceControls="true" showTargetControls="true"
+									showCheckbox="true" responsive="true" showSourceFilter="true"
+									showTargetFilter="true" filterMatchMode="contains"
+									converter="com.pmo.EmployeeConverter">
 
+									<f:facet name="sourceCaption">Ressources disponibles</f:facet>
+									<f:facet name="targetCaption">Ressources affectées au projet</f:facet>
+
+									<p:ajax event="transfer"
+										listener="#{projectController.onTransfer}" update="msg" />
+									<p:ajax event="select" listener="#{projectController.onSelect}"
+										update="msg" />
+									<p:ajax event="unselect"
+										listener="#{projectController.onUnselect}" update="msg" />
+									<p:ajax event="reorder"
+										listener="#{projectController.onReorder}" update="msg" />
+
+									<p:column style="width:10%">
+										<h:outputText
+											styleClass="ui-theme ui-theme-#{employee.firstname}" />
+									</p:column>
+
+									<p:column style="width:90%;">
+										<h:outputText
+											value="#{employee.firstname} #{employee.lastname}" />
+									</p:column>
+								</p:pickList>
 							</div>
 
 							<div class="box-footer">
@@ -149,6 +211,9 @@
 							</div>
 
 						</div>
+
+
+
 						</section>
 					</div>
 

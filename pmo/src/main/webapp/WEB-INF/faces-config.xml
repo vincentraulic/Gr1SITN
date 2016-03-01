@@ -27,6 +27,12 @@
 	  <message-bundle>
 	  	com.pmo.utils.MyMessage
 	  </message-bundle>
+	  
+	  <resource-bundle>
+	  	<base-name>com.pmo.utils.AppMessage</base-name>
+	  	<var>msg</var>
+	  </resource-bundle>
+	  
      </application>       
      
 </faces-config>

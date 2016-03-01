@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import com.pmo.model.Employee;
 import com.pmo.model.Project;
 
 @Local
@@ -21,5 +22,6 @@ public interface ProjectDao {
 	
 	public List<Project> getProjects();
 	
-
+	public List<Project> getProjects(Employee employee);
+	
 }

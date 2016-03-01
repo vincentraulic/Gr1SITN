@@ -1,6 +1,7 @@
 package com.pmo.controller;
 
 import java.io.Serializable;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +17,14 @@ import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import com.pmo.dao.UserDao;
 import com.pmo.model.Employee;
 import com.pmo.model.Project;
 import com.pmo.service.EmployeeService;
 import com.pmo.service.ProjectService;
+import com.pmo.user.service.UserPmo;
 import com.pmo.utils.StringUtils;
 
 @ConversationScoped
@@ -31,10 +35,10 @@ public class EmployeeController implements Serializable{
 
 	@EJB
 	private transient EmployeeService employeeService;
-	
+
 	@EJB
 	private transient ProjectService projectService;	
-	
+
 	@EJB
 	private transient UserDao userDao;
 
@@ -50,9 +54,17 @@ public class EmployeeController implements Serializable{
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
-	
+
 	public List<Project> getProjects(){
 		return new ArrayList<Project>(projectService.getProjects());
+	}
+
+	public List<Project> getProjectsUser(){
+
+		UserPmo user = (UserPmo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Employee currentEmployee = userDao.getUser(user.getUsername());
+
+		return new ArrayList<Project>(projectService.getProjects(currentEmployee));
 	}
 
 	@PostConstruct
@@ -63,19 +75,14 @@ public class EmployeeController implements Serializable{
 
 	public String create(){
 
-		//TODO Enlever les tirets dans une fonction
-		employee.setPhone(employee.getPhone().replace("-", ""));
-		
+		employee.setPhone(StringUtils.removeHyphen(employee.getPhone()));
+
 		employeeService.createEmployee(employee);
 
-		//useless
-		//employee = new Employee();
-		
 		conversation.end();
-		
-		//TODO mettre dans fichier propriete
-		String message = "L'utilisateur " + employee.getFirstname() + " " + employee.getLastname()
-							+ " a bien été créé";
+
+		String message = MessageFormat.format(StringUtils.getBundle().getString("createemployeesuccess"),employee.getFirstname(),employee.getLastname());
+
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));
 		return "home/homeContent";
 	}
@@ -96,7 +103,7 @@ public class EmployeeController implements Serializable{
 		String lastname= uiInputLastname.getLocalValue() == null ? ""
 				: uiInputLastname.getLocalValue().toString();
 		String lastnameId = uiInputLastname.getClientId();
-		
+
 		if (StringUtils.hasSpecialCharacter(firstname)) {
 			FacesMessage msg = new FacesMessage("Firstname no valid");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);

@@ -27,5 +27,10 @@
 		<pattern value="/user/newproject" />
 		<view-id value="/view/newProject.jsf" />
 	</url-mapping>	
+	
+	<url-mapping id="projectbudget">
+		<pattern value="/user/projectbudget" />
+		<view-id value="/view/projectbudget.jsf" />
+	</url-mapping>		
 
 </pretty-config>
