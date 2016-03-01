@@ -93,24 +93,8 @@ CREATE TABLE IF NOT EXISTS PHASE(
 	name VARCHAR(50) NOT NULL,
 	cost INT NOT NULL,
 	datestart DATE NOT NULL,
-	dateend DATE NOT NULL,	
-	PRIMARY KEY (id),
+	dateend DATE NOT NULL,
 	CONSTRAINT pk_phase PRIMARY KEY(id),
 	CONSTRAINT pk_phase FOREIGN KEY(id_project) REFERENCES PROJECT(id)
 )
 ENGINE=InnoDB;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
