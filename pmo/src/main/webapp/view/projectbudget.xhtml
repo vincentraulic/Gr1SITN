@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:outputScript name="plugins/managerow/managerow.js" />
+
+<h:body>
+
+	<ui:composition template="/view/template/templatewithoutjquery.xhtml">
+		<ui:define name="title">Gestion du budget</ui:define>
+
+		<ui:define name="body">
+
+			<!-- Content Wrapper. Contains page content -->
+			<div class="content-wrapper">
+				<!-- Content Header (Page header) -->
+				<section class="content-header">
+				<h1>Gestion du budget</h1>
+				<ol class="breadcrumb">
+					<li><a href="./user/home"><i class="fa fa-dashboard"></i>
+							Home</a></li>
+					<li class="active">Gestion du budget</li>
+				</ol>
+				</section>
+
+				<!-- Main content -->
+				<section class="content"> <!-- Small boxes (Stat box) -->
+				<!-- Main row -->
+				<div class="row">
+					<!-- Left col -->
+					<section class="col-lg-7 connectedSortable">
+
+					<div class="box">
+						<div class="box-body">
+							<div class="input-group margin">
+								<span class="input-group-btn"> <h:link
+										outcome="/view/newProject.jsf">
+										<button type="button" class="btn btn-success btn-flat">Créer
+											un projet</button>
+									</h:link>
+								</span>
+							</div>
+							<div class="form-group" style="width: 50%;">
+								<h:outputLabel for="projets">Projets</h:outputLabel>
+								<h:selectOneListbox id="projets" name="projets"
+									styleClass="form-control #{component.valid ? '' : 'has-error'}"
+									label="Projets" value="#{projectController.project}">
+									<f:selectItems value="#{employeeController.projectsUser}"
+										var="project" itemLabel="#{project.name}"
+										itemValue="#{project.name}" />
+									<f:converter converterId="com.pmo.ProjectConverter" />
+								</h:selectOneListbox>
+								<h:commandButton value="Valider" styleClass="btn btn-default"
+									action="projectbudget">
+								</h:commandButton>
+							</div>
+						</div>
+					</div>
+					</section>
+					<!-- right col -->
+					<section class="col-lg-5 connectedSortable">
+					<div class="box">
+						<div class="box-header">
+							<h3 class="box-title">Phases</h3>
+						</div>
+						<div class="box-body">
+							<div class="input-group margin">
+
+								<h:form>
+									<table class="table table-bordered" id="phasesTable">
+										<tbody>
+											<tr>
+												<th></th>
+												<th>Nom</th>
+												<th>Coût</th>
+												<th>Date de début</th>
+												<th>Date de fin</th>
+											</tr>
+											<tr id='p0'>
+												<td><input type="checkbox" name="chk" /></td>
+												<td><h:inputText
+														styleClass="form-control #{component.valid ? '' : 'has-error'}"
+														value="#{phaseController.name}" required="true"
+														name="name0" placeholder='Nom'>
+														<f:validateLength minimum="2" maximum="50" />
+													</h:inputText></td>
+												<td><h:inputText
+														styleClass="form-control #{component.valid ? '' : 'has-error'}"
+														value="#{phaseController.cost}" required="true"
+														name="cost0" placeholder="Coût">
+														<f:validateRegex pattern="[0-9]+" />
+													</h:inputText></td>
+												<td><p:inputMask
+														styleClass="form-control #{component.valid ? '' : 'has-error'}"
+														value="#{phaseController.dateStart}" mask="99/99/9999"
+														required="true" name="dstart0" placeholder="dd/MM/aaaa">
+														<f:convertDateTime pattern="dd/MM/yyyy" />
+													</p:inputMask></td>
+												<td><p:inputMask
+														styleClass="form-control #{component.valid ? '' : 'has-error'}"
+														value="#{phaseController.dateEnd}" mask="99/99/9999"
+														required="true" name="dend0" placeholder="dd/MM/aaaa">
+														<f:convertDateTime pattern="dd/MM/yyyy" />
+													</p:inputMask></td>
+													
+													<!-- Passer le projet sélectionné en paramètre -->
+													<!--  Ajouter la possibilité d'ajouter une ligne à chaud -->
+											</tr>
+										</tbody>
+									</table>
+									<span class="input-group-btn"> <h:commandButton
+											class="btn btn-success btn-flat" value="Ajouter"
+											action="#{phaseController.create}" />
+									</span>
+								</h:form>
+
+								<h:form>
+									<h:dataTable value="#{projectController.projet.phases}"
+										var="phase" styleClass="order-table"
+										headerClass="order-table-header"
+										rowClasses="order-table-odd-row,order-table-even-row">
+
+									</h:dataTable>
+									<h:column>
+										<f:facet name="header">Nom</f:facet>
+										<h:inputText value="#{phase.name}"
+											rendered="#{phase.editable}" />
+										<h:outputText value="#{phase.name}"
+											rendered="#{not phase.editable}" />
+									</h:column>
+
+									<h:column>
+										<f:facet name="header">Coût</f:facet>
+										<h:inputText value="#{phase.cost}"
+											rendered="#{phase.editable}" />
+										<h:outputText value="#{phase.cost}"
+											rendered="#{not phase.editable}" />
+									</h:column>
+
+									<h:column>
+										<f:facet name="header">Date de début</f:facet>
+										<h:inputText value="#{phase.start}"
+											rendered="#{phase.editable}" />
+										<h:outputText value="#{phase.start}"
+											rendered="#{not phase.editable}" />
+									</h:column>
+
+									<h:column>
+										<f:facet name="header">Date de fin</f:facet>
+										<h:inputText value="#{phase.end}" rendered="#{phase.editable}" />
+										<h:outputText value="#{phase.end}"
+											rendered="#{not phase.editable}" />
+									</h:column>
+
+									<h:colum>
+										<f:facet name="header">Action</f:facet>
+										<h:commandLink value="X"
+											action="#{projectController.deletePhase(phase)}"
+											rendered="#{not phase.editable}" />
+									</h:colum>
+
+									<h:commandButton value="Save Changes" action="projectbudget" />
+
+								</h:form>
+
+							</div>
+						</div>
+					</div>
+					</section>
+				</div>
+				<!-- /.row --> <!-- Small boxes (Stat box) -->
+				<div class="row">
+					<div class="box">
+
+						<!-- /.box-header -->
+						<div class="box-body">
+
+							<!-- Custom Tabs (Pulled to the right) -->
+							<div class="nav-tabs-custom">
+								<ul class="nav nav-tabs pull-right">
+									<ui:repeat value="#{projectController.projet.phases}"
+										var="phase" varStatus="status">
+										<li class="#{phase.first?'first':'active'}"><a
+											href="#tab_1-#{status.index}" + data-toggle="tab"> <h:outputText
+													value="#{phase.name}" />
+										</a></li>
+									</ui:repeat>
+
+									<li class="pull-left header"><i class="fa fa-th"></i>Calendrier
+										par semaine</li>
+								</ul>
+								<div class="tab-content">
+									<ui:repeat value="#{projectController.projet.phases}"
+										var="phase" varStatus="status">
+										<div class="tab-pane active" id="tab_1-#{status.index}">
+											<table id="example#{status.index}"
+												class="table table-bordered table-striped">
+												<!-- TODO afficher les semaines pour chaque phase ainsi que les collaborateurs associés au projet
+												+ les charges sur chaque semaine
+												+ vérifier que la somme des charges du collaborateur ne dépasse pas son temps de présence
+												+ vérifier que la somme des charges < cout de la phase
+												+ ajouter la possibilité de modifier les charges dans la page
+												http://www.mkyong.com/jsf2/how-to-update-row-in-jsf-datatable/
+												  -->
+												<thead>
+													<tr>
+														<th>Collaborateur</th>
+														<th>S1</th>
+														<th>S2</th>
+														<th>S3</th>
+														<th>S4</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>Bob</td>
+														<td>2</td>
+														<td>5</td>
+														<td>4</td>
+														<td>1</td>
+													</tr>
+												</tbody>
+												<tfoot>
+													<tr>
+														<th>Collaborateur</th>
+														<th>S1</th>
+														<th>S2</th>
+														<th>S3</th>
+														<th>S4</th>
+													</tr>
+												</tfoot>
+											</table>
+										</div>
+										<!-- /.tab-pane -->
+									</ui:repeat>
+
+								</div>
+								<!-- /.tab-content -->
+							</div>
+							<!-- nav-tabs-custom -->
+
+						</div>
+						<!-- /.box-body -->
+					</div>
+
+				</div>
+				</section>
+
+			</div>
+			<!-- /.content-wrapper -->
+
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+</html>
