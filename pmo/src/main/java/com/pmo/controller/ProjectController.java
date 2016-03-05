@@ -8,13 +8,12 @@ import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.Conversation;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.inject.Named;
 
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.TransferEvent;
 import org.primefaces.event.UnselectEvent;
@@ -29,17 +28,14 @@ import com.pmo.service.EmployeeService;
 import com.pmo.service.ProjectService;
 import com.pmo.user.service.UserPmo;
 
-@RequestScoped
-@Named("projectController")
+@ManagedBean
+@ViewScoped
 public class ProjectController implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 6372999549377720106L;
-	
-	@Inject
-	private Conversation conversation ;
 	
 	@EJB
 	private transient ProjectService projectService;
@@ -53,6 +49,16 @@ public class ProjectController implements Serializable{
 	private DualListModel<Employee> employees;
 	
 	private Project project;
+	
+	private Phase phase;
+
+	public Phase getPhase() {
+		return phase;
+	}
+
+	public void setPhase(Phase phase) {
+		this.phase = phase;
+	}
 
 	public Project getProject() {
 		return project;
@@ -76,17 +82,18 @@ public class ProjectController implements Serializable{
 		project.setPhases(lp);
 	}
 	
-	public String addPhase() {
-		Phase p = new Phase();
-		
-		//TODO
-		project.getPhases().add(p);
-		return null;
+	public void addPhase(){
+		//TODO check le cout ne dépasse pas le cout total, ...
+		phase.setProject(project);
+		project.getPhases().add(phase);
+		phase = new Phase();
 	}	
 	
 	@PostConstruct
-	private void init(){
+	private void init(){	
 		project = new Project();
+		
+		phase = new Phase();
 		
 		List<Employee> _employees = employeeService.getEmployees();
 		
@@ -97,8 +104,6 @@ public class ProjectController implements Serializable{
 		_employees.remove(currentEmployee);
 		
 		employees = new DualListModel<Employee>(_employees, new ArrayList<Employee>());
-		
-		conversation.begin();
 	}
 	
 	public String create(){
@@ -106,8 +111,6 @@ public class ProjectController implements Serializable{
 		project.setEmployees(new HashSet<Employee>(employees.getTarget()));
 		
 		projectService.createProject(project);
-		
-		conversation.end();
 		
 		//TODO mettre dans fichier propriete
 		String message = "Le projet " + project.getName() + " " + "a bien été créé";
@@ -144,6 +147,18 @@ public class ProjectController implements Serializable{
     public void onReorder() {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "List Reordered", null));
+    } 
+    
+    public void onEditPhase(RowEditEvent event) {  
+        FacesMessage msg = new FacesMessage("Phase editée",((Phase) event.getObject()).getName());  
+        //TODO update la phase
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+    }  
+       
+    public void onCancelPhase(RowEditEvent event) {     	
+        FacesMessage msg = new FacesMessage("Phase supprimée");   
+        FacesContext.getCurrentInstance().addMessage(null, msg); 
+        project.getPhases().remove((Phase) event.getObject());
     } 
 
 	

@@ -15,8 +15,10 @@ import com.pmo.dao.UserDao;
 import com.pmo.event.type.EventType;
 import com.pmo.model.Employee;
 import com.pmo.model.Event;
+import com.pmo.model.Project;
 import com.pmo.model.Task;
 import com.pmo.service.EmployeeService;
+import com.pmo.service.ProjectService;
 import com.pmo.service.TaskService;
 import com.pmo.user.service.UserPmo;
 
@@ -25,7 +27,7 @@ import com.pmo.user.service.UserPmo;
 public class UserController implements Serializable{
 
 	private static final long serialVersionUID = 7465185353899089409L;
-
+	
 	@EJB
 	private transient TaskService taskService;
 	
@@ -63,5 +65,6 @@ public class UserController implements Serializable{
 		}
 		return absences;
 	}
+
 	
 }

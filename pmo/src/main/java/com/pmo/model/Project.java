@@ -33,7 +33,7 @@ public class Project extends AbstractPersistent{
     @OneToMany(mappedBy="project", cascade=CascadeType.ALL)
 	private Set<ProjectTask> projectTasks = new HashSet<ProjectTask>();
     
-    @OneToMany(mappedBy="phase", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="project", cascade=CascadeType.ALL)
 	private Set<Phase> phases = new HashSet<Phase>();
 
 	@ManyToMany(mappedBy="projects")

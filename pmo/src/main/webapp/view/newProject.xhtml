@@ -31,13 +31,15 @@
 				</ol>
 				</section>
 
-				<h:messages globalOnly="true" />
+				<h:messages style="color:red;" />
 
 				<!-- Main content -->
 				<section class="content" style="margin-left:-230px"> <!-- Small boxes (Stat box) -->
 
-				<!-- Main row --> <h:form>
+				<!-- Main row --> 
+				
 					<div class="row">
+						<h:form>
 						<!-- Left col -->
 						<section class="col-lg-7 connectedSortable">
 						<div class="box">
@@ -101,7 +103,7 @@
 											styleClass="form-control #{component.valid ? '' : 'has-error'}"
 											value="#{projectController.project.cost}" required="true"
 											label="Coût">
-											<f:validateRegex pattern="[0-9]+" />
+											
 										</h:inputText>
 									</div>
 									<!-- /.input group -->
@@ -109,61 +111,7 @@
 
 							</div>
 						</div>
-						</section>
-						<!-- right col -->
-						<section class="col-lg-5 connectedSortable">
-
-						<div class="box">
-							<div class="box-header">
-								<h3 class="box-title">Gestion des phases</h3>
-							</div>
-							<div class="box-body">
-
-
-								<table class="table table-bordered" id="phasesTable">
-									<tbody>
-										<tr>
-											<th></th>
-											<th>Nom</th>
-											<th>Coût</th>
-											<th>Date de début</th>
-											<th>Date de fin</th>
-										</tr>
-										<tr id='p0'>
-											<td><input type="checkbox" name="chk"/></td>
-											<td><h:inputText
-													styleClass="form-control #{component.valid ? '' : 'has-error'}"
-													value="#{projectController.project.phases.name}"
-													required="true" name="name0" placeholder='Nom'>
-													<f:validateLength minimum="2" maximum="50" />
-												</h:inputText></td>
-											<td><h:inputText
-													styleClass="form-control #{component.valid ? '' : 'has-error'}"
-													value="#{projectController.project.phases.cost}"
-													required="true" name="cost0" placeholder="Coût">
-													<f:validateRegex pattern="[0-9]+" />
-												</h:inputText></td>
-											<td><p:inputMask
-													styleClass="form-control #{component.valid ? '' : 'has-error'}"
-													value="#{projectController.project.phases.dateStart}"
-													mask="99/99/9999" required="true" name="dstart0"
-													placeholder="dd/MM/aaaa">
-													<f:convertDateTime pattern="dd/MM/yyyy" />
-												</p:inputMask></td>
-											<td><p:inputMask
-													styleClass="form-control #{component.valid ? '' : 'has-error'}"
-													value="#{projectController.project.phases.dateEnd}"
-													mask="99/99/9999" required="true" name="dend0"
-													placeholder="dd/MM/aaaa">
-													<f:convertDateTime pattern="dd/MM/yyyy" />
-												</p:inputMask></td>
-										</tr>
-									</tbody>
-								</table>
-								<a id="add_row" class="btn btn-default pull-left" onclick="addRow('phasesTable')">Ajouter</a><a id='delete_row' class="pull-right btn btn-default" onclick="deleteRow('phasesTable')">Supprimer</a>
-							</div>
-						</div>
-
+						
 						<div class="box">
 							<div class="box-header">
 								<h3 class="box-title">Affectation des ressources</h3>
@@ -211,13 +159,153 @@
 							</div>
 
 						</div>
-
-
-
 						</section>
-					</div>
+						</h:form>
+						
+						<h:form>
+						<!-- right col -->
+						<section class="col-lg-5 connectedSortable">
 
-				</h:form> <!-- /.row --> </section>
+						<div class="box">
+							<div class="box-header">
+								<h3 class="box-title">Gestion des phases</h3>
+							</div>
+							<div class="box-body">
+
+								<p:dataTable id="phaseTable" value="#{projectController.project.phases}" var="phase" widgetVar="50" styleClass="table table-bordered" editable="true">
+									<p:ajax event="rowEdit" listener="#{projectController.onEditPhase}" />  
+                    				<p:ajax event="rowEditCancel" listener="#{projectController.onCancelPhase}" /> 
+								
+									<p:column>
+				                        <f:facet name="header">  
+				                            <h:outputText value="Nom" />  
+				                        </f:facet>
+				                        <p:cellEditor>  
+				                            <f:facet name="output">  
+				                                <h:outputText value="#{phase.name}" />  
+				                            </f:facet>  
+				                            <f:facet name="input">  
+				                                <h:inputText
+													styleClass="form-control #{component.valid ? '' : 'has-error'}"
+													value="#{phase.name}"
+													required="true" name="name0" placeholder='Nom'>
+													<f:validateLength minimum="2" maximum="50" />
+												</h:inputText>  
+				                            </f:facet>  
+				                        </p:cellEditor> 
+				                    </p:column>
+				                    
+				                    <p:column>
+				                        <f:facet name="header">  
+				                            <h:outputText value="Coût" />  
+				                        </f:facet>
+				                        <p:cellEditor>  
+				                            <f:facet name="output">  
+				                                <h:outputText value="#{phase.cost}" />  
+				                            </f:facet>  
+				                            <f:facet name="input">  
+				                                <h:inputText
+													styleClass="form-control #{component.valid ? '' : 'has-error'}"
+													value="#{phase.cost}"
+													required="true" name="cost0" placeholder="Coût">
+													
+												</h:inputText>  
+				                            </f:facet>  
+				                        </p:cellEditor>
+				                    </p:column>
+				                    
+				                    <p:column>
+				                        <f:facet name="header">  
+				                            <h:outputText value="Date de début" />  
+				                        </f:facet>
+				                        <p:cellEditor>  
+				                            <f:facet name="output">  
+				                                <h:outputText value="#{phase.start}" />  
+				                            </f:facet>  
+				                            <f:facet name="input">  
+				                                <p:inputMask
+													styleClass="form-control #{component.valid ? '' : 'has-error'}"
+													value="#{phase.start}"
+													mask="99/99/9999" required="true" name="dstart0"
+													placeholder="dd/MM/aaaa">
+													<f:convertDateTime pattern="dd/MM/yyyy" />
+												</p:inputMask>  
+				                            </f:facet>  
+				                        </p:cellEditor>
+				                    </p:column>
+				                    
+				                    <p:column>
+				                        <f:facet name="header">  
+				                            <h:outputText value="Date de fin" />  
+				                        </f:facet>
+				                        <p:cellEditor>  
+				                            <f:facet name="output">  
+				                                <h:outputText value="#{phase.end}" />  
+				                            </f:facet>  
+				                            <f:facet name="input">   
+				                            	<p:inputMask
+													styleClass="form-control #{component.valid ? '' : 'has-error'}"
+													value="#{phase.end}"
+													mask="99/99/9999" required="true" name="dend0"
+													placeholder="dd/MM/aaaa">
+													<f:convertDateTime pattern="dd/MM/yyyy" />
+												</p:inputMask>
+				                            </f:facet>  
+				                        </p:cellEditor>
+				                    </p:column>
+									
+									<p:column headerText="Options" style="width:100px">  
+				                        <p:rowEditor />  
+				                    </p:column>
+								
+								</p:dataTable>
+								
+								<p:spacer height="30px;"/>
+								
+								<p:panelGrid columns="2">
+				                    <h:outputLabel for="phasename" value="Nom de la phase: " />
+				                    <h:inputText
+										styleClass="form-control #{component.valid ? '' : 'has-error'}"
+										value="#{projectController.phase.name}"
+										required="true" id="phasename" placeholder='Nom'>
+										<f:validateLength minimum="2" maximum="50" />
+									</h:inputText>  
+				                    <h:outputLabel for="phasecost" value="Coût: " />
+				                    <h:inputText
+										styleClass="form-control #{component.valid ? '' : 'has-error'}"
+										value="#{projectController.phase.cost}"
+										required="true" id="phasecost" placeholder="Coût">
+										
+									</h:inputText>
+				                    <h:outputLabel for="phasestart" value="Date de début: " />
+				                    <p:inputMask
+										styleClass="form-control #{component.valid ? '' : 'has-error'}"
+										value="#{projectController.phase.start}"
+										mask="99/99/9999" required="true" id="phasestart"
+										placeholder="dd/MM/aaaa">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</p:inputMask>
+									<h:outputLabel for="phaseend" value="Date de fin: " />
+									<p:inputMask
+										styleClass="form-control #{component.valid ? '' : 'has-error'}"
+										value="#{projectController.phase.end}"
+										mask="99/99/9999" required="true" id="phaseend"
+										placeholder="dd/MM/aaaa">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</p:inputMask>
+				                    <f:facet name="footer">
+				                    	<p:commandButton id="addButton" value="Ajouter la phase"
+											actionListener="#{projectController.addPhase}"
+											update="phaseTable" />
+				                    	
+				                    </f:facet>
+				                </p:panelGrid>
+							</div>
+						</div>
+						</section>
+						</h:form>
+					</div>
+				</section>
 
 			</div>
 			<!-- /.content-wrapper -->

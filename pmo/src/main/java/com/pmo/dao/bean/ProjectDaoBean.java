@@ -23,7 +23,7 @@ public class ProjectDaoBean implements ProjectDao{
 				|| project.getDateStart() == null)
 			throw new IllegalArgumentException("Argument(s) null or empty");
 		
-		if(project.getDateEnd() != null && project.getDateEnd().compareTo(project.getDateStart()) >0){
+		if(project.getDateEnd() != null && project.getDateEnd().compareTo(project.getDateStart()) < 0){
 			throw new IllegalArgumentException("The date of the end of the project if before the date of the start");
 		}
 		

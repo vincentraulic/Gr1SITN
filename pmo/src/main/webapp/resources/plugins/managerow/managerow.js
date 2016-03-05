@@ -1,4 +1,4 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
 	var j=1;
 
 	function addRow(tableID) {
@@ -28,4 +28,4 @@ $(document).ready(function(){
 			alert(e);
 		}
 	}
-});
+});*/
