@@ -4,6 +4,7 @@ DEFAULT 0;
 
 ALTER TABLE event
 ADD type ENUM('ABSENCE',
+	'RTT',
 	'LEAVE',
 	'SICK_LEAVE',
 	'FORMATION',

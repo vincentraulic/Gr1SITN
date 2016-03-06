@@ -3,6 +3,7 @@ package com.pmo.event.type;
 public enum EventType {
 
 	ABSENCE("Absence"),
+	RTT("RTT"),
 	LEAVE("Leave"),
 	SICK_LEAVE("Sick leave"),
 	FORMATION("Formation"),
