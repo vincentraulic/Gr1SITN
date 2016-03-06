@@ -15,6 +15,9 @@ import com.pmo.dao.EmployeeDao;
 import com.pmo.dao.EventDao;
 import com.pmo.dao.UserDao;
 import com.pmo.event.type.EventType;
+import com.pmo.exception.EventTypeNotFoundException;
+import com.pmo.exception.InvalidDateException;
+import com.pmo.exception.UnknownEmployeeException;
 import com.pmo.model.Employee;
 import com.pmo.model.Event;
 import com.pmo.service.EmployeeService;
@@ -73,7 +76,7 @@ public class EmployeeServiceBean implements EmployeeService{
 	}
 
 	@Override
-	public Employee getEmployee(int id) {
+	public Employee getEmployee(int id) throws UnknownEmployeeException {
 		//to do gérer si l'id n'existe pas
 		
 		return employeeDao.getEmployee(id);
@@ -85,29 +88,32 @@ public class EmployeeServiceBean implements EmployeeService{
 	}
 
 	@Override
-	public int createEvent(Event event) {
-		//to do check si dateEnd > dateStart
+	public int createEvent(Event event) throws InvalidDateException {
+
+		event.checkIfDatesAreFilledAndConformed();
 		
 		int id = eventDao.createEvent(event);
 		return id;
 	}
 	
 	@Override
-	public List<Event> getEvents(int idEmployee) {
+	public List<Event> getEvents(int idEmployee) throws UnknownEmployeeException {
 		//to do gérer si l'id n'existe pas
 		
 		return eventDao.getEvents(idEmployee);
 	}
 
 	@Override
-	public List<Event> getEvents(Employee employee, EventType type) {
+	public List<Event> getEvents(Employee employee, EventType type) throws UnknownEmployeeException, EventTypeNotFoundException {
 		//to do check si le type de Event existe
 		return eventDao.getEvents(employee.getId(), type);
 	}
 
 	@Override
-	public int updateEvent(Event event) {
-		//to do check dateEnd > dateStart
+	public int updateEvent(Event event) throws InvalidDateException {
+
+		event.checkIfDatesAreFilledAndConformed();
+		
 		return eventDao.updateEvent(event);
 	}
 	

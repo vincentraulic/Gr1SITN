@@ -15,10 +15,8 @@ import com.pmo.dao.UserDao;
 import com.pmo.event.type.EventType;
 import com.pmo.model.Employee;
 import com.pmo.model.Event;
-import com.pmo.model.Project;
 import com.pmo.model.Task;
 import com.pmo.service.EmployeeService;
-import com.pmo.service.ProjectService;
 import com.pmo.service.TaskService;
 import com.pmo.user.service.UserPmo;
 

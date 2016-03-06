@@ -3,6 +3,7 @@ package com.pmo.controller;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -22,6 +23,7 @@ import org.primefaces.model.ScheduleModel;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.pmo.dao.UserDao;
+import com.pmo.exception.UnknownEmployeeException;
 import com.pmo.model.Employee;
 import com.pmo.model.Event;
 import com.pmo.service.EmployeeService;
@@ -32,6 +34,8 @@ import com.pmo.user.service.UserPmo;
 public class ScheduleView implements Serializable {
 
 	private static final long serialVersionUID = -6062981628012210057L;
+	
+	public final static Logger LOG = Logger.getLogger(ScheduleView.class.getName());
 
 	@EJB
 	private transient EmployeeService employeeService;
@@ -52,17 +56,22 @@ public class ScheduleView implements Serializable {
     	UserPmo user = (UserPmo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		employee = userDao.getUser(user.getUsername());
     	
-    	List<Event> events = employeeService.getEvents(employee.getId());
-    	
-        eventModel = new DefaultScheduleModel();
-        
-        for(Event e : events){
-        	ScheduleEvent schEv = new DefaultScheduleEvent(e.getTitle(), e.getStart(), e.getEnd());
-        	eventModel.addEvent(schEv);
-        	schEv.setId(String.valueOf(e.getId()));
-        }
-        
-        ev.setEmployee(employee);
+		try {
+	    	List<Event> events = employeeService.getEvents(employee.getId());
+	    	
+	        eventModel = new DefaultScheduleModel();
+	        
+	        for(Event e : events){
+	        	ScheduleEvent schEv = new DefaultScheduleEvent(e.getTitle(), e.getStart(), e.getEnd());
+	        	eventModel.addEvent(schEv);
+	        	schEv.setId(String.valueOf(e.getId()));
+	        }
+	        
+	        ev.setEmployee(employee);
+		}
+		catch(UnknownEmployeeException uee) {
+			LOG.warning("Employee " + employee.getId() + " does not exist. " + uee);
+		}
     }
      
      

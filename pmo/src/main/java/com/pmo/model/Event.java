@@ -14,6 +14,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import com.pmo.event.type.EventType;
+import com.pmo.exception.InvalidDateException;
 
 @Entity
 @Table(name="EVENT")
@@ -123,6 +124,16 @@ public class Event extends AbstractPersistent{
 	public int hashCode() {
 		int result = getId();
         return result;
+	}
+	
+	
+	/**
+	 * Returns true if the dates are filled, and if the start date is before the end date
+	 * The start date can be the end date (for a one-day event)
+	 * TODO : Update the function if it's a timestamp and not a simple date
+	 **/
+	public boolean checkIfDatesAreFilledAndConformed() throws InvalidDateException {
+		return start != null && end != null && (end.after(start) || end.equals(start));
 	}
 
 

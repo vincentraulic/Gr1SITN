@@ -5,7 +5,6 @@ import java.text.MessageFormat;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
-import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -13,6 +12,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.pmo.dao.UserDao;
+import com.pmo.exception.InvalidDateException;
 import com.pmo.model.Event;
 import com.pmo.service.EmployeeService;
 import com.pmo.utils.StringUtils;
@@ -50,14 +50,20 @@ public class EventController {
 
 			// Récupérer l'employée en cours
 			// event.setEmployee(employeeService.getEmployee());
+			
+			try {
 
-			employeeService.createEvent(event);
-
-			conversation.end();
-
-			String message = MessageFormat.format(StringUtils.getBundle().getString("createeventsuccess"),event.getEmployee().getFirstname(),event.getEmployee().getLastname());
-
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));
+				employeeService.createEvent(event);
+	
+				conversation.end();
+	
+				String message = MessageFormat.format(StringUtils.getBundle().getString("createeventsuccess"),event.getEmployee().getFirstname(),event.getEmployee().getLastname());
+	
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));
+			}
+			catch(InvalidDateException ide) {
+				
+			}
 			return "home/homeContent";
 		}
 
