@@ -21,6 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.pmo.dao.UserDao;
 import com.pmo.model.Employee;
+import com.pmo.model.Event;
 import com.pmo.model.Project;
 import com.pmo.service.EmployeeService;
 import com.pmo.service.ProjectService;
