@@ -1,7 +1,9 @@
 package com.pmo.model;
 
 import java.util.Date;
+import java.util.logging.Logger;
 
+import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,13 +15,17 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import com.pmo.controller.EventController;
 import com.pmo.event.type.EventType;
 import com.pmo.exception.InvalidDateException;
 
 @Entity
 @Table(name="EVENT")
+@Named
 public class Event extends AbstractPersistent{
 
+	public final static Logger LOG = Logger.getLogger(Event.class.getName());
+	
 	private static final long serialVersionUID = 5741436241683297737L;
 
 	private String reason;
@@ -49,6 +55,7 @@ public class Event extends AbstractPersistent{
 
 	public void setReason(String reason) {
 		this.reason = reason;
+		LOG.info("changement reason event par : " + reason);
 	}
 	
 	public EventType getType() {
@@ -134,6 +141,10 @@ public class Event extends AbstractPersistent{
 	 **/
 	public boolean checkIfDatesAreFilledAndConformed() throws InvalidDateException {
 		return start != null && end != null && (end.after(start) || end.equals(start));
+	}
+
+	public void setTitle(String t) {
+		this.title = t;
 	}
 
 
