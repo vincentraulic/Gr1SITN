@@ -17,14 +17,11 @@ import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-
 import com.pmo.dao.UserDao;
 import com.pmo.model.Employee;
 import com.pmo.model.Project;
 import com.pmo.service.EmployeeService;
 import com.pmo.service.ProjectService;
-import com.pmo.user.service.UserPmo;
 import com.pmo.utils.StringUtils;
 
 @ConversationScoped
@@ -57,14 +54,6 @@ public class EmployeeController implements Serializable{
 
 	public List<Project> getProjects(){
 		return new ArrayList<Project>(projectService.getProjects());
-	}
-
-	public List<Project> getProjectsUser(){
-
-		UserPmo user = (UserPmo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Employee currentEmployee = userDao.getUser(user.getUsername());
-
-		return new ArrayList<Project>(projectService.getProjects(currentEmployee));
 	}
 
 	@PostConstruct
