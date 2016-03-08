@@ -9,9 +9,9 @@ import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
@@ -28,8 +28,8 @@ import com.pmo.service.EmployeeService;
 import com.pmo.service.ProjectService;
 import com.pmo.user.service.UserPmo;
 
-@ManagedBean
 @ViewScoped
+@Named("projectController")
 public class ProjectController implements Serializable{
 
 	/**
@@ -68,6 +68,13 @@ public class ProjectController implements Serializable{
 		this.project = project;
 	}
 	
+	public List<Project> getProjects() {
+		UserPmo user = (UserPmo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Employee currentEmployee = userDao.getUser(user.getUsername());
+		
+		return new ArrayList<Project> (currentEmployee.getProjects());
+	}
+	
 	public DualListModel<Employee> getEmployees() {
 		return employees;
 	}
@@ -83,7 +90,7 @@ public class ProjectController implements Serializable{
 	}
 	
 	public void addPhase(){
-		//TODO check le cout ne dépasse pas le cout total, ...
+		//TODO check le cout ne dÃ©passe pas le cout total, ...
 		phase.setProject(project);
 		project.getPhases().add(phase);
 		phase = new Phase();
@@ -113,7 +120,7 @@ public class ProjectController implements Serializable{
 		projectService.createProject(project);
 		
 		//TODO mettre dans fichier propriete
-		String message = "Le projet " + project.getName() + " " + "a bien été créé";
+		String message = "Le projet " + project.getName() + " " + "a bien Ã©tÃ© crÃ©Ã©";
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));
 		return "home/homeContent";
 	}
@@ -150,13 +157,13 @@ public class ProjectController implements Serializable{
     } 
     
     public void onEditPhase(RowEditEvent event) {  
-        FacesMessage msg = new FacesMessage("Phase editée",((Phase) event.getObject()).getName());  
+        FacesMessage msg = new FacesMessage("Phase editÃ©e",((Phase) event.getObject()).getName());  
         //TODO update la phase
         FacesContext.getCurrentInstance().addMessage(null, msg);  
     }  
        
     public void onCancelPhase(RowEditEvent event) {     	
-        FacesMessage msg = new FacesMessage("Phase supprimée");   
+        FacesMessage msg = new FacesMessage("Phase supprimÃ©e");   
         FacesContext.getCurrentInstance().addMessage(null, msg); 
         project.getPhases().remove((Phase) event.getObject());
     } 

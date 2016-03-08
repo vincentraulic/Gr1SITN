@@ -125,7 +125,7 @@
 									showSourceControls="true" showTargetControls="true"
 									showCheckbox="true" responsive="true" showSourceFilter="true"
 									showTargetFilter="true" filterMatchMode="contains"
-									converter="com.pmo.EmployeeConverter">
+									converter="com.pmo.EmployeeConverter" styleClass="text-family">
 
 									<f:facet name="sourceCaption">Ressources disponibles</f:facet>
 									<f:facet name="targetCaption">Ressources affectées au projet</f:facet>
@@ -172,7 +172,7 @@
 							</div>
 							<div class="box-body">
 
-								<p:dataTable id="phaseTable" value="#{projectController.project.phases}" var="phase" widgetVar="50" styleClass="table table-bordered" editable="true">
+								<p:dataTable id="phaseTable" value="#{projectController.project.phases}" var="phase" widgetVar="50" styleClass="table table-bordered text-family" editable="true">
 									<p:ajax event="rowEdit" listener="#{projectController.onEditPhase}" />  
                     				<p:ajax event="rowEditCancel" listener="#{projectController.onCancelPhase}" /> 
 								
@@ -262,7 +262,7 @@
 								
 								<p:spacer height="30px;"/>
 								
-								<p:panelGrid columns="2">
+								<p:panelGrid columns="2" styleClass="text-family">
 				                    <h:outputLabel for="phasename" value="Nom de la phase: " />
 				                    <h:inputText
 										styleClass="form-control #{component.valid ? '' : 'has-error'}"

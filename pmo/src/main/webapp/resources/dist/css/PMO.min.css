@@ -5752,3 +5752,9 @@ table.text-center, table.text-center td, table.text-center th {
 		white-space: normal !important
 	}
 }
+.text-family {
+	font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial,
+		sans-serif;
+	font-weight: 400;
+	font-size: 14px;
+}

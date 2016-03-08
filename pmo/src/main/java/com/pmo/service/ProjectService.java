@@ -22,7 +22,4 @@ public interface ProjectService {
 	public List<Event> getEventEmployees(int idProject);
 
 	public List<Project> getProjects();
-	
-	public List<Project> getProjects(Employee employee);
-
 }
