@@ -41,6 +41,10 @@
 						<p:outputLabel for="type" value="Type:" />
 						<p:inputText id="type" value="#{scheduleView.ev.type}"
 							required="true" />
+						
+						<h:selectOneMenu id='type2Test' value="#{eventtype}" >
+						    <f:selectItems value="#{eventtype}" />
+						</h:selectOneMenu>
 
 						<p:outputLabel for="reason" value="Reason:" />
 						<p:inputText id="reason" value="#{scheduleView.event.title}"
