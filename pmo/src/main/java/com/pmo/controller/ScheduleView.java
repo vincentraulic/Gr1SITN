@@ -23,6 +23,7 @@ import org.primefaces.model.ScheduleModel;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.pmo.dao.UserDao;
+import com.pmo.event.type.EventType;
 import com.pmo.exception.UnknownEmployeeException;
 import com.pmo.model.Employee;
 import com.pmo.model.Event;
@@ -169,4 +170,10 @@ public class ScheduleView implements Serializable {
     private void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
+    
+    public EventType[] getEventTypes()
+    {
+    	return EventType.values();
+    }
+   
 }
