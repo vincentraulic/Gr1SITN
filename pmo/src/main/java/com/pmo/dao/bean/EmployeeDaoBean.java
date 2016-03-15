@@ -13,20 +13,27 @@ import com.pmo.utils.StringUtils;
 @Stateless
 public class EmployeeDaoBean implements EmployeeDao{
 
-    @PersistenceContext(unitName = "pmodb")
+	@PersistenceContext(unitName = "pmodb")
 	private EntityManager em ;
 
 	public int createEmployee(Employee employee) {
-		
+
 		if(StringUtils.isEmpty(employee.getLastname()) || StringUtils.isEmpty(employee.getFirstname()) 
 				|| employee.getDateStart() == null)
 			throw new IllegalArgumentException("Argument(s) null or empty");
-		
+
 		employee.setUsername(employee.getFirstname().toLowerCase() + "." + employee.getLastname().toLowerCase());
+
+		//check if username has already be taken by comparing the hashcode and if it exists, it increment the username
+		int it=1;
+		while(this.getEmployees().contains(employee)){
+			employee.setUsername(employee.getUsername() + it);
+			++it;
+		}
 		employee.setRole("ROLE_USER");
-		
+
 		em.persist(employee);
-		
+
 		return employee.getId();
 	}
 
@@ -52,19 +59,19 @@ public class EmployeeDaoBean implements EmployeeDao{
 	@SuppressWarnings("unchecked")
 	public Employee getEmployee(String lastname, String firstname) {
 		List<Employee> list = em.createQuery("SELECT e FROM Employee e "
-							+ "WHERE e.lastname = :lastn "
-							+ "AND e.firstname = :firstn")
-				 .setParameter("lastn", lastname)
-				 .setParameter("firstn", firstname)
-				 .getResultList();
-		
+				+ "WHERE e.lastname = :lastn "
+				+ "AND e.firstname = :firstn")
+				.setParameter("lastn", lastname)
+				.setParameter("firstn", firstname)
+				.getResultList();
+
 		if(! list.isEmpty())
 			return list.get(0);
 		else
 			throw new IllegalArgumentException("Project name not found");
 	}
 
-	
+
 
 
 }

@@ -1,5 +1,6 @@
 package com.pmo.dao.bean;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -9,6 +10,7 @@ import javax.persistence.PersistenceContext;
 
 import com.pmo.dao.ProjectDao;
 import com.pmo.model.Employee;
+import com.pmo.model.Phase;
 import com.pmo.model.Project;
 import com.pmo.utils.StringUtils;
 
@@ -22,10 +24,6 @@ public class ProjectDaoBean implements ProjectDao{
 		if(StringUtils.isEmpty(project.getName()) || project.getCost() < 0 
 				|| project.getDateStart() == null)
 			throw new IllegalArgumentException("Argument(s) null or empty");
-		
-		if(project.getDateEnd() != null && project.getDateEnd().compareTo(project.getDateStart()) < 0){
-			throw new IllegalArgumentException("The date of the end of the project if before the date of the start");
-		}
 		
 		em.persist(project);
 		

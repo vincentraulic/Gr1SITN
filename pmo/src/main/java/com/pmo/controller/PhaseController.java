@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
@@ -14,6 +14,7 @@ import org.primefaces.event.RowEditEvent;
 import com.pmo.model.Phase;
 import com.pmo.model.Project;
 import com.pmo.service.PhaseService;
+import com.pmo.service.ProjectService;
 
 @ViewScoped
 @Named("phaseController")
@@ -27,6 +28,9 @@ public class PhaseController implements Serializable{
 	
 	@EJB
 	private transient PhaseService phaseService;
+	
+	@EJB
+	private transient ProjectService projectService;
 
 	private Phase phase;
 
@@ -51,24 +55,21 @@ public class PhaseController implements Serializable{
 	}
 	
 	public void addPhase(Project project){
-
-		phase.setProject(project);
-		
-		project.getPhases().add(phase);
-		
-		//TODO update le project ?
-		
+		//phase.setProject(project);
+		Project p = projectService.getProject(project.getId());
+				p.getPhases().add(phase);
+		//System.out.println(projectService.getProject(1).getPhases());
 		setPhase(new Phase());
-	}	
+	}		
 	
     public void onEditPhase(RowEditEvent event) {  
-        FacesMessage msg = new FacesMessage("Phase editée",((Phase) event.getObject()).getName());  
+        FacesMessage msg = new FacesMessage("Phase editï¿½e",((Phase) event.getObject()).getName());  
         //TODO update la phase
         FacesContext.getCurrentInstance().addMessage(null, msg);  
     }  
        
     public void onCancelPhase(RowEditEvent event) {     	
-        FacesMessage msg = new FacesMessage("Phase supprimée");   
+        FacesMessage msg = new FacesMessage("Phase supprimï¿½e");   
         FacesContext.getCurrentInstance().addMessage(null, msg); 
         //TODO supprimer la phase du projet
     } 

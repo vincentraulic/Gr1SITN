@@ -9,9 +9,9 @@ import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.faces.view.ViewScoped;
 
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
@@ -158,7 +158,6 @@ public class ProjectController implements Serializable{
     
     public void onEditPhase(RowEditEvent event) {  
         FacesMessage msg = new FacesMessage("Phase editée",((Phase) event.getObject()).getName());  
-        //TODO update la phase
         FacesContext.getCurrentInstance().addMessage(null, msg);  
     }  
        
