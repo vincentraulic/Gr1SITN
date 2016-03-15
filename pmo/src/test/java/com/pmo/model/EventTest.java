@@ -17,6 +17,17 @@ public class EventTest {
 	
 	Event event;
 	
+	@Before
+	public void initTestDates() {
+		Calendar cal = Calendar.getInstance();
+		currentDate = cal.getTime();
+		
+		cal.add(Calendar.YEAR, -1);
+		oldDate = cal.getTime();
+		
+		event = new Event();
+	}
+	
 	@Test
 	public void testDateOk() {
 		event.setStart(oldDate);
@@ -82,18 +93,5 @@ public class EventTest {
 		} catch(InvalidDateException ide) {
 			Assert.assertTrue("You should not have an InvalidDateException here", false);
 		}
-	}
-	
-	
-	
-	@Before
-	public void initTestDates() {
-		Calendar cal = Calendar.getInstance();
-		currentDate = cal.getTime();
-		
-		cal.add(Calendar.YEAR, -1);
-		oldDate = cal.getTime();
-		
-		event = new Event();
 	}
 }

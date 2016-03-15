@@ -1,38 +1,36 @@
 package com.pmo.controller;
 
+
+import java.io.Serializable;
 import java.text.MessageFormat;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.Conversation;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.pmo.dao.UserDao;
+import com.pmo.event.type.EventType;
 import com.pmo.exception.InvalidDateException;
 import com.pmo.model.Event;
 import com.pmo.service.EmployeeService;
 import com.pmo.utils.StringUtils;
 
-@ManagedBean
-@Named("eventController")
-public class EventController {
-
+@RequestScoped
+@Named
+public class EventController implements Serializable {
+		
+		public final static Logger LOG = Logger.getLogger(EventController.class.getName());
+		
 		@EJB
 		private transient EmployeeService employeeService;
 		
-		@EJB
-		private transient UserDao userDao;
-
-		@Inject
-		private Conversation conversation ;
-
 		private Event event;
-
+		
 		public Event getEvent() {
+			LOG.info("passage par GET Event");
 			return event;
 		}
 
@@ -43,26 +41,25 @@ public class EventController {
 		@PostConstruct
 		private void init(){
 			event = new Event();
-			conversation.begin();
+			event.setType(EventType.ABSENCE);
+			event.setTitle("test");
+			LOG.info("initialisation objet event");
 		}
 
-		public String create(){
-
-			// Récupérer l'employée en cours
-			// event.setEmployee(employeeService.getEmployee());
-			
+		public String create() {
+			LOG.info("Passage create event controller ");
+			LOG.info("objet event raison: " + event.getReason());
+			LOG.info("objet event date start et end : " + event.getStart() + " et " + event.getEnd());
 			try {
-
+				
 				employeeService.createEvent(event);
-	
-				conversation.end();
-	
+				
 				String message = MessageFormat.format(StringUtils.getBundle().getString("createeventsuccess"),event.getEmployee().getFirstname(),event.getEmployee().getLastname());
 	
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));
 			}
 			catch(InvalidDateException ide) {
-				
+				LOG.warning("Une erreur s'est produite lors de la création de l'event : " + ide);
 			}
 			return "home/homeContent";
 		}
