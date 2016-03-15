@@ -1,6 +1,5 @@
 package com.pmo.controller;
 
-import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.logging.Logger;
 
@@ -24,18 +23,15 @@ import com.pmo.utils.StringUtils;
 
 @RequestScoped
 @Named
-public class EventController {
-
+public class EventController  {
+		
 		public final static Logger LOG = Logger.getLogger(EventController.class.getName());
 		
 		@EJB
 		private transient EmployeeService employeeService;
 		
-		@EJB
-		private transient UserDao userDao;
-
 		private Event event;
-
+		
 		public Event getEvent() {
 			LOG.info("passage par GET Event");
 			return event;

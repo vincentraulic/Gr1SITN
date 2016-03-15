@@ -7,7 +7,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-	
+
 <h:body>
 	<ui:composition template="/view/template/template.xhtml">
 		<ui:define name="title">Gestion des absences</ui:define>
@@ -37,55 +37,61 @@
 						<div class="box-header">Ajout de l'absence - Informations</div>
 						<!-- /.box-header -->
 						<div class="box-body table-responsive no-padding">
-								<h:form id="form">
-								<div class="form-group">
-									<h:outputLabel for="reason">Raison</h:outputLabel>
-									<h:inputText id="reason"
-										value="#{eventController.event.reason}"
-										required="true" label="raison">
-										<f:validateLength minimum="2" maximum="50" />
-									</h:inputText>
-								</div>
-								<div class="form-group">
-									<h:outputLabel for="startdate">Date de début</h:outputLabel>
-									<h:inputText id="startdate"
-										value="#{eventController.event.start}"
-										required="true" label="startdate">
-										<f:validateLength minimum="2" maximum="50" />
-										<f:convertDateTime pattern="dd/MM/yyyy" />
-									</h:inputText>
-								</div>
-								
-								<div class="form-group">
-									<h:outputLabel for="enddate">Date de fin</h:outputLabel>
-									<h:inputText id="enddate"
-										value="#{eventController.event.end}"
-										required="true" label="enddate">
-										<f:validateLength minimum="2" maximum="50" />
-										<f:convertDateTime pattern="dd/MM/yyyy" />
-									</h:inputText>
-								</div>
-								
-								<div class="form-group">
-									<h:outputLabel for="allday">Journée entière</h:outputLabel>
-									<h:inputText id="allday"
-										value="#{eventController.event.allDay}"
-										required="true" label="allday">
-										<f:validateLength minimum="2" maximum="50" />
-									</h:inputText>
-								</div>
-								
-							
-								<div class="box-footer">
-								<h:commandButton value="Valider" styleClass="btn btn-default"
-									action="#{eventController.create}">
-								</h:commandButton>
-								
-								
+							<div class="form-group">
+								<h:outputLabel for="reason">Raison</h:outputLabel>
+								<h:inputText id="reason"
+									styleClass="form-control #{component.valid ? '' : 'has-error'}"
+									value="#{eventController.event.reason}" required="true"
+									label="raison">
+									<f:validateLength minimum="2" maximum="50" />
+								</h:inputText>
 							</div>
-							</h:form>
-							
-							
+							<div class="form-group">
+								<h:outputLabel for="startdate">Date de début</h:outputLabel>
+								<h:inputText id="startdate"
+									styleClass="form-control #{component.valid ? '' : 'has-error'}"
+									value="#{eventController.event.start}" required="true"
+									label="startdate">
+									<f:validateLength minimum="2" maximum="50" />
+								</h:inputText>
+							</div>
+
+							<div class="form-group">
+								<h:outputLabel for="enddate">Date de fin</h:outputLabel>
+								<h:inputText id="enddate"
+									styleClass="form-control #{component.valid ? '' : 'has-error'}"
+									value="#{eventController.event.end}" required="true"
+									label="enddate">
+									<f:validateLength minimum="2" maximum="50" />
+								</h:inputText>
+							</div>
+
+							<div class="form-group">
+								<h:outputLabel for="allday">Journée entière</h:outputLabel>
+								<h:inputText id="allday"
+									styleClass="form-control #{component.valid ? '' : 'has-error'}"
+									value="#{eventController.event.allDay}" required="true"
+									label="allday">
+									<f:validateLength minimum="2" maximum="50" />
+								</h:inputText>
+							</div>
+
+							<!--   <div class="form-group">
+									<h:outputLabel for="type">Type</h:outputLabel>
+									<h:inputText id="type"
+										styleClass="form-control #{component.valid ? '' : 'has-error'}"
+										value="#{eventController.event.type}"
+										required="true" label="type">
+										<f:validateLength minimum="2" maximum="50" />
+									</h:inputText>
+								</div>-->
+
+							<div class="box-footer">
+								<button type="submit" class="btn btn-default">Annuler</button>
+								<h:commandButton value="Valider" styleClass="btn btn-default"
+									action="#{employeeController.create}">
+								</h:commandButton>
+							</div>
 						</div>
 						<!-- /.box-body -->
 					</div>
