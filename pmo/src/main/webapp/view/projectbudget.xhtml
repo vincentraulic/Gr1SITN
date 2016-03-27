@@ -20,9 +20,9 @@
 		<ui:define name="body">
 
 			<!-- Content Wrapper. Contains page content -->
-			<div class="content-wrapper" style="margin-left: 0px">
+			<div class="content-wrapper">
 				<!-- Content Header (Page header) -->
-				<section class="content-header">
+				<section class="content-header" style="margin-left:-230px">
 				<h1>Gestion du budget</h1>
 				<ol class="breadcrumb">
 					<li><a href="./user/home"><i class="fa fa-dashboard"></i>
@@ -32,11 +32,11 @@
 				</section>
 
 				<!-- Main content -->
-				<section class="content"> <!-- Small boxes (Stat box) -->
+				<section class="content" style="margin-left:-230px"> <!-- Small boxes (Stat box) -->
 				<!-- Main row -->
 				<div class="row">
 					<!-- Left col -->
-					<section class="connectedSortable">
+					<section class="col-lg-7 connectedSortable">
 
 					<div class="box">
 						<div class="box-body">
@@ -55,11 +55,11 @@
 				</div>
 				<div class="row">
 					<!-- right col -->
-					<section class="connectedSortable">
+					<section class="col-lg-5 connectedSortable">
 					<div class="box">
 						<div class="box-header">
 							<h3 class="box-title">
-								<i class="fa fa-th"> </i>Phases
+								<i class="fa fa-th"> </i> Phases
 							</h3>
 						</div>
 						<div class="box-body">
@@ -69,8 +69,7 @@
 									styleClass="text-family" id="tabViewProject">
 									<p:tab title="Projet - #{project.name}">
 										<h:form id="projectform_#{project.id}">
-											<p:dataTable value="#{project.phases}" var="phase"
-												styleClass="table table-bordered text-family">
+											<p:dataTable value="#{project.phases}" var="phase" widgetVar="50" styleClass="table table-bordered text-family" editable="true">
 												<p:ajax event="rowEdit"
 													listener="#{projectController.onEditPhase}" />
 												<p:ajax event="rowEditCancel"
@@ -197,6 +196,7 @@
 				</div>
 				<!-- /.row --> <!-- Small boxes (Stat box) -->
 				<div class="row">
+					<section class="col-lg-5 connectedSortable">
 					<div class="box">
 
 						<!-- /.box-header -->
@@ -263,7 +263,7 @@
 						</div>
 						<!-- /.box-body -->
 					</div>
-
+					</section>
 				</div>
 				</section>
 

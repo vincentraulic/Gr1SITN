@@ -74,11 +74,11 @@ ENGINE=InnoDB;
 CREATE TABLE IF NOT EXISTS EMPLOYEES_PROJECTS(
 	id_employee INT NOT NULL,
 	id_project INT NOT NULL,
-	id_role INT NOT NULL,
+	id_role INT,
 	PRIMARY KEY (id_employee, id_project) ,
 	CONSTRAINT fk_employee_project FOREIGN KEY(id_employee) REFERENCES EMPLOYEE(id),
-	CONSTRAINT fk_project_employee FOREIGN KEY(id_project) REFERENCES PROJECT(id),
-	CONSTRAINT fk_project_role_employee FOREIGN KEY(id_project) REFERENCES ROLE(id)
+	CONSTRAINT fk_project_employee FOREIGN KEY(id_project) REFERENCES PROJECT(id)
+	--CONSTRAINT fk_project_role_employee FOREIGN KEY(id_project) REFERENCES ROLE(id)
 )
 ENGINE=InnoDB;
 

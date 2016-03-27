@@ -24,25 +24,25 @@ public class ProjectServiceBean implements ProjectService{
 	@Override
 	public int createProject(Project project) {
 		if(project.getDateEnd() != null && project.getDateEnd().compareTo(project.getDateStart()) < 0){
-			throw new IllegalArgumentException("La date de fin du projet ne peut pas Ãªtre avant la date du dÃ©but");
+			throw new IllegalArgumentException("La date de fin du projet ne peut pas être avant la date du début");
 		}
 		
 		int cost = 0;
 		for(Phase p : project.getPhases()){
 			if(p.getStart() != null && p.getEnd()!= null && p.getEnd().compareTo(p.getStart()) < 0)
-				throw new IllegalArgumentException("La date de fin de la phase ne peut pas Ãªtre avant la date de dÃ©but");				
+				throw new IllegalArgumentException("La date de fin de la phase ne peut pas être avant la date de début");				
 			if(p.getStart() != null && p.getStart().compareTo(project.getDateStart()) < 0)
-				throw new IllegalArgumentException("La date de dÃ©but de la phase ne peut pas Ãªtre avant la date de dÃ©but du projet");	
+				throw new IllegalArgumentException("La date de début de la phase ne peut pas être avant la date de début du projet");	
 			if(p.getEnd() != null && p.getEnd().compareTo(project.getDateEnd()) > 0)
-				throw new IllegalArgumentException("La date de fin de la phase ne peut pas Ãªtre aprÃ©s la date de fin du projet");	
+				throw new IllegalArgumentException("La date de fin de la phase ne peut pas être après la date de fin du projet");	
 			cost += p.getCost();
 		}
 		if(cost > project.getCost())
-			throw new IllegalArgumentException("L'ensemble des coÃ»ts des phases est supÃ©rieur au budget du projet");
+			throw new IllegalArgumentException("L'ensemble des coûts des phases est supérieur au budget du projet");
 		
 		for(Project p : projectDao.getProjects()){
 			if(p.getName().equals(project.getName())){
-				throw new IllegalArgumentException("Le nom du projet est dÃ©jÃ  pris");				
+				throw new IllegalArgumentException("Le nom du projet est déjà  pris");				
 			}
 		}
 		
@@ -96,6 +96,11 @@ public class ProjectServiceBean implements ProjectService{
 	@Override
 	public List<Project> getProjects() {
 		return projectDao.getProjects();
+	}
+
+	@Override
+	public void update(Project project) {
+		projectDao.update(project);
 	}
 
 }

@@ -1,6 +1,5 @@
 package com.pmo.dao.bean;
 
-import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -10,7 +9,6 @@ import javax.persistence.PersistenceContext;
 
 import com.pmo.dao.ProjectDao;
 import com.pmo.model.Employee;
-import com.pmo.model.Phase;
 import com.pmo.model.Project;
 import com.pmo.utils.StringUtils;
 
@@ -93,5 +91,10 @@ public class ProjectDaoBean implements ProjectDao{
 				.setParameter("emp", employee.getId())
 				.getResultList();
 		return list;
+	}
+
+	@Override
+	public void update(Project project) {
+		em.merge(project);		
 	}
 }

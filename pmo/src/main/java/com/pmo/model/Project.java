@@ -2,12 +2,13 @@ package com.pmo.model;
 
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -37,7 +38,11 @@ public class Project extends AbstractPersistent{
     @OneToMany(mappedBy="project", cascade=CascadeType.ALL)
 	private Set<Phase> phases = new HashSet<Phase>();
 
-	@ManyToMany(mappedBy="projects")
+	@ManyToMany(targetEntity=Employee.class)
+	@JoinTable(
+		      name="EMPLOYEES_PROJECTS",
+		      joinColumns={@JoinColumn(name="id_project", referencedColumnName="id")},
+		      inverseJoinColumns={@JoinColumn(name="id_employee", referencedColumnName="id")})	
 	private Set<Employee> employees = new HashSet<Employee>();  
     
 	public String getName() {

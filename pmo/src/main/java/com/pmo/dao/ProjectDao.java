@@ -24,4 +24,6 @@ public interface ProjectDao {
 	
 	public List<Project> getProjects(Employee employee);
 	
+	public void update(Project project);
+	
 }
