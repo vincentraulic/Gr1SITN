@@ -38,12 +38,11 @@ public class EmployeeServiceBean implements EmployeeService{
 	
 	@Override
 	public int createEmployee(Employee employee) {
-		//to do verifier les champs
-		
+
 		//Setting a generate password
 		SecureRandom random = new SecureRandom();
 		String password = new BigInteger(120, random).toString(20);
-		
+
 		//send the password to the admin
 		Email email = new Email();
 		UserPmo user = (UserPmo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -70,14 +69,14 @@ public class EmployeeServiceBean implements EmployeeService{
 
 	@Override
 	public Employee getDetails(String username) {
-		//to do gérer si l'username n'existe pas
+		//TODO gérer si l'username n'existe pas
 		
 		return userDao.getUser(username);
 	}
 
 	@Override
 	public Employee getEmployee(int id) throws UnknownEmployeeException {
-		//to do gérer si l'id n'existe pas
+		//TODO gérer si l'id n'existe pas
 		
 		return employeeDao.getEmployee(id);
 	}
@@ -98,14 +97,14 @@ public class EmployeeServiceBean implements EmployeeService{
 	
 	@Override
 	public List<Event> getEvents(int idEmployee) throws UnknownEmployeeException {
-		//to do gérer si l'id n'existe pas
+		//TODO gérer si l'id n'existe pas
 		
 		return eventDao.getEvents(idEmployee);
 	}
 
 	@Override
 	public List<Event> getEvents(Employee employee, EventType type) throws UnknownEmployeeException, EventTypeNotFoundException {
-		//to do check si le type de Event existe
+		//TODO check si le type de Event existe
 		return eventDao.getEvents(employee.getId(), type);
 	}
 

@@ -20,9 +20,9 @@
 		<ui:define name="body">
 
 			<!-- Content Wrapper. Contains page content -->
-			<div class="content-wrapper" style="margin-left: 0px">
+			<div class="content-wrapper">
 				<!-- Content Header (Page header) -->
-				<section class="content-header">
+				<section class="content-header" style="margin-left:-230px">
 				<h1>Gestion du budget</h1>
 				<ol class="breadcrumb">
 					<li><a href="./user/home"><i class="fa fa-dashboard"></i>
@@ -32,11 +32,11 @@
 				</section>
 
 				<!-- Main content -->
-				<section class="content"> <!-- Small boxes (Stat box) -->
+				<section class="content" style="margin-left:-230px"> <!-- Small boxes (Stat box) -->
 				<!-- Main row -->
 				<div class="row">
 					<!-- Left col -->
-					<section class="connectedSortable">
+					<section class="col-lg-7 connectedSortable">
 
 					<div class="box">
 						<div class="box-body">
@@ -55,20 +55,21 @@
 				</div>
 				<div class="row">
 					<!-- right col -->
-					<section class="connectedSortable">
+					<section class="col-lg-5 connectedSortable">
 					<div class="box">
 						<div class="box-header">
-							<h3 class="box-title">Phases</h3>
+							<h3 class="box-title">
+								<i class="fa fa-th"> </i> Phases
+							</h3>
 						</div>
 						<div class="box-body">
 							<div class="input-group margin">
 								<p:tabView value="#{projectController.projects}" var="project"
-									scrollable="true" style="width: 1280px;" styleClass="text-family">
+									scrollable="true" style="width: 1280px;"
+									styleClass="text-family" id="tabViewProject">
 									<p:tab title="Projet - #{project.name}">
 										<h:form id="projectform_#{project.id}">
-											<p:dataTable id="phaseTable_#{project.id}"
-												value="#{project.phases}" var="phase"
-												styleClass="table table-bordered text-family">
+											<p:dataTable value="#{project.phases}" var="phase" widgetVar="50" styleClass="table table-bordered text-family" editable="true">
 												<p:ajax event="rowEdit"
 													listener="#{projectController.onEditPhase}" />
 												<p:ajax event="rowEditCancel"
@@ -158,18 +159,20 @@
 
 											<p:panelGrid columns="2" styleClass="text-family">
 												<h:outputLabel for="phasename" value="Nom de la phase: " />
-												<p:inputText value="#{phaseController.phase.name}" />
+												<p:inputText id="phasename"
+													value="#{phaseController.phase.name}" />
 												<h:outputLabel for="phasecost" value="Coût: " />
-												<p:inputText value="#{phaseController.phase.cost}" />
+												<p:inputText id="phasecost"
+													value="#{phaseController.phase.cost}" />
 												<h:outputLabel for="phasestart" value="Date de début: " />
-												<p:inputMask
+												<p:inputMask id="phasestart"
 													styleClass="form-control #{component.valid ? '' : 'has-error'}"
 													value="#{phaseController.phase.start}" mask="99/99/9999"
 													required="true" name="phasestart" placeholder="dd/MM/aaaa">
 													<f:convertDateTime pattern="dd/MM/yyyy" />
 												</p:inputMask>
 												<h:outputLabel for="phaseend" value="Date de fin: " />
-												<p:inputMask
+												<p:inputMask id="phaseend"
 													styleClass="form-control #{component.valid ? '' : 'has-error'}"
 													value="#{phaseController.phase.end}" mask="99/99/9999"
 													required="true" name="phaseend" placeholder="dd/MM/aaaa">
@@ -178,8 +181,8 @@
 												<f:facet name="footer">
 													<p:commandButton id="addButton_#{project.id}"
 														value="Ajouter la phase"
-														actionListener="#{phaseController.addPhase(project)}" />
-													<!-- update="phaseTable_#{project.id}" -->
+														actionListener="#{phaseController.addPhase(project)}"
+														update="tabViewProject" />
 												</f:facet>
 											</p:panelGrid>
 										</h:form>
@@ -193,6 +196,7 @@
 				</div>
 				<!-- /.row --> <!-- Small boxes (Stat box) -->
 				<div class="row">
+					<section class="col-lg-5 connectedSortable">
 					<div class="box">
 
 						<!-- /.box-header -->
@@ -259,7 +263,7 @@
 						</div>
 						<!-- /.box-body -->
 					</div>
-
+					</section>
 				</div>
 				</section>
 

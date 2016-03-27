@@ -106,5 +106,9 @@ public class Phase extends AbstractPersistent{
         return result;
 	}
 
+	@Override
+	public String toString() {
+		return this.getName() + "" + this.getProject().getName();
+	}
 
 }

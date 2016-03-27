@@ -12,75 +12,90 @@
 	<ui:composition template="/view/template/template.xhtml">
 		<ui:define name="title">Gestion des absences</ui:define>
 
-		<div class="box-header">Ajout de l'absence - Informations</div>
-		<!-- /.box-header -->
-		<div class="box-body table-responsive no-padding">
-			<h:form id="form">
-				<div class="form-group">
-					<h:outputLabel for="reason">Raison</h:outputLabel>
-					<h:inputText id="reason" value="#{eventController.event.reason}"
-						required="true" label="raison">
-						<f:validateLength minimum="2" maximum="50" />
+		<ui:define name="body">
+			Body here
+			 <div class="content-wrapper">
+				<!-- Content Header (Page header) -->
+				<section class="content-header">
+				<h1>Ajouter une absence</h1>
+				<ol class="breadcrumb">
+					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li class="active">Ajouter une absence</li>
+				</ol>
+				</section>
 
-						<div class="form-group">
-							<h:outputLabel for="startdate">Date de début</h:outputLabel>
-							<h:inputText id="startdate"
-								value="#{eventController.event.start}" required="true"
-								label="startdate">
-								<f:validateLength minimum="2" maximum="50" />
-								<f:convertDateTime pattern="dd/MM/yyyy" />
-							</h:inputText>
-						</div>
+				<!-- Main content -->
+				<section class="content"> <!-- Small boxes (Stat box) -->
+				<div class="row">
+					<div class="col-lg-3 col-xs-6"></div>
+					<!-- ./col -->
+				</div>
+				<!-- /.row -->
 
-						<div class="form-group">
-							<h:outputLabel for="enddate">Date de fin</h:outputLabel>
-							<h:inputText id="enddate" value="#{eventController.event.end}"
-								required="true" label="enddate">
-								<f:validateLength minimum="2" maximum="50" />
-								<f:convertDateTime pattern="dd/MM/yyyy" />
-							</h:inputText>
-						</div>
+				<div class="row">
 
-						<div class="form-group">
-							<h:outputLabel for="allday">Journée entière</h:outputLabel>
-							<h:inputText id="allday" value="#{eventController.event.allDay}"
-								required="true" label="allday">
-								<f:validateLength minimum="2" maximum="50" />
-							</h:inputText>
-						</div>
+					<div class="box">
+						<div class="box-header">Ajout de l'absence - Informations</div>
+						<!-- /.box-header -->
+						<h:form>
+							<div class="box-body table-responsive no-padding">
+								<div class="form-group">
+									<h:outputLabel for="reason">Raison</h:outputLabel>
+									<h:inputText id="reason"
+										value="#{eventController.event.reason}" required="true"
+										label="raison">
+										<f:validateLength minimum="2" maximum="50" />
+									</h:inputText>
+								</div>
+								<div class="form-group">
+									<h:outputLabel for="startdate">Date de début</h:outputLabel>
+									<h:inputText id="startdate"
+										value="#{eventController.event.start}" required="true"
+										label="startdate">
+										<f:validateLength minimum="2" maximum="50" />
+									</h:inputText>
+								</div>
 
+								<div class="form-group">
+									<h:outputLabel for="enddate">Date de fin</h:outputLabel>
+									<h:inputText id="enddate" value="#{eventController.event.end}"
+										required="true" label="enddate">
+										<f:validateLength minimum="2" maximum="50" />
+									</h:inputText>
+								</div>
 
+								<div class="form-group">
+									<h:outputLabel for="allday">Journée entière</h:outputLabel>
+									<h:inputText id="allday"
+										value="#{eventController.event.allDay}" required="true"
+										label="allday">
+										<f:validateLength minimum="2" maximum="50" />
+									</h:inputText>
+								</div>
 
-						<div class="box-footer">
-							<h:commandButton value="Valider" styleClass="btn btn-default"
-								action="#{eventController.create}">
-							</h:commandButton>
+								<div class="box-footer">
+									<h:commandButton value="Valider" styleClass="btn btn-default"
+										action="#{eventController.create}">
+									</h:commandButton>
+								</div>
+							</div>
+						</h:form>
+						<!-- /.box-body -->
+					</div>
+					<!-- /.box -->
 
+				</div>
 
-						</div>
-			</h:form>
-
-
-		</div>
-		<!-- /.box-body -->
-		</div>
-		</div>
-		<!-- /.box-body -->
-		</div>
-		<!-- /.box -->
-		</div>
-
-		<!-- Main row -->
-		<div class="row">
-			<!-- /.Left col -->
-			<!-- right col -->
-			<section class="col-lg-5 connectedSortable"> </section>
-			<!-- right col -->
-		</div>
-		<!-- /.row (main row) -->
-		</section>
-		<!-- /.content -->
-		</div>
+				<!-- Main row -->
+				<div class="row">
+					<!-- /.Left col -->
+					<!-- right col -->
+					<section class="col-lg-5 connectedSortable"> </section>
+					<!-- right col -->
+				</div>
+				<!-- /.row (main row) --> </section>
+				<!-- /.content -->
+			</div>
 
 		</ui:define>
 

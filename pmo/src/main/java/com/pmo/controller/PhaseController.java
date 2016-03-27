@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
@@ -14,6 +14,7 @@ import org.primefaces.event.RowEditEvent;
 import com.pmo.model.Phase;
 import com.pmo.model.Project;
 import com.pmo.service.PhaseService;
+import com.pmo.service.ProjectService;
 
 @ViewScoped
 @Named("phaseController")
@@ -27,6 +28,9 @@ public class PhaseController implements Serializable{
 	
 	@EJB
 	private transient PhaseService phaseService;
+	
+	@EJB
+	private transient ProjectService projectService;
 
 	private Phase phase;
 
@@ -51,15 +55,12 @@ public class PhaseController implements Serializable{
 	}
 	
 	public void addPhase(Project project){
-
-		phase.setProject(project);
-		
-		project.getPhases().add(phase);
-		
-		//TODO update le project ?
-		
+		Project p = projectService.getProject(project.getId());
+		p.getPhases().add(phase);
+		phase.setProject(p);
+		projectService.update(p);
 		setPhase(new Phase());
-	}	
+	}		
 	
     public void onEditPhase(RowEditEvent event) {  
         FacesMessage msg = new FacesMessage("Phase editée",((Phase) event.getObject()).getName());  

@@ -1,20 +1,17 @@
 package com.pmo.controller;
 
+
+import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.Conversation;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.pmo.dao.UserDao;
 import com.pmo.event.type.EventType;
 import com.pmo.exception.InvalidDateException;
 import com.pmo.model.Event;
@@ -23,7 +20,7 @@ import com.pmo.utils.StringUtils;
 
 @RequestScoped
 @Named
-public class EventController  {
+public class EventController implements Serializable {
 		
 		public final static Logger LOG = Logger.getLogger(EventController.class.getName());
 		
@@ -49,7 +46,7 @@ public class EventController  {
 			LOG.info("initialisation objet event");
 		}
 
-		public String create(){
+		public String create() {
 			LOG.info("Passage create event controller ");
 			LOG.info("objet event raison: " + event.getReason());
 			LOG.info("objet event date start et end : " + event.getStart() + " et " + event.getEnd());

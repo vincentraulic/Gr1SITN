@@ -39,11 +39,9 @@
 					showEffect="clip" hideEffect="clip">
 					<h:panelGrid id="eventDetails" columns="2">
 						<p:outputLabel for="type" value="Type:" />
-						<p:inputText id="type" value="#{scheduleView.ev.type}"
-							required="true" />
 						
-						<h:selectOneMenu id='type2Test' value="#{eventtype}" >
-						    <f:selectItems value="#{eventtype}" />
+						<h:selectOneMenu id='type' value="#{scheduleView.ev.type}" >
+						    <f:selectItems value="#{scheduleView.eventTypes}" />
 						</h:selectOneMenu>
 
 						<p:outputLabel for="reason" value="Reason:" />

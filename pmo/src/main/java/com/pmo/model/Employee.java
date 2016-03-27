@@ -180,7 +180,7 @@ public class Employee extends AbstractPersistent{
 
 	@Override
 	public int hashCode() {
-		return lastname.hashCode() + firstname.hashCode() + dateStart.hashCode();
+		return username.hashCode();
 	}
 	
 	@Override

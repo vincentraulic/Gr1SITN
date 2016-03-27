@@ -9,8 +9,8 @@ import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import org.primefaces.event.RowEditEvent;
@@ -72,7 +72,9 @@ public class ProjectController implements Serializable{
 		UserPmo user = (UserPmo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Employee currentEmployee = userDao.getUser(user.getUsername());
 		
-		return new ArrayList<Project> (currentEmployee.getProjects());
+		List<Project> list =  new ArrayList<Project> (currentEmployee.getProjects());
+		
+		return list;
 	}
 	
 	public DualListModel<Employee> getEmployees() {
@@ -114,13 +116,16 @@ public class ProjectController implements Serializable{
 	}
 	
 	public String create(){
+		UserPmo user = (UserPmo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Employee currentEmployee = userDao.getUser(user.getUsername());
 		
 		project.setEmployees(new HashSet<Employee>(employees.getTarget()));
+		project.getEmployees().add(currentEmployee);
 		
 		projectService.createProject(project);
 		
 		//TODO mettre dans fichier propriete
-		String message = "Le projet " + project.getName() + " " + "a bien √©t√© cr√©√©";
+		String message = "Le projet " + project.getName() + " " + "a bien ÈtÈ crÈÈ";
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));
 		return "home/homeContent";
 	}
@@ -158,7 +163,6 @@ public class ProjectController implements Serializable{
     
     public void onEditPhase(RowEditEvent event) {  
         FacesMessage msg = new FacesMessage("Phase edit√©e",((Phase) event.getObject()).getName());  
-        //TODO update la phase
         FacesContext.getCurrentInstance().addMessage(null, msg);  
     }  
        
