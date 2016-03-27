@@ -2,15 +2,15 @@ package com.pmo.event.type;
 
 public enum EventType {
 
-	ABSENCE("Absence"),
+	ABSENCE("ABSENCE"),
 	RTT("RTT"),
-	LEAVE("Leave"),
-	SICK_LEAVE("Sick leave"),
-	FORMATION("Formation"),
-	PROJECT_ENTRY("Project entry"),
-	PROJECT_EXIT("Project exit"),
-	MEETING("Reunion"),
-	OTHER("Autre");
+	LEAVE("LEAVE"),
+	SICK_LEAVE("SICK_LEAVE"),
+	FORMATION("FORMATION"),
+	PROJECT_ENTRY("PROJECT_ENTRY"),
+	PROJECT_EXIT("PROJECT_EXIT"),
+	MEETING("MEETING"),
+	OTHER("OTHER");
 	
 	private String name;
 	

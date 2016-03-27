@@ -20,7 +20,7 @@ public class ProjectConverter implements Converter{
 			String value) {
 		Project project = projectService.getProject(value);
 		
-		//TODO gérer si projet non trouvé
+		//TODO gÃ©rer si projet non trouvÃ©
 		
 		return project;
 	}

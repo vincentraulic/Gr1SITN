@@ -6,6 +6,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
+import com.pmo.exception.UnknownEmployeeException;
 import com.pmo.model.Employee;
 import com.pmo.service.EmployeeService;
 
@@ -17,10 +18,10 @@ public class EmployeeConverter implements Converter{
 	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component,
-			String value) {
+			String value) throws UnknownEmployeeException {
 		Employee employee = employeeService.getEmployee(Integer.valueOf(value));
 		
-		//TODO check l'employée existe
+		//TODO check l'employÃ© existe
 		
 		return employee;
 	}
