@@ -21,6 +21,7 @@ import org.primefaces.model.DualListModel;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.pmo.dao.UserDao;
+import com.pmo.exception.InvalidDateException;
 import com.pmo.model.Employee;
 import com.pmo.model.Phase;
 import com.pmo.model.Project;
@@ -122,10 +123,16 @@ public class ProjectController implements Serializable{
 		project.setEmployees(new HashSet<Employee>(employees.getTarget()));
 		project.getEmployees().add(currentEmployee);
 		
-		projectService.createProject(project);
+		String message;
+		try {
+			projectService.createProject(project);
+			
+			//TODO mettre dans fichier propriete
+			message = "Le projet " + project.getName() + " " + "a bien Ã©tÃ© crÃ©Ã©";
+		} catch(InvalidDateException ide) {
+			message = ide.getMessage();
+		}
 		
-		//TODO mettre dans fichier propriete
-		String message = "Le projet " + project.getName() + " " + "a bien été créé";
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));
 		return "home/homeContent";
 	}

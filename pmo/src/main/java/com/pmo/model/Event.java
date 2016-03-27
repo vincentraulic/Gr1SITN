@@ -139,7 +139,7 @@ public class Event extends AbstractPersistent{
 	 * The start date can be the end date (for a one-day event)
 	 * TODO : Update the function if it's a timestamp and not a simple date
 	 **/
-	public boolean checkIfDatesAreFilledAndConformed() throws InvalidDateException {
+	public boolean checkIfDatesAreFilledAndConformed() {
 		return start != null && end != null && (end.after(start) || end.equals(start));
 	}
 

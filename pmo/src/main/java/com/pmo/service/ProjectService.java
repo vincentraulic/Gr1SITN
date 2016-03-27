@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import com.pmo.exception.InvalidDateException;
 import com.pmo.model.Employee;
 import com.pmo.model.Event;
 import com.pmo.model.Project;
@@ -11,7 +12,7 @@ import com.pmo.model.Project;
 @Local
 public interface ProjectService {
 
-	public int createProject(Project project);
+	public int createProject(Project project) throws InvalidDateException;
 	
 	public Project getProject(String name);
 	
