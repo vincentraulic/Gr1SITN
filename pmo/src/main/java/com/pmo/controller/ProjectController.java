@@ -11,6 +11,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.event.RowEditEvent;
@@ -18,19 +19,17 @@ import org.primefaces.event.SelectEvent;
 import org.primefaces.event.TransferEvent;
 import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.DualListModel;
-import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.pmo.dao.UserDao;
 import com.pmo.exception.InvalidDateException;
 import com.pmo.model.Employee;
 import com.pmo.model.Phase;
 import com.pmo.model.Project;
+import com.pmo.model.ProjectTask;
 import com.pmo.service.EmployeeService;
 import com.pmo.service.ProjectService;
-import com.pmo.user.service.UserPmo;
 
 @ViewScoped
-@Named("projectController")
+@Named
 public class ProjectController implements Serializable{
 
 	/**
@@ -44,8 +43,8 @@ public class ProjectController implements Serializable{
 	@EJB
 	private transient EmployeeService employeeService;
 	
-	@EJB
-	private transient UserDao userDao;
+	@Inject
+	private transient UserController user;
 	
 	private DualListModel<Employee> employees;
 	
@@ -69,13 +68,8 @@ public class ProjectController implements Serializable{
 		this.project = project;
 	}
 	
-	public List<Project> getProjects() {
-		UserPmo user = (UserPmo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Employee currentEmployee = userDao.getUser(user.getUsername());
-		
-		List<Project> list =  new ArrayList<Project> (currentEmployee.getProjects());
-		
-		return list;
+	public List<Project> getProjects() {	
+		return new ArrayList<Project> (user.getEmployee().getProjects());
 	}
 	
 	public DualListModel<Employee> getEmployees() {
@@ -106,22 +100,16 @@ public class ProjectController implements Serializable{
 		phase = new Phase();
 		
 		List<Employee> _employees = employeeService.getEmployees();
-		
-		UserPmo user = (UserPmo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Employee currentEmployee = userDao.getUser(user.getUsername());
-		
+			
 		//we remove the user in the employee list
-		_employees.remove(currentEmployee);
+		_employees.remove(user.getEmployee());
 		
 		employees = new DualListModel<Employee>(_employees, new ArrayList<Employee>());
 	}
 	
-	public String create(){
-		UserPmo user = (UserPmo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Employee currentEmployee = userDao.getUser(user.getUsername());
-		
+	public String create(){		
 		project.setEmployees(new HashSet<Employee>(employees.getTarget()));
-		project.getEmployees().add(currentEmployee);
+		project.getEmployees().add(user.getEmployee());
 		
 		String message;
 		try {
@@ -169,14 +157,27 @@ public class ProjectController implements Serializable{
     } 
     
     public void onEditPhase(RowEditEvent event) {  
-        FacesMessage msg = new FacesMessage("Phase editÃ©e",((Phase) event.getObject()).getName());  
+        FacesMessage msg = new FacesMessage("Phase editée",((Phase) event.getObject()).getName());  
         FacesContext.getCurrentInstance().addMessage(null, msg);  
     }  
        
     public void onCancelPhase(RowEditEvent event) {     	
-        FacesMessage msg = new FacesMessage("Phase supprimÃ©e");   
+        FacesMessage msg = new FacesMessage("Phase supprimée");   
         FacesContext.getCurrentInstance().addMessage(null, msg); 
         project.getPhases().remove((Phase) event.getObject());
+        projectService.update(project); //TODO à vérifier
+    } 
+    
+    public void onEditProjectTask(RowEditEvent event) {  
+        FacesMessage msg = new FacesMessage("Tâche projet editée",((Phase) event.getObject()).getName());  
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+    }  
+       
+    public void onCancelProjectTask(RowEditEvent event) {     	
+        FacesMessage msg = new FacesMessage("Tâche projet supprimée");   
+        FacesContext.getCurrentInstance().addMessage(null, msg); 
+        project.getProjectTasks().remove((ProjectTask) event.getObject());
+        projectService.update(project); //TODO à vérifier
     } 
 
 	

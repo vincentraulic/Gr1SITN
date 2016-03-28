@@ -5,8 +5,8 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
-import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import org.primefaces.event.RowEditEvent;
@@ -17,7 +17,7 @@ import com.pmo.service.PhaseService;
 import com.pmo.service.ProjectService;
 
 @ViewScoped
-@Named("phaseController")
+@Named
 public class PhaseController implements Serializable{
 
 	/**

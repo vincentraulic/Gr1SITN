@@ -57,7 +57,9 @@ public class EmployeeServiceBean implements EmployeeService{
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String hashedPassword = passwordEncoder.encode(password);
 		
-		employee.setPassword(hashedPassword);
+		//TODO remettre l'encryptage par la suite
+		//employee.setPassword(hashedPassword);
+		employee.setPassword(password);
 		
 		//set the standard email
 		//TODO mettre le domaine de l'email dans un fichier propriete

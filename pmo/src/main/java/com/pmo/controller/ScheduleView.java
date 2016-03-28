@@ -8,10 +8,11 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
@@ -20,18 +21,15 @@ import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
-import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.pmo.dao.UserDao;
 import com.pmo.event.type.EventType;
 import com.pmo.exception.UnknownEmployeeException;
 import com.pmo.model.Employee;
 import com.pmo.model.Event;
 import com.pmo.service.EmployeeService;
-import com.pmo.user.service.UserPmo;
  
-@ManagedBean
 @ViewScoped
+@Named
 public class ScheduleView implements Serializable {
 
 	private static final long serialVersionUID = -6062981628012210057L;
@@ -41,8 +39,8 @@ public class ScheduleView implements Serializable {
 	@EJB
 	private transient EmployeeService employeeService;
 	
-	@EJB
-	private transient UserDao userDao;
+	@Inject
+	private transient UserController user;
 	
 	private transient Employee employee;
 	
@@ -54,8 +52,7 @@ public class ScheduleView implements Serializable {
  
     @PostConstruct
     public void init() {
-    	UserPmo user = (UserPmo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		employee = userDao.getUser(user.getUsername());
+		employee = user.getEmployee();
     	
 		try {
 	    	List<Event> events = employeeService.getEvents(employee.getId());

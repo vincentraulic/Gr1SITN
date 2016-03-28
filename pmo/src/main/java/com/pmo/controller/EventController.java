@@ -22,6 +22,11 @@ import com.pmo.utils.StringUtils;
 @Named
 public class EventController implements Serializable {
 		
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8392497429459702995L;
+
 		public final static Logger LOG = Logger.getLogger(EventController.class.getName());
 		
 		@EJB

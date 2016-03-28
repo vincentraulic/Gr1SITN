@@ -1,0 +1,96 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<div class="row">
+		<!-- right col -->
+		<section class="col-lg-7 connectedSortable">
+			<div class="box">
+				<div class="box-header">
+					<h3 class="box-title">
+						<i class="fa fa-th"> </i> Tâches
+					</h3>
+				</div>
+				<div class="box-body">
+					<div class="input-group margin">
+
+
+						<h:form>
+							<p:dataTable value="#{project.projectTasks}" var="projectTask" widgetVar="50"
+								styleClass="table table-bordered text-family" editable="true">
+								<p:ajax event="rowEdit"
+									listener="#{projectController.onEditProjectTask}" />
+								<p:ajax event="rowEditCancel"
+									listener="#{projectController.onCancelProjectTask}" />
+
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="Nom" />
+									</f:facet>
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{projectTask.name}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:inputText
+												styleClass="form-control #{component.valid ? '' : 'has-error'}"
+												value="#{projectTask.name}" required="true" name="name0"
+												placeholder='Nom'>
+												<f:validateLength minimum="2" maximum="50" />
+											</h:inputText>
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="Coût" />
+									</f:facet>
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{projectTask.cost}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:inputText
+												styleClass="form-control #{component.valid ? '' : 'has-error'}"
+												value="#{projectTask.cost}" required="true" name="cost0"
+												placeholder="Coût">
+												<f:validateRegex pattern="[0-9]+" />
+											</h:inputText>
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Options">
+									<p:rowEditor />
+								</p:column>
+
+							</p:dataTable>
+
+							<p:panelGrid columns="2" styleClass="text-family">
+								<h:outputLabel for="taskname_#{project.id}" value="Nom de la tâche: " />
+								<p:inputText id="taskname_#{project.id}"
+									value="#{taskController.projectTask.name}" required="true"/>
+								<h:outputLabel for="taskcost_#{project.id}" value="Coût: " />
+								<p:inputText id="taskcost_#{project.id}"
+									value="#{taskController.projectTask.cost}" required="true"/>
+								<f:facet name="footer">
+									<p:commandButton id="addButtonProjectTask_#{project.id}"
+										value="Ajouter la tâche"
+										actionListener="#{taskController.addProjectTask(project)}"
+										update="tabViewProject" />
+								</f:facet>
+							</p:panelGrid>
+						</h:form>
+
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<!-- /.row -->
+
+</ui:composition>

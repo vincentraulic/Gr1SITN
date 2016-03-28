@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:outputScript name="plugins/managerow/managerow.js" />
+
+<h:body>
+
+	<ui:composition template="/view/template/templatewithoutjquery.xhtml">
+		<ui:define name="title">Gestion du budget</ui:define>
+
+		<ui:define name="body">
+
+			<!-- Content Wrapper. Contains page content -->
+			<div class="content-wrapper">
+				<!-- Content Header (Page header) -->
+				<section class="content-header" style="margin-left:-230px">
+				<h1>Gestion du budget</h1>
+				<ol class="breadcrumb">
+					<li><a href="./user/home"><i class="fa fa-dashboard"></i>
+							Home</a></li>
+					<li class="active">Gestion du budget</li>
+				</ol>
+				</section>
+
+				<!-- Main content -->
+				<section class="content" style="margin-left:-230px"> <!-- Small boxes (Stat box) -->
+				<!-- Main row -->
+				
+				<p:tabView value="#{projectController.projects}" var="project"
+									scrollable="true" 
+									styleClass="text-family" id="tabViewProject"
+									dynamic="false">
+				<p:tab title="Projet - #{project.name}">
+					
+					<ui:include src="/view/projectbudget/phase.xhtml" />
+					
+					<ui:include src="/view/projectbudget/task.xhtml" />
+
+				</p:tab>
+				</p:tabView>
+				</section>
+
+			</div>
+			<!-- /.content-wrapper -->
+
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+</html>

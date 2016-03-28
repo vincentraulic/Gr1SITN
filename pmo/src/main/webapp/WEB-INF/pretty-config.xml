@@ -30,7 +30,7 @@
 	
 	<url-mapping id="projectbudget">
 		<pattern value="/user/projectbudget" />
-		<view-id value="/view/projectbudget.jsf" />
+		<view-id value="/view/projectbudget/projectbudget.jsf" />
 	</url-mapping>		
 
 </pretty-config>

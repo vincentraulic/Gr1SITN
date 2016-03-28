@@ -6,12 +6,15 @@ import javax.ejb.Local;
 
 import com.pmo.model.Employee;
 import com.pmo.model.Project;
+import com.pmo.model.ProjectTask;
 import com.pmo.model.Task;
 
 @Local
 public interface TaskService {
 
 	public int createTask(Task task);
+	
+	public int createProjectTask(ProjectTask projectTask);
 	
 	public List<Task> getTasks(Employee employee);
 	

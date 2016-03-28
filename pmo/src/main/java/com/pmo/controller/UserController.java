@@ -21,7 +21,7 @@ import com.pmo.service.TaskService;
 import com.pmo.user.service.UserPmo;
 
 @SessionScoped
-@Named("userController")
+@Named
 public class UserController implements Serializable{
 
 	private static final long serialVersionUID = 7465185353899089409L;

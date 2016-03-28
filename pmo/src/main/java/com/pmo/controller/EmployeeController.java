@@ -17,7 +17,6 @@ import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.pmo.dao.UserDao;
 import com.pmo.model.Employee;
 import com.pmo.model.Project;
 import com.pmo.service.EmployeeService;
@@ -25,7 +24,7 @@ import com.pmo.service.ProjectService;
 import com.pmo.utils.StringUtils;
 
 @ConversationScoped
-@Named("employeeController")
+@Named
 public class EmployeeController implements Serializable{
 
 	private static final long serialVersionUID = 3445553454588895388L;
@@ -35,9 +34,6 @@ public class EmployeeController implements Serializable{
 
 	@EJB
 	private transient ProjectService projectService;	
-
-	@EJB
-	private transient UserDao userDao;
 
 	@Inject
 	private Conversation conversation ;

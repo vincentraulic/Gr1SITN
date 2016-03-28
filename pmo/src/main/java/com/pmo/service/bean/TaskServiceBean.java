@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import com.pmo.dao.ProjectDao;
+import com.pmo.dao.ProjectTaskDao;
 import com.pmo.dao.TaskDao;
 import com.pmo.model.Employee;
 import com.pmo.model.Project;
@@ -19,6 +20,9 @@ public class TaskServiceBean implements TaskService{
 
 	@EJB
 	private TaskDao taskDao;
+	
+	@EJB
+	private ProjectTaskDao projectTaskDao;
 	
 	@EJB
 	private ProjectDao projectDao;
@@ -54,6 +58,11 @@ public class TaskServiceBean implements TaskService{
 	@Override
 	public int calculateProgression(Task task) {
 		return (task.getMandayUsed()/100) * task.getCost();
+	}
+
+	@Override
+	public int createProjectTask(ProjectTask projectTask) {
+		return projectTaskDao.createProjectTask(projectTask);
 	}
 
 }
