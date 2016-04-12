@@ -32,8 +32,7 @@ public class PhaseServiceBean implements PhaseService{
 
 	@Override
 	public void updatePhase(Phase phase) {
-		// TODO Auto-generated method stub
-		
+		throw new UnsupportedOperationException("The method is not implemented yet");
 	}
 
 }
