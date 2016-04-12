@@ -14,7 +14,7 @@ public interface ProjectDao {
 	
 	public Project getProject(int id);
 	
-	public Project getProject(String name);
+	public Project getProjectByName(String name);
 	
 	public void deleteProject(Project project);
 	

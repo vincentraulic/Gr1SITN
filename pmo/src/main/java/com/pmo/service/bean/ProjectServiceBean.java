@@ -27,18 +27,18 @@ public class ProjectServiceBean implements ProjectService{
 
 	@Override
 	public int createProject(Project project) {
-		if(checkIfDatesAreFilledAndConform(project.getDateEnd(), project.getDateEnd(), project.getDateStart())) 
+		if(checkIfDatesAreFilledAndConform(project.getDateEnd(), project.getDateEnd(), project.getDateStart(), false)) 
 			throw new InvalidDateException("La date de fin du projet ne peut pas être avant la date du début");
 		
 		int cost = 0;
 		for(Phase p : project.getPhases()){
-			if(checkIfDatesAreFilledAndConform(p.getStart(), p.getEnd(), p.getStart()))
+			if(checkIfDatesAreFilledAndConform(p.getStart(), p.getEnd(), p.getStart(), false))
 				throw new InvalidDateException("La date de fin de la phase ne peut pas être avant la date de début");
 
-			if(checkIfDatesAreFilledAndConform(p.getStart(), p.getStart(), project.getDateStart()))
+			if(checkIfDatesAreFilledAndConform(p.getStart(), p.getStart(), project.getDateStart(), false))
 				throw new InvalidDateException("La date de début de la phase ne peut pas être avant la date de début du projet");
 
-			if(checkIfDatesAreFilledAndConform(p.getEnd(), project.getDateEnd(), p.getEnd()))
+			if(checkIfDatesAreFilledAndConform(p.getEnd(), project.getDateEnd(), p.getEnd(), true))
 				throw new InvalidDateException("La date de fin de la phase ne peut pas être après la date de fin du projet");	
 			cost += p.getCost();
 		}
@@ -58,7 +58,7 @@ public class ProjectServiceBean implements ProjectService{
 	public Project getProject(String name) {
 		//to do gérer si le nom n'existe pas
 
-		return projectDao.getProject(name);
+		return projectDao.getProjectByName(name);
 	}
 
 	@Override
@@ -108,8 +108,13 @@ public class ProjectServiceBean implements ProjectService{
 		projectDao.update(project);
 	}
 	
-	private boolean checkIfDatesAreFilledAndConform(Date startDate, Date endDate, Date dateToCompare) {
-		return startDate != null && endDate != null && dateToCompare != null && endDate.compareTo(dateToCompare) < 0;
+	private boolean compareEqualsOrNot(Date endDate, Date dateToCompare, boolean equals) {
+		return equals ? endDate.compareTo(dateToCompare) <= 0 : endDate.compareTo(dateToCompare) < 0;
+	}
+	
+	private boolean checkIfDatesAreFilledAndConform(Date startDate, Date endDate, Date dateToCompare, boolean equals) {
+		return startDate != null && endDate != null && dateToCompare != null 
+				&& compareEqualsOrNot(endDate, dateToCompare, equals);
 	}
 
 }

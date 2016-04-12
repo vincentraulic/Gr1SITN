@@ -1,12 +1,14 @@
 package com.pmo.dao.bean;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 
+import com.pmo.controller.EventController;
 import com.pmo.dao.ProjectDao;
 import com.pmo.model.Employee;
 import com.pmo.model.Project;
@@ -17,6 +19,8 @@ public class ProjectDaoBean implements ProjectDao{
 
 	@PersistenceContext(unitName = "pmodb")
 	private EntityManager em ;
+	
+	public final static Logger LOG = Logger.getLogger(ProjectDaoBean.class.getName());
 
 	public int createProject(Project project) {
 		if(StringUtils.isEmpty(project.getName()) || project.getCost() < 0 
@@ -33,16 +37,19 @@ public class ProjectDaoBean implements ProjectDao{
 	}
 
 	@SuppressWarnings("unchecked")
-	public Project getProject(String name) {
-		List<Project> list = em.createQuery("SELECT p FROM Project p "
-				+ "WHERE p.name = :name")
-				.setParameter("name", name)
-				.getResultList();
-		
-		if(! list.isEmpty())
-			return list.get(0);
-		else
-			throw new IllegalArgumentException("Project name not found");
+	public Project getProjectByName(String name) {
+		Project p = null;
+		try {
+			p = (Project) em.createQuery("SELECT p FROM Project p "
+					+ "WHERE p.name = :name")
+					.setParameter("name", name)
+					.getSingleResult();
+		}
+		catch(Exception e) {
+			// TODO : A développer selon les exceptions
+			LOG.severe("Project name not found or more than one project found" + e);
+		}
+		return p;
 	}
 
 	public void deleteProject(int id) {
