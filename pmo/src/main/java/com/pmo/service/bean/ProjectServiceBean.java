@@ -7,8 +7,6 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import org.springframework.cglib.core.GeneratorStrategy;
-
 import com.pmo.dao.ProjectDao;
 import com.pmo.exception.InvalidDateException;
 import com.pmo.model.Employee;
@@ -108,11 +106,11 @@ public class ProjectServiceBean implements ProjectService{
 		projectDao.update(project);
 	}
 	
-	private boolean compareEqualsOrNot(Date endDate, Date dateToCompare, boolean equals) {
+	private static boolean compareEqualsOrNot(Date endDate, Date dateToCompare, boolean equals) {
 		return equals ? endDate.compareTo(dateToCompare) <= 0 : endDate.compareTo(dateToCompare) < 0;
 	}
 	
-	private boolean checkIfDatesAreFilledAndConform(Date startDate, Date endDate, Date dateToCompare, boolean equals) {
+	private static boolean checkIfDatesAreFilledAndConform(Date startDate, Date endDate, Date dateToCompare, boolean equals) {
 		return startDate != null && endDate != null && dateToCompare != null 
 				&& compareEqualsOrNot(endDate, dateToCompare, equals);
 	}

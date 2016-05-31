@@ -9,7 +9,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -96,8 +95,9 @@ public class ScheduleView implements Serializable {
     }
      
     /**
+     * @author Quentin
      * Prise en compte remarque de O.Cailloux
-     * Suppression du paramètre actionEvent
+     * Suppression du paramÃ¨tre actionEvent
      */
     public void addEvent() {
 		
@@ -168,7 +168,7 @@ public class ScheduleView implements Serializable {
         ev.setEmployee(employee);
     }
      
-    private void addMessage(FacesMessage message) {
+    private static void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
     

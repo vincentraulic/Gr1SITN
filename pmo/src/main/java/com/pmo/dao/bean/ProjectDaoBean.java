@@ -9,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 
-import com.pmo.controller.EventController;
 import com.pmo.dao.ProjectDao;
 import com.pmo.model.Employee;
 import com.pmo.model.Project;
@@ -24,7 +23,7 @@ public class ProjectDaoBean implements ProjectDao{
 	public final static Logger LOG = Logger.getLogger(ProjectDaoBean.class.getName());
 
 	/**
-	 * prise en compte remarque de O.Cailloux (nom, co�t et date)
+	 * prise en compte remarque de O.Cailloux (nom, coût et date)
 	 * prise en compte remarque de O.Cailloux (non doublons des noms des projets dans SQL)
 	 * 
 	 */
@@ -49,7 +48,12 @@ public class ProjectDaoBean implements ProjectDao{
 		return em.find(Project.class, id);
 	}
 
-	@SuppressWarnings("unchecked")
+	/**
+	 * @author Quentin 
+	 * Prise en compte des remarques
+	 * Changement du nom de la méthode
+	 * Modification de la méthode en live pendant la revue avec le prof : single result
+	 */
 	public Project getProjectByName(String name) {
 		Project p = null;
 		try {

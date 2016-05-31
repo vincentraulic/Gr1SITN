@@ -15,7 +15,7 @@ import com.pmo.service.PhaseService;
  * 
  * @author Roland
  * Remarque de O.Cailloux : supprimer ce service et utiliser directement le phaseDao
- * Pour nous, ce n'est pas justifié car on est ammené à ajouter des éléments métiers dans le code
+ * Pour nous, ce n'est pas justifiÃ© car on est amenÃ©s Ã  ajouter des Ã©lÃ©ments mÃ©tier dans le code
  */
 @Stateless
 public class PhaseServiceBean implements PhaseService{

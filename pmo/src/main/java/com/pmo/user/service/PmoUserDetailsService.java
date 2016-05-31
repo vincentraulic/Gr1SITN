@@ -46,7 +46,7 @@ public class PmoUserDetailsService implements UserDetailsService{
 		return buildUserForAuthentication(user, authorities);
 	}
 
-	private User buildUserForAuthentication(Employee user, 
+	private static User buildUserForAuthentication(Employee user, 
 			List<GrantedAuthority> authorities) {
 		
 		return new UserPmo(user.getUsername(), 
@@ -57,7 +57,7 @@ public class PmoUserDetailsService implements UserDetailsService{
 				user.getLastname());
 	}
 
-	private List<GrantedAuthority> buildUserAuthority(String userRoles) {
+	private static List<GrantedAuthority> buildUserAuthority(String userRoles) {
 
 		String roles[] = userRoles.split(";");
 		Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();

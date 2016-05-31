@@ -2,7 +2,6 @@ package com.pmo.controller;
 
 import java.io.Serializable;
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -49,7 +48,7 @@ public class EmployeeController implements Serializable{
 	}
 
 	public List<Project> getProjects(){
-		return new ArrayList<Project>(projectService.getProjects());
+		return projectService.getProjects();
 	}
 
 	@PostConstruct

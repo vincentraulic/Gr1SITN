@@ -62,14 +62,19 @@ public class PhaseController implements Serializable{
 		setPhase(new Phase());
 	}		
 	
+	/** 
+	 * @author Quentin
+	 * Prise en compte des remarques
+	 * Passage en UTF-8
+	 */
     public void onEditPhase(RowEditEvent event) {  
-        FacesMessage msg = new FacesMessage("Phase editée",((Phase) event.getObject()).getName());  
+        FacesMessage msg = new FacesMessage("Phase editÃ©e",((Phase) event.getObject()).getName());  
         //TODO update la phase
         FacesContext.getCurrentInstance().addMessage(null, msg);  
     }  
        
     public void onCancelPhase(RowEditEvent event) {     	
-        FacesMessage msg = new FacesMessage("Phase supprimée");   
+        FacesMessage msg = new FacesMessage("Phase supprimÃ©e");   
         FacesContext.getCurrentInstance().addMessage(null, msg); 
         //TODO supprimer la phase du projet
     } 
