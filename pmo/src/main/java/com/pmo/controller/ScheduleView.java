@@ -95,7 +95,11 @@ public class ScheduleView implements Serializable {
         this.scheduleEvent = event;
     }
      
-    public void addEvent(ActionEvent actionEvent) {
+    /**
+     * Prise en compte remarque de O.Cailloux
+     * Suppression du paramètre actionEvent
+     */
+    public void addEvent() {
 		
         if(scheduleEvent.getId() == null){
             eventModel.addEvent(scheduleEvent);

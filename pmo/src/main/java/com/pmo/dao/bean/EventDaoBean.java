@@ -75,9 +75,13 @@ public class EventDaoBean implements EventDao{
 		return list;
 	}
 
-
+/**
+ * à débuguer à vérifier
+ */
 	public int updateEvent(Event event) {
 		Event e = em.find(Event.class, event.getId());
+		
+		
 		
 		e.setReason(event.getReason() != null ? event.getReason() : e.getReason());
 		e.setType(event.getType() != null ? event.getType() : e.getType());

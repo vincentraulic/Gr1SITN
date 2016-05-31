@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
@@ -22,12 +23,24 @@ public class ProjectDaoBean implements ProjectDao{
 	
 	public final static Logger LOG = Logger.getLogger(ProjectDaoBean.class.getName());
 
+	/**
+	 * prise en compte remarque de O.Cailloux (nom, coût et date)
+	 * prise en compte remarque de O.Cailloux (non doublons des noms des projets dans SQL)
+	 * 
+	 */
 	public int createProject(Project project) {
 		if(StringUtils.isEmpty(project.getName()) || project.getCost() < 0 
 				|| project.getDateStart() == null)
 			throw new IllegalArgumentException("Argument(s) null or empty");
 		
-		em.persist(project);
+		try {
+			em.persist(project);
+		}catch (EntityExistsException e){
+			throw new IllegalArgumentException("Project already exists");
+		}
+		
+		
+		//TODO ajouter 
 		
 		return project.getId();
 	}
