@@ -5,10 +5,12 @@ Software of project management
 
 Technos/Frameworks utilisés pour le projet
 -----------
-- JSF
-- EJB
-- CDI
-- Spring security 4
+- JSF pour les vues
+- EJB pour les services
+- CDI pour les services
+- JPA pour la couche ORM entre l'application et la base de données
+- Spring security 4 pour l'authentification et l'accès au site
+- Prettyfaces pour la réécriture des urls
 - Serveur Glassfish 4
 - Base de données MySQL
 
@@ -23,16 +25,40 @@ Installation
 ```
 Eclipse :
 
-1) Importer le projet maven
+- Importer le projet maven
 
 Base de données :
 
-1) Exécuter le script script_database.sql
+- Exécuter le script script_database.sql
 
 Connexion du serveur Glassfish à la base de données
 
-1) La data-source située dans le fichier persistence.xml s'appelle "jdbc/pmo_resource"
+- La data-source située dans le fichier persistence.xml s'appelle "jdbc/pmo_resource"
+
+Aller sur :
+- http://localhost:8080/pmo
+
+Le mot de passe crypté est : 123456
+
 ```
+
+Structure principale
+-----------
+```
+    +-- java.com.pmo            # Classes Java
+    ¦   +-- controller          # Controleurs JSF
+    ¦   +-- dao		            # Couche ORM entre la base de données et l'application
+    ¦   +-- model               # Objets métiers correspondant aux tables de la base données 
+	¦   +-- service             # Services de l'application
+    ¦   +-- user                # Classes spécifiques pour l'authentification avec Spring security	
+    +-- webapp
+	¦   +-- css		            # Style des vues
+    ¦   +-- ressources          # Ressources pour les vues
+    ¦   +-- view                # Templates des vues jsf
+	¦   +-- service             # Services de l'application
+	+-- test					# Test
+```
+
 
 Licence
 ------------

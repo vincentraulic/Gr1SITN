@@ -15,8 +15,9 @@ CREATE TABLE IF NOT EXISTS EMPLOYEE(
 )
 ENGINE=InnoDB;
 
+--le mot de passe crypté correspond au mot de passe : 123456
 INSERT INTO EMPLOYEE
-VALUES (1, 'toto', 'roland', 'roland.toto', '123456', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null, 'roland.toto@gmail.com', STR_TO_DATE('01/01/1970', '%d/%m/%Y'), '0160657075', 'CTO');
+VALUES (1, 'toto', 'roland', 'roland.toto', '$2a$10$DT18wtMdGuNhR4smwOrlA.i4RwwELPOg1..qNrK8f.IO2mD9SWGQC', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null, 'roland.toto@gmail.com', STR_TO_DATE('01/01/1970', '%d/%m/%Y'), '0160657075', 'CTO');
 INSERT INTO EMPLOYEE
 VALUES (2, 'raulic', 'vincent', 'vincent.raulic', '$2a$10$DT18wtMdGuNhR4smwOrlA.i4RwwELPOg1..qNrK8f.IO2mD9SWGQC', 'ROLE_USER', STR_TO_DATE('31/12/2015', '%d/%m/%Y'), null, 'vincent.raulic@pmo.com', STR_TO_DATE('01/01/1970', '%d/%m/%Y'), '0160657075', 'CTO');
 INSERT INTO EMPLOYEE

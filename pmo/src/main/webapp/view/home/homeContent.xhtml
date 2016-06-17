@@ -6,10 +6,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:f="http://java.sun.com/jsf/core"
 	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
 
 <h:body>
-	<ui:composition template="/view/template/template.xhtml">
+	<ui:composition template="/view/template/templatewithoutjquery.xhtml">
 		<ui:define name="title">Home</ui:define>
 	
 		<ui:define name="body">
@@ -34,36 +35,14 @@
 			<!-- Main content -->
 			<section class="content">
 				<!-- Small boxes (Stat box) -->
-				<div class="row">
-					<div class="col-lg-3 col-xs-6">
-						<!-- small box -->
-						<div class="small-box bg-aqua">
-							<div class="inner">
-								<h3>150</h3>
-
-								<p>Jours-hommes</p>
-							</div>
-							<div class="icon">
-								<i class="ion ion-person-add"></i>
-							</div>
-							<a href="#" class="small-box-footer">More info <i
-								class="fa fa-arrow-circle-right"></i></a>
-						</div>
-					</div>
-					<!-- ./col -->
-				</div>
-				<!-- /.row -->
 
 				<div class="row">
-					<div class="col-xs-12">
+					<!-- Left col -->
+					<section class="col-lg-7 connectedSortable">
+					<!-- /.Left col -->
 					<div class="box">
 						<div class="box-header">
 							<h3 class="box-title">Planning des absences</h3>
-							<div>
-								<h:link outcome="/view/absence/absenceContent.jsf">
-									<span>Ajouter une absence</span>
-								</h:link>
-							</div>
 							<div class="box-tools">
 								<div class="input-group input-group-sm" style="width: 150px;">
 									<input type="text" name="table_search"
@@ -78,7 +57,7 @@
 						</div>
 						<!-- /.box-header -->
 						<div class="box-body table-responsive no-padding">
-							<h:dataTable value="#{userController.absences}" var="absence"
+							<h:dataTable value="#{userController.absencesEmployees}" var="absence"
 								styleClass="table table-hover">
 
 								<h:column>
@@ -128,29 +107,13 @@
 						<!-- /.box-body -->
 					</div>
 					<!-- /.box -->
-					</div>
-				</div>
-
-				<!-- Main row -->
-				<div class="row">
-					<!-- Left col -->
-					<section class="col-lg-7 connectedSortable"></section>
-					<!-- /.Left col -->
+					</section>
+					
 					<!-- right col -->
 					<section class="col-lg-5 connectedSortable">
 						<div class="box">
 							<div class="box-header">
-								<h3 class="box-title">Tâches en cours</h3>
-
-								<div class="box-tools">
-									<ul class="pagination pagination-sm no-margin pull-right">
-										<li><a href="#">&laquo;</a></li>
-										<li><a href="#">1</a></li>
-										<li><a href="#">2</a></li>
-										<li><a href="#">3</a></li>
-										<li><a href="#">&raquo;</a></li>
-									</ul>
-								</div>
+								<h3 class="box-title">Mes tâches en cours</h3>
 							</div>
 							<!-- /.box-header -->
 							<div class="box-body no-padding">
@@ -177,6 +140,13 @@
 										<!-- row record -->
 	    								#{task.employee.lastname} #{task.employee.firstname}
 	    							</h:column>
+	    							
+	    							<h:column>
+										<!-- column header -->
+										<f:facet name="header">Coût (JH) utilisé</f:facet>
+										<!-- row record -->
+	    								#{task.mandayUsed}
+	    							</h:column>
 
 									<h:column>
 										<!-- column header -->
@@ -192,7 +162,7 @@
 										<!-- column header -->
 										<f:facet name="header"></f:facet>
 										<!-- row record -->
-										<span class="badge bg-red">#{taskController.calculateProgression(task)}</span>
+										<span class="badge bg-red">#{taskController.calculateProgression(task)} %</span>
 									</h:column>
 								</h:dataTable>
 							</div>
@@ -202,6 +172,89 @@
 
 					</section>
 					<!-- right col -->
+				</div>
+				
+				<div class="row">
+					<section class="col-lg-7 connectedSortable">
+						<div class="box">
+								<div class="box-header">
+									<h3 class="box-title">Etat des coûts des projets (Coût estimé, affecté et effectué)</h3>
+								</div>
+								<div class="box-body no-padding">
+									<p:chart type="bar" model="#{taskController.barModel}" style="height:200px"/>
+								</div>
+							<!-- /.box-body -->
+						</div>
+					</section>
+					
+										<!-- right col -->
+					<section class="col-lg-5 connectedSortable">
+						<div class="box">
+							<div class="box-header">
+								<h3 class="box-title">Les tâches du projets</h3>
+							</div>
+							<!-- /.box-header -->
+							<div class="box-body no-padding">
+								<h:dataTable value="#{userController.allTasksEmployees}" var="task"
+									styleClass="table">
+
+									<h:column>
+										<!-- column header -->
+										<f:facet name="header">Tâche</f:facet>
+										<!-- row record -->
+	    								#{task.id}
+	    							</h:column>
+
+									<h:column>
+										<!-- column header -->
+										<f:facet name="header">Tâche</f:facet>
+										<!-- row record -->
+	    								#{task.projectTask.name}
+	    							</h:column>
+
+									<h:column>
+										<!-- column header -->
+										<f:facet name="header">Responsable</f:facet>
+										<!-- row record -->
+	    								#{task.employee.lastname} #{task.employee.firstname}
+	    							</h:column>
+	    							
+	    							<h:column>
+										<!-- column header -->
+										<f:facet name="header">Coût (JH) utilisé</f:facet>
+										<!-- row record -->
+	    								#{task.mandayUsed}
+	    							</h:column>
+
+									<h:column>
+										<!-- column header -->
+										<f:facet name="header">Progression</f:facet>
+										<!-- row record -->
+										<div class="progress progress-xs">
+											<div class="progress-bar progress-bar-danger"
+												style="width: #{taskController.calculateProgression(task)}%"></div>
+										</div>
+									</h:column>
+
+									<h:column>
+										<!-- column header -->
+										<f:facet name="header"></f:facet>
+										<!-- row record -->
+										<span class="badge bg-red">#{taskController.calculateProgression(task)} %</span>
+									</h:column>
+								</h:dataTable>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+
+					</section>
+					<!-- right col -->
+				</div>
+
+				<!-- Main row -->
+				<div class="row">
+					
 				</div>
 				<!-- /.row (main row) -->
 

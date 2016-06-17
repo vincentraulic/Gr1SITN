@@ -29,6 +29,10 @@ public class TaskServiceBean implements TaskService{
 	
 	@Override
 	public int createTask(Task task) {
+		//TODO check coût ne dépasse le total du projectTask
+		//TODO check des tâches n'empiètent pas sur d'autres tâches
+		//TODO check dateEnd-dateStart >= coût JH
+		//TODO check coût JH >= mandayUsed
 		return taskDao.createTask(task);
 	}
 
@@ -39,14 +43,19 @@ public class TaskServiceBean implements TaskService{
 
 	@Override
 	public void updateTask(Task task) {
-		// TODO Auto-generated method stub
-		
+		taskDao.update(task);
+	}
+	
+	@Override
+	public void delete(Task task) {
+		taskDao.deleteTask(task);
 	}
 
 	@Override
 	public List<Task> getTasks(Project project) {
-		
-		List<Task> tasks = new ArrayList<Task>();
+		//get from database
+		project = projectDao.getProject(project.getId());
+		List<Task> tasks = new ArrayList<>();
 		
 		for(ProjectTask pT : project.getProjectTasks()){
 			tasks.addAll(pT.getTasks());
@@ -57,12 +66,33 @@ public class TaskServiceBean implements TaskService{
 
 	@Override
 	public int calculateProgression(Task task) {
-		return (task.getMandayUsed()/100) * task.getCost();
+		//integer to float pour les divisions
+		float manD = task.getMandayUsed();
+		float cost = task.getCost();
+		float value = (int) manD / cost * 100;
+		return (int) value;
 	}
 
 	@Override
 	public int createProjectTask(ProjectTask projectTask) {
 		return projectTaskDao.createProjectTask(projectTask);
 	}
+	
+	@Override
+	public void delete(ProjectTask projectTask) {
+		projectTaskDao.deleteProjectTask(projectTask);
+	}
+
+	@Override
+	public ProjectTask getProjectTaskById(int id) {
+		return projectTaskDao.getProjectTaskById(id);
+	}
+
+	@Override
+	public void update(ProjectTask projectTask) {
+		projectTaskDao.updateProjectTask(projectTask);
+	}
+
+	
 
 }

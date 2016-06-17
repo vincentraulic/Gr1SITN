@@ -55,8 +55,7 @@ public class PhaseDaoBean implements PhaseDao{
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Phase> getPhases(Project project) {
-		List<Phase> list = em.createQuery("SELECT s FROM Tache s "
-				+ "WHERE s.project.id = :proj")
+		List<Phase> list = em.createNamedQuery("Phase.findByProjectId")
 				.setParameter("proj", project.getId())
 				.getResultList();
 		return list;

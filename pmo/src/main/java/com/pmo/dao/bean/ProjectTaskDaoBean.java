@@ -45,12 +45,23 @@ public class ProjectTaskDaoBean implements ProjectTaskDao{
 
 	@SuppressWarnings("unchecked")
 	public List<ProjectTask> getProjectTasks(int id_project) {
-		List<ProjectTask> list = em.createQuery("SELECT p FROM ProjectTask p "
-									+ "WHERE p.project.id = :project")
+		List<ProjectTask> list = em.createNamedQuery("ProjectTask.findByProjectId")
 									.setParameter("project", id_project)
 									.getResultList();
 		return list;
 		
 	}
+
+	@Override
+	public ProjectTask getProjectTaskById(int id) {
+		return em.find(ProjectTask.class, id);
+	}
+
+	@Override
+	public void updateProjectTask(ProjectTask projectTask) {
+		em.merge(projectTask);
+	}
+	
+	
 
 }

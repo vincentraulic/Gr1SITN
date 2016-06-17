@@ -3,25 +3,37 @@ package com.pmo.model;
 import java.util.Date;
 import java.util.logging.Logger;
 
-import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-import com.pmo.controller.EventController;
 import com.pmo.event.type.EventType;
-import com.pmo.exception.InvalidDateException;
 
+@NamedQueries({
+	@NamedQuery(
+	        name="Event.findAll",
+	        query="SELECT a FROM Event a"),
+	@NamedQuery(
+        name="Event.findByEmployeeId",
+        query="SELECT a FROM Event a "
+				+ "WHERE a.employee.id = :id_e"),
+    @NamedQuery(
+        name="Event.findByEmployeeIdType",
+        query="SELECT a FROM Event a "
+				+ "WHERE a.employee.id = :id_e "
+				+ "AND a.type = :typ")
+})
 @Entity
 @Table(name="EVENT")
-@Named
 public class Event extends AbstractPersistent{
 
 	public final static Logger LOG = Logger.getLogger(Event.class.getName());

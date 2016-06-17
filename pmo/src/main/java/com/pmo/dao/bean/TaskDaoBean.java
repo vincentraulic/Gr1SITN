@@ -24,8 +24,8 @@ public class TaskDaoBean implements TaskDao {
 			throw new IllegalArgumentException("Argument(s) null or empty");
 		
 		try{
-			em.getReference(ProjectTask.class, task.getProjectTask());
-			em.getReference(Employee.class, task.getEmployee());
+			em.getReference(ProjectTask.class, task.getProjectTask().getId());
+			em.getReference(Employee.class, task.getEmployee().getId());
 		} catch(EntityNotFoundException e){
 			throw new IllegalArgumentException("Can't reference to projectTask or employee,"
 					+ " projectTask or employee not found in database");
@@ -52,8 +52,7 @@ public class TaskDaoBean implements TaskDao {
 
 	@SuppressWarnings("unchecked")
 	public List<Task> getTasks(ProjectTask projectTask) {
-		List<Task> list = em.createQuery("SELECT s FROM Task s "
-							+ "WHERE s.id_projecttask = :projecttask")
+		List<Task> list = em.createNamedQuery("Task.findByProjectTaskId")
 							.setParameter("projecttask", projectTask.getId())
 							.getResultList();
 		return list;
@@ -61,11 +60,16 @@ public class TaskDaoBean implements TaskDao {
 
 	@SuppressWarnings("unchecked")
 	public List<Task> getTasks(Employee employee) {
-		List<Task> list = em.createQuery("SELECT s FROM Task s "
-				+ "WHERE s.employee.id = :emp")
+		List<Task> list = em.createNamedQuery("Task.findByEmployeeId")
 				.setParameter("emp", employee.getId())
 				.getResultList();
 		return list;
+	}
+
+	@Override
+	public void update(Task task) {
+		em.merge(task);
+		
 	}
 
 }

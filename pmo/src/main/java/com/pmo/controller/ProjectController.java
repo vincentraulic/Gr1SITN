@@ -26,7 +26,9 @@ import com.pmo.model.Phase;
 import com.pmo.model.Project;
 import com.pmo.model.ProjectTask;
 import com.pmo.service.EmployeeService;
+import com.pmo.service.PhaseService;
 import com.pmo.service.ProjectService;
+import com.pmo.service.TaskService;
 
 @ViewScoped
 @Named
@@ -43,9 +45,18 @@ public class ProjectController implements Serializable{
 	@EJB
 	private transient EmployeeService employeeService;
 	
+	@EJB
+	private transient TaskService taskService;
+	
+	@EJB
+	private transient PhaseService phaseService;
+	
 	@Inject
 	private transient UserController user;
-	
+
+	/**
+	 * Specific list for Primefaces library
+	 */
 	private DualListModel<Employee> employees;
 	
 	private Project project;
@@ -69,7 +80,7 @@ public class ProjectController implements Serializable{
 	}
 	
 	public List<Project> getProjects() {	
-		return new ArrayList<Project> (user.getEmployee().getProjects());
+		return new ArrayList<> (user.getEmployee().getProjects());
 	}
 	
 	public DualListModel<Employee> getEmployees() {
@@ -104,11 +115,11 @@ public class ProjectController implements Serializable{
 		//we remove the user in the employee list
 		_employees.remove(user.getEmployee());
 		
-		employees = new DualListModel<Employee>(_employees, new ArrayList<Employee>());
+		employees = new DualListModel<>(_employees, new ArrayList<Employee>());
 	}
 	
 	public String create(){		
-		project.setEmployees(new HashSet<Employee>(employees.getTarget()));
+		project.setEmployees(new HashSet<>(employees.getTarget()));
 		project.getEmployees().add(user.getEmployee());
 		
 		String message;
@@ -157,28 +168,29 @@ public class ProjectController implements Serializable{
     } 
     
     public void onEditPhase(RowEditEvent event) {  
-        FacesMessage msg = new FacesMessage("Phase editée",((Phase) event.getObject()).getName());  
+        phaseService.updatePhase((Phase) event.getObject());
+    	FacesMessage msg = new FacesMessage("Phase editÃ©e",((Phase) event.getObject()).getName());  
         FacesContext.getCurrentInstance().addMessage(null, msg);  
     }  
        
     public void onCancelPhase(RowEditEvent event) {     	
-        FacesMessage msg = new FacesMessage("Phase supprimée");   
+        FacesMessage msg = new FacesMessage("Phase supprimÃ©e");   
         FacesContext.getCurrentInstance().addMessage(null, msg); 
         project.getPhases().remove((Phase) event.getObject());
-        projectService.update(project); //TODO à vérifier
+        projectService.update(project); //TODO  Ã Â   vÃ©rifier
     } 
     
     public void onEditProjectTask(RowEditEvent event) {  
-        FacesMessage msg = new FacesMessage("Tâche projet editée",((Phase) event.getObject()).getName());  
+    	taskService.update((ProjectTask) event.getObject());
+    	FacesMessage msg = new FacesMessage("Tache projet editÃ©e",((ProjectTask) event.getObject()).getName());  
         FacesContext.getCurrentInstance().addMessage(null, msg);  
     }  
        
     public void onCancelProjectTask(RowEditEvent event) {     	
-        FacesMessage msg = new FacesMessage("Tâche projet supprimée");   
+        FacesMessage msg = new FacesMessage("Tache projet supprimÃ©e");   
         FacesContext.getCurrentInstance().addMessage(null, msg); 
         project.getProjectTasks().remove((ProjectTask) event.getObject());
-        projectService.update(project); //TODO à vérifier
+        projectService.update(project); //TODO  Ã Â  vÃ©rifier
     } 
-
 	
 }

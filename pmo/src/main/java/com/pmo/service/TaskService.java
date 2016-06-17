@@ -16,11 +16,19 @@ public interface TaskService {
 	
 	public int createProjectTask(ProjectTask projectTask);
 	
+	public void delete(ProjectTask projectTask);
+	
+	public void update(ProjectTask projectTask);
+	
 	public List<Task> getTasks(Employee employee);
 	
 	public void updateTask(Task task);
 	
+	public void delete(Task task);
+	
 	public List<Task> getTasks(Project project);
 	
 	public int calculateProgression(Task task);
+	
+	public ProjectTask getProjectTaskById(int id);
 }

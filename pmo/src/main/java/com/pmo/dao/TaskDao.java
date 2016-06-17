@@ -20,4 +20,6 @@ public interface TaskDao {
 	public List<Task> getTasks(ProjectTask projectTask);
 	
 	public List<Task> getTasks(Employee employee);
+	
+	public void update(Task task);
 }

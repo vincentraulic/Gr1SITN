@@ -32,5 +32,15 @@
 		<pattern value="/user/projectbudget" />
 		<view-id value="/view/projectbudget/projectbudget.jsf" />
 	</url-mapping>		
+	
+	<url-mapping id="taskaffectation">
+		<pattern value="/user/taskaffectation" />
+		<view-id value="/view/projectmanagement/task_employee.jsf" />
+	</url-mapping>		
+	
+	<url-mapping id="taskcreation">
+		<pattern value="/user/taskcreation" />
+		<view-id value="/view/projectmanagement/taskcreation.jsf" />
+	</url-mapping>	
 
 </pretty-config>

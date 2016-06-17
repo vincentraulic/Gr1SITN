@@ -10,13 +10,14 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.pmo.event.type.EventType;
 import com.pmo.exception.InvalidDateException;
 import com.pmo.model.Event;
 import com.pmo.service.EmployeeService;
-import com.pmo.utils.StringUtils;
+import com.pmo.utils.BundleMessage;
 
 @RequestScoped
 @Named
@@ -31,6 +32,9 @@ public class EventController implements Serializable {
 		
 		@EJB
 		private transient EmployeeService employeeService;
+		
+		@Inject
+		private transient BundleMessage bundleMessage;
 		
 		private Event event;
 		
@@ -59,7 +63,7 @@ public class EventController implements Serializable {
 				
 				employeeService.createEvent(event);
 				
-				String message = MessageFormat.format(StringUtils.getBundle().getString("createeventsuccess"),event.getEmployee().getFirstname(),event.getEmployee().getLastname());
+				String message = MessageFormat.format(bundleMessage.getBundle().getString("createeventsuccess"),event.getEmployee().getFirstname(),event.getEmployee().getLastname());
 	
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));
 			}

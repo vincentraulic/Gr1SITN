@@ -95,7 +95,6 @@ public class ScheduleView implements Serializable {
     }
      
     /**
-     * @author Quentin
      * Prise en compte remarque de O.Cailloux
      * Suppression du paramètre actionEvent
      */
@@ -168,7 +167,7 @@ public class ScheduleView implements Serializable {
         ev.setEmployee(employee);
     }
      
-    private static void addMessage(FacesMessage message) {
+    private void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
     

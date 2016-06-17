@@ -10,11 +10,26 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+@NamedQueries({
+    @NamedQuery(
+        name="Project.findAll",
+        query="SELECT p FROM Project p"),
+    @NamedQuery(
+        name="Project.findByName",
+        query="SELECT p FROM Project p "
+				+ "WHERE p.name = :name"),
+    @NamedQuery(
+            name="Project.findByEmployeeId",
+            query="SELECT s FROM Project s "
+    				+ "WHERE :emp MEMBER OF s.employees")
+})
 @Entity
 @Table(name="PROJECT")
 public class Project extends AbstractPersistent{
@@ -33,17 +48,17 @@ public class Project extends AbstractPersistent{
 	private Date dateEnd;
 	
     @OneToMany(mappedBy="project", cascade=CascadeType.ALL)
-	private Set<ProjectTask> projectTasks = new HashSet<ProjectTask>();
+	private Set<ProjectTask> projectTasks = new HashSet<>();
     
     @OneToMany(mappedBy="project", cascade=CascadeType.ALL)
-	private Set<Phase> phases = new HashSet<Phase>();
+	private Set<Phase> phases = new HashSet<>();
 
 	@ManyToMany(targetEntity=Employee.class)
 	@JoinTable(
 		      name="EMPLOYEES_PROJECTS",
 		      joinColumns={@JoinColumn(name="id_project", referencedColumnName="id")},
 		      inverseJoinColumns={@JoinColumn(name="id_employee", referencedColumnName="id")})	
-	private Set<Employee> employees = new HashSet<Employee>();  
+	private Set<Employee> employees = new HashSet<>();  
     
 	public String getName() {
 		return name;

@@ -46,8 +46,9 @@ public class EmployeeServiceBean implements EmployeeService{
 		//send the password to the admin
 		Email email = new Email();
 		UserPmo user = (UserPmo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		//send password to manager/admin
 		Employee admin = userDao.getUser(user.getUsername());
-		List<String> recipients = new ArrayList<String>();
+		List<String> recipients = new ArrayList<>();
 		recipients.add(admin.getEmail());
 		email.send(recipients, "Compte de " + employee.getFirstname() + " " + employee.getLastname(),
 					"Bonjour,\nVoici le mot de passe pour le compte de " + employee.getFirstname() + " " + employee.getLastname()
@@ -57,11 +58,11 @@ public class EmployeeServiceBean implements EmployeeService{
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String hashedPassword = passwordEncoder.encode(password);
 		
-		//TODO remettre l'encryptage par la suite
-		//employee.setPassword(hashedPassword);
-		employee.setPassword(password);
+		employee.setPassword(hashedPassword);
+		//employee.setPassword(password);
 		
 		//set the standard email
+		//désactiver de façon temporaire l'antivirus s'il y a une erreur de création de mail
 		//TODO mettre le domaine de l'email dans un fichier propriete
 		String domaine = "gmail.com";
 		employee.setEmail(employee.getFirstname() + "." + employee.getLastname() + "@" + domaine);

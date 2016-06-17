@@ -49,8 +49,7 @@ public class EventDaoBean implements EventDao{
 			throw new EntityNotFoundException("Events not found with " + id_employee + " id_employee");
 		}
 		
-		List<Event> list = em.createQuery("SELECT a FROM Event a "
-								+ "WHERE a.employee.id = :id_e")
+		List<Event> list = em.createNamedQuery("Event.findByEmployeeId")
 								.setParameter("id_e", id_employee)
 								.getResultList();
 		
@@ -66,23 +65,19 @@ public class EventDaoBean implements EventDao{
 												+ " for type " + type.getName());
 		}
 		
-		List<Event> list = em.createQuery("SELECT a FROM Event a "
-								+ "WHERE a.employee.id = :id_e "
-								+ "AND a.type = :typ")
+		List<Event> list = em.createNamedQuery("Event.findByEmployeeIdType")
 								.setParameter("id_e", id_employee)
 								.setParameter("typ", type)
 								.getResultList();
 		return list;
 	}
 
-/**
- * A debugguer, à vérifier
- */
+
 	public int updateEvent(Event event) {
-		Event e = em.find(Event.class, event.getId());
-		
-		
-		
+		Event e = em.find(Event.class, event.getId());		
+		/*
+		 * on n'utilise pas volontairement em.merge(event) car nous ne mettons pas à jour tous les champs
+		 */
 		e.setReason(event.getReason() != null ? event.getReason() : e.getReason());
 		e.setType(event.getType() != null ? event.getType() : e.getType());
 		e.setAllDay(event.getAllDay());
@@ -90,7 +85,6 @@ public class EventDaoBean implements EventDao{
 		e.setEnd(event.getEnd() != null ? event.getEnd() : e.getEnd());
 		
 		em.merge(e);
-		em.flush();
 		return e.getId();
 	}
 

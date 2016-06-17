@@ -48,17 +48,10 @@ public class ProjectDaoBean implements ProjectDao{
 		return em.find(Project.class, id);
 	}
 
-	/**
-	 * @author Quentin 
-	 * Prise en compte des remarques
-	 * Changement du nom de la méthode
-	 * Modification de la méthode en live pendant la revue avec le prof : single result
-	 */
 	public Project getProjectByName(String name) {
 		Project p = null;
 		try {
-			p = (Project) em.createQuery("SELECT p FROM Project p "
-					+ "WHERE p.name = :name")
+			p = (Project) em.createNamedQuery("Project.findByName")
 					.setParameter("name", name)
 					.getSingleResult();
 		}

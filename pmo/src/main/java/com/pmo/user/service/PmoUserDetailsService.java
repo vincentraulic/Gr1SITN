@@ -18,10 +18,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.pmo.dao.UserDao;
 import com.pmo.model.Employee;
 
+/**
+ * 
+ * @author Roland
+ * Nous n'avons pas injecté directement UserDao car il n'y a pas d'annotation spécifique JEE
+ * au début de la classe (@Controller, ...) et donc Glassfish ne va pas lire les annotations de type @EJB.
+ * Nous injectons de façon manuelle l'EJB UserDao
+ */
 public class PmoUserDetailsService implements UserDetailsService{
 
+	//@EJB(mappedName="java:module/pmo/UserDao")
 	private UserDao userDao;
 
+	
 	public PmoUserDetailsService() {
 		try {
 			InitialContext ctx = new InitialContext();
@@ -60,14 +69,14 @@ public class PmoUserDetailsService implements UserDetailsService{
 	private static List<GrantedAuthority> buildUserAuthority(String userRoles) {
 
 		String roles[] = userRoles.split(";");
-		Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
+		Set<GrantedAuthority> setAuths = new HashSet<>();
 
 		// Build user's authorities
 		for (String userRole : roles) {
 			setAuths.add(new SimpleGrantedAuthority(userRole));
 		}
 
-		List<GrantedAuthority> result = new ArrayList<GrantedAuthority>(setAuths);
+		List<GrantedAuthority> result = new ArrayList<>(setAuths);
 
 		return result;
 	}

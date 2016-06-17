@@ -20,6 +20,7 @@ import com.pmo.model.Employee;
 import com.pmo.model.Project;
 import com.pmo.service.EmployeeService;
 import com.pmo.service.ProjectService;
+import com.pmo.utils.BundleMessage;
 import com.pmo.utils.StringUtils;
 
 @ConversationScoped
@@ -36,6 +37,9 @@ public class EmployeeController implements Serializable{
 
 	@Inject
 	private Conversation conversation ;
+	
+	@Inject
+	private transient BundleMessage bundleMessage;
 
 	private Employee employee;
 
@@ -65,7 +69,7 @@ public class EmployeeController implements Serializable{
 
 		conversation.end();
 
-		String message = MessageFormat.format(StringUtils.getBundle().getString("createemployeesuccess"),employee.getFirstname(),employee.getLastname());
+		String message = MessageFormat.format(bundleMessage.getBundle().getString("createemployeesuccess"),employee.getFirstname(),employee.getLastname());
 
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));
 		return "home/homeContent";

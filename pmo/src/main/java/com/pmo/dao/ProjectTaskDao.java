@@ -13,5 +13,9 @@ public interface ProjectTaskDao {
 	
 	public void deleteProjectTask(ProjectTask projectTask);
 	
+	public void updateProjectTask(ProjectTask projectTask);
+	
 	public List<ProjectTask> getProjectTasks(int id_project);
+	
+	public ProjectTask getProjectTaskById(int id);
 }

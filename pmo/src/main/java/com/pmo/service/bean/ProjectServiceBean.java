@@ -69,7 +69,7 @@ public class ProjectServiceBean implements ProjectService{
 	@Override
 	public List<Employee> getEmployees(Project project) {
 
-		List<Employee> employees = new ArrayList<Employee>();
+		List<Employee> employees = new ArrayList<>();
 
 		for(ProjectTask pT : project.getProjectTasks()){
 			for(Task t : pT.getTasks()){
@@ -85,7 +85,7 @@ public class ProjectServiceBean implements ProjectService{
 	public List<Event> getEventEmployees(int idProject) {
 		Project project = projectDao.getProject(idProject);
 
-		List<Event> events = new ArrayList<Event>();
+		List<Event> events = new ArrayList<>();
 
 		for(ProjectTask pT : project.getProjectTasks()){
 			for(Task t : pT.getTasks()){
@@ -106,11 +106,11 @@ public class ProjectServiceBean implements ProjectService{
 		projectDao.update(project);
 	}
 	
-	private static boolean compareEqualsOrNot(Date endDate, Date dateToCompare, boolean equals) {
+	private boolean compareEqualsOrNot(Date endDate, Date dateToCompare, boolean equals) {
 		return equals ? endDate.compareTo(dateToCompare) <= 0 : endDate.compareTo(dateToCompare) < 0;
 	}
 	
-	private static boolean checkIfDatesAreFilledAndConform(Date startDate, Date endDate, Date dateToCompare, boolean equals) {
+	private boolean checkIfDatesAreFilledAndConform(Date startDate, Date endDate, Date dateToCompare, boolean equals) {
 		return startDate != null && endDate != null && dateToCompare != null 
 				&& compareEqualsOrNot(endDate, dateToCompare, equals);
 	}

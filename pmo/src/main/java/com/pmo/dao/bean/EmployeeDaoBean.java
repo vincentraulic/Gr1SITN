@@ -24,7 +24,7 @@ public class EmployeeDaoBean implements EmployeeDao{
 
 		employee.setUsername(employee.getFirstname().toLowerCase() + "." + employee.getLastname().toLowerCase());
 
-		//check if username has already be taken by comparing the hashcode and if it exists, it increment the username
+		//check if username has already be taken by comparing the hashcode and if it exists, it increments the username
 		int it=1;
 		while(this.getEmployees().contains(employee)){
 			employee.setUsername(employee.getUsername() + it);
@@ -45,7 +45,7 @@ public class EmployeeDaoBean implements EmployeeDao{
 
 	@SuppressWarnings("unchecked")
 	public List<Employee> getEmployees() {
-		List<Employee> list = em.createQuery("SELECT e FROM Employee e").getResultList();
+		List<Employee> list = em.createNamedQuery("Employee.findAll").getResultList();
 		if(! list.isEmpty())
 			return list;
 		else
@@ -58,9 +58,7 @@ public class EmployeeDaoBean implements EmployeeDao{
 
 	@SuppressWarnings("unchecked")
 	public Employee getEmployee(String lastname, String firstname) {
-		List<Employee> list = em.createQuery("SELECT e FROM Employee e "
-				+ "WHERE e.lastname = :lastn "
-				+ "AND e.firstname = :firstn")
+		List<Employee> list = em.createNamedQuery("Employee.findByName")
 				.setParameter("lastn", lastname)
 				.setParameter("firstn", firstname)
 				.getResultList();

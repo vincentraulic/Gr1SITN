@@ -7,9 +7,20 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+@NamedQueries({
+    @NamedQuery(
+        name="ProjectTask.findAll",
+        query="SELECT p FROM ProjectTask p"),
+    @NamedQuery(
+        name="ProjectTask.findByProjectId",
+        query="SELECT p FROM ProjectTask p "
+				+ "WHERE p.project.id = :project")
+})
 @Entity
 @Table(name="PROJECTTASK")
 public class ProjectTask extends AbstractPersistent{
@@ -22,7 +33,7 @@ public class ProjectTask extends AbstractPersistent{
 	private int cost;
 	
 	@OneToMany(mappedBy="projectTask")
-	private Set<Task> tasks = new HashSet<Task>();
+	private Set<Task> tasks = new HashSet<>();
 	
 	@ManyToOne
 	@JoinColumn(name="id_project")
@@ -86,6 +97,10 @@ public class ProjectTask extends AbstractPersistent{
 	@Override
 	public int hashCode() {
 		return name.hashCode() + cost + project.hashCode();
-
+	}
+	
+	@Override
+	public String toString() {
+		return String.valueOf(getId());
 	}
 }

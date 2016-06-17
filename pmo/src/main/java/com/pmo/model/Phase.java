@@ -6,10 +6,21 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+@NamedQueries({
+    @NamedQuery(
+        name="Phase.findAll",
+        query="SELECT s FROM Phase s"),
+    @NamedQuery(
+        name="Phase.findByProjectId",
+        query="SELECT s FROM Phase s "
+				+ "WHERE s.project.id = :proj")
+})
 @Entity
 @Table(name="PHASE")
 public class Phase extends AbstractPersistent{
