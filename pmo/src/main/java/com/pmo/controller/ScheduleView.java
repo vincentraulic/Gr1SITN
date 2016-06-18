@@ -167,7 +167,7 @@ public class ScheduleView implements Serializable {
         ev.setEmployee(employee);
     }
      
-    private void addMessage(FacesMessage message) {
+    private static void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
     

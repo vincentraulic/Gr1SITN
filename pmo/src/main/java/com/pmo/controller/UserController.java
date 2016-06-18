@@ -55,10 +55,10 @@ public class UserController implements Serializable{
 	@PostConstruct
 	private void init(){
 		
-		listTypeAbsence.add(EventType.ABSENCE);
-		listTypeAbsence.add(EventType.RTT);
-		listTypeAbsence.add(EventType.LEAVE);
-		listTypeAbsence.add(EventType.SICK_LEAVE);
+		getListTypeAbsence().add(EventType.ABSENCE);
+		getListTypeAbsence().add(EventType.RTT);
+		getListTypeAbsence().add(EventType.LEAVE);
+		getListTypeAbsence().add(EventType.SICK_LEAVE);
 		
 		user = (UserPmo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
@@ -81,7 +81,7 @@ public class UserController implements Serializable{
 			tasks.addAll(taskController.getTasksOfProject(p));
 		}
 		
-		//remove tasks of the user sinon doublon
+		//remove tasks of the user otherwise there are duplicate tasks
 		tasks.removeAll(getTasks());
 		return tasks;
 	}
@@ -90,16 +90,30 @@ public class UserController implements Serializable{
 		return new ArrayList<Event>(getEmployee().getEvents());
 	}
 	
+	// Get all the absences of the employee
 	public List<Event> getAbsences(){
+		return getAbsences(false);
+	}
+	
+	// TODO : Prévoir la gestion des cas des demi-journées avec le booléen allDay lorsque ça sera implémenté
+	// FIXME : On devrait faire event.getEnd().getTime() + 1 journée, car dans le cas d'une journée complète
+	// 			la fin est le 17 par exemple, mais le retour n'est que le 18
+	
+	// Get all the absences of the employee
+	// If the boolean fromNow is set to "true", will not return the absences already finished 
+	public List<Event> getAbsences(boolean fromNow){
 		List<Event> absences = new ArrayList<Event>();
 		for(Event event : getEmployee().getEvents()){
-			if(listTypeAbsence.contains(event.getType()))
+			if(getListTypeAbsence().contains(event.getType()) 
+				&& (!fromNow || fromNow && event.getEnd().getTime() >= Calendar.getInstance().getTimeInMillis())) {
 				absences.add(event);
+			}
 		}
 		return absences;
 	}
 	
-	// FIXME : La méthode n'est jamais appelé par le rendu HOME (page d'accueil JSF). A corriger
+	// FIXME : La méthode n'est jamais appelée par le rendu HOME (page d'accueil JSF). A corriger
+	// FIXME : Même fixme que pour la méthode getAbsences(fromNow)
 	public List<Event> getAbsencesEmployees() {
 		Set<Employee> employees = new HashSet<>();
 		for(Project p : getEmployee().getProjects()) {
@@ -109,8 +123,8 @@ public class UserController implements Serializable{
 		List<Event> absences = new ArrayList<Event>();
 		for(Employee emp : employees){
 			for(Event event : emp.getEvents()){
-				//get the event available
-				if(listTypeAbsence.contains(event.getType()) && event.getEnd().getTime() >= Calendar.getInstance().getTimeInMillis())
+				// Get all absences from today
+				if(getListTypeAbsence().contains(event.getType()) && event.getEnd().getTime() >= Calendar.getInstance().getTimeInMillis())
 					absences.add(event);
 			}
 		}
@@ -120,15 +134,12 @@ public class UserController implements Serializable{
 				return o1.getEnd().compareTo(o2.getEnd());
 			}
 		});
-		
-		for(Event abs : absences)
-		{
-			System.out.println(abs.getReason());
-			LOG.info("log passage getabsencesemployees" + abs.getReason());
-			
-		}
 
 		return absences;
+	}
+
+	public List<EventType> getListTypeAbsence() {
+		return listTypeAbsence;
 	}
 
 	

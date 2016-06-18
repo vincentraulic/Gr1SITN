@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import com.pmo.exception.InvalidDateException;
 
-public class EventTest {
+public class EventDateTest {
 	
 	Date currentDate;
 	
