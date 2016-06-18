@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -30,6 +31,8 @@ import com.pmo.user.service.UserPmo;
 @Named
 public class UserController implements Serializable{
 
+	public final static Logger LOG = Logger.getLogger(UserController.class.getName());
+	
 	private static final long serialVersionUID = 7465185353899089409L;
 	
 	@EJB
@@ -45,9 +48,18 @@ public class UserController implements Serializable{
 	private transient TaskController taskController;
 	
 	private UserPmo user;
+
+	
+	private List<EventType> listTypeAbsence = new ArrayList<>();
 	
 	@PostConstruct
 	private void init(){
+		
+		listTypeAbsence.add(EventType.ABSENCE);
+		listTypeAbsence.add(EventType.RTT);
+		listTypeAbsence.add(EventType.LEAVE);
+		listTypeAbsence.add(EventType.SICK_LEAVE);
+		
 		user = (UserPmo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
 
@@ -81,23 +93,24 @@ public class UserController implements Serializable{
 	public List<Event> getAbsences(){
 		List<Event> absences = new ArrayList<Event>();
 		for(Event event : getEmployee().getEvents()){
-			if(event.getType().equals(EventType.ABSENCE))
+			if(listTypeAbsence.contains(event.getType()))
 				absences.add(event);
 		}
 		return absences;
 	}
 	
+	// FIXME : La méthode n'est jamais appelé par le rendu HOME (page d'accueil JSF). A corriger
 	public List<Event> getAbsencesEmployees() {
 		Set<Employee> employees = new HashSet<>();
 		for(Project p : getEmployee().getProjects()) {
 			employees.addAll(p.getEmployees());
 		}
-		
+
 		List<Event> absences = new ArrayList<Event>();
 		for(Employee emp : employees){
 			for(Event event : emp.getEvents()){
 				//get the event available
-				if(event.getType().equals(EventType.ABSENCE) && event.getEnd().getTime() >= Calendar.getInstance().getTimeInMillis())
+				if(listTypeAbsence.contains(event.getType()) && event.getEnd().getTime() >= Calendar.getInstance().getTimeInMillis())
 					absences.add(event);
 			}
 		}
@@ -107,6 +120,14 @@ public class UserController implements Serializable{
 				return o1.getEnd().compareTo(o2.getEnd());
 			}
 		});
+		
+		for(Event abs : absences)
+		{
+			System.out.println(abs.getReason());
+			LOG.info("log passage getabsencesemployees" + abs.getReason());
+			
+		}
+
 		return absences;
 	}
 
