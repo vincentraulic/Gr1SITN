@@ -5,6 +5,8 @@ PMO-web (Project Management Online)
 
 Software of project management
 
+Le projet final se situe dans la branche dev_jsf
+
 Branches
 -----------
 - [projet en jsf](https://github.com/vincentraulic/Gr1SITN/tree/dev_jsf) La branche dev_jsf correspond à notre branche review
