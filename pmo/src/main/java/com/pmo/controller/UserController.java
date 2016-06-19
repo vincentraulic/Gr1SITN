@@ -112,8 +112,7 @@ public class UserController implements Serializable{
 		return absences;
 	}
 	
-	// FIXME : La méthode n'est jamais appelée par le rendu HOME (page d'accueil JSF). A corriger
-	// FIXME : Même fixme que pour la méthode getAbsences(fromNow)
+	// ok
 	public List<Event> getAbsencesEmployees() {
 		Set<Employee> employees = new HashSet<>();
 		for(Project p : getEmployee().getProjects()) {

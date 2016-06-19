@@ -3,6 +3,10 @@ PMO-web (Project Management Online)
 
 Software of project management
 
+Groupe par pair programming :
+- Pseudos "rorolroland" et "vincentraulic" : Roland Srong & Vincent Raulic
+- Pseudos "Quentin Combier" et "Nirv" : Quentin Combier & Thomas Bethelot
+
 Technos/Frameworks utilisés pour le projet
 -----------
 - JSF pour les vues
