@@ -59,6 +59,12 @@ Structure principale
 	+-- test					# Test
 ```
 
+Contact pour les questions
+------------
+rs.rolandit@gmail.com
+vincent.raulic@gmail.com
+quentin.combier@gmail.com
+bethelot.thomas@gmail.com
 
 Licence
 ------------
